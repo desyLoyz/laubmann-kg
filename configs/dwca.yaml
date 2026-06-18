@@ -1,0 +1,9 @@
+# Darwin Core Archive export configuration
+publisher: Laubmann KG Project
+license: CC-BY-4.0
+core:
+  - occurrence
+  - event
+extensions:
+  - multimedia
+  - measurement_or_fact

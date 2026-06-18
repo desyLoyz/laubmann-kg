@@ -1,0 +1,17 @@
+# Main pipeline configuration
+volume: vol01
+stages:
+  preprocess: true
+  detect_layout: true
+  detect_entries: true
+  transcribe: true
+  extract_observations: true
+  export_jsonld: true
+  export_dwca: true
+
+paths:
+  raw: data/raw
+  processed: data/processed
+  annotations: data/annotations
+  exports: data/exports
+  cache: data/cache/llm

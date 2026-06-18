@@ -1,0 +1,10 @@
+# LLM and vision model configuration
+layout_detection:
+  provider: openai
+  model: gpt-4o
+transcription:
+  provider: openai
+  model: gpt-4o
+extraction:
+  provider: openai
+  model: gpt-4o

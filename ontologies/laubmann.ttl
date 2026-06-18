@@ -1,0 +1,3 @@
+@prefix laubmann: <http://example.org/laubmann/> .
+
+# TODO: define ontology classes and properties

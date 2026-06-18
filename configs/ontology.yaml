@@ -1,0 +1,5 @@
+# Ontology and vocabulary configuration
+ontology_path: ontologies/laubmann.ttl
+shacl_shapes_path: ontologies/shacl_shapes.ttl
+controlled_vocabularies_path: ontologies/controlled_vocabularies.ttl
+jsonld_context_path: schemas/jsonld_context.json
