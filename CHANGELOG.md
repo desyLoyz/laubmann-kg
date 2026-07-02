@@ -31,6 +31,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 - Flache Stage-Module (`preprocess.py`, `detect_layout.py` usw.) in thematische Subpackages überführt
 - CLI importiert Stage-Funktionen aus den neuen Subpackages (`preprocessing`, `layout`, `diary` usw.)
+- `.cursorrules`: Regel ergänzt, dass der Nutzer Commits selbst pusht
 
 ## [0.1.0] - 2026-06-18
 
