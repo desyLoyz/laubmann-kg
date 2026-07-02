@@ -1,0 +1,28 @@
+You are helping build a scientific Python repository for extracting ornithological observations from handwritten diaries.
+
+General rules:
+- Use type hints.
+- Use Pydantic for data models.
+- Prefer pure functions.
+- Keep provenance metadata.
+- Do not discard uncertainty.
+- Never overwrite raw data.
+- All LLM prompts must be versioned.
+- All LLM responses must be cached.
+- All extracted observations must link back to source volume, page, region and text span.
+- Darwin Core export must exclude published literature observations unless explicitly configured otherwise.
+- Add tests for all schema transformations.
+
+Important requirements:
+- Every result must preserve provenance: volume, page, side, region, text span, model, prompt version and confidence.
+- Do not overwrite raw images.
+- Use versioned prompts from the prompts directory.
+- Use structured JSON outputs for LLM responses.
+- Use Darwin Core terms where applicable.
+- Exclude observations from published literature from the main DwC-A export.
+
+Changelog:
+- Update CHANGELOG.md under [Unreleased] for every meaningful change (features, fixes, breaking changes, removals).
+- Use Keep a Changelog section headers: Added, Changed, Deprecated, Removed, Fixed, Security.
+- Write changelog entries in German; keep section headers in English.
+- Move entries from [Unreleased] to a versioned section only when releasing a new version.
