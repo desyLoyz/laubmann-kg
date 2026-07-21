@@ -1,0 +1,47 @@
+<PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15">
+  <Metadata>
+    <Creator>journal_processor</Creator>
+    <Created>2026-04-12T15:13:47.792305+00:00</Created>
+  </Metadata>
+  <Page imageFilename="52b78822-8d1b-4cb0-968b-072d61b066df_0068_L.png" imageWidth="1295" imageHeight="3246">
+    <ReadingOrder>
+      <OrderedGroup id="reading_order">
+        <RegionRefIndexed index="1" regionRef="r01"/>
+        <RegionRefIndexed index="2" regionRef="r02"/>
+        <RegionRefIndexed index="3" regionRef="r03"/>
+      </OrderedGroup>
+    </ReadingOrder>
+    <TextRegion id="r01" custom="type:ParagraphRegion">
+      <Coords points="177,126 1280,126 1280,1631 177,1631"/>
+      <TextEquiv>
+        <Unicode>dich heute ein merkwürdiger Vogel, der mich aus der
+weiten Ferne wohl etwas erwarten lässt.
+&lt;u&gt;Von Beizstetten&lt;/u&gt; an der Bahnstation ein breites Tal
+an der Linie &lt;u&gt;Ulm - Sigmaringen&lt;/u&gt;, führt der Weg abwärts
+über Bach und &lt;u&gt;Beizstetten Kloster&lt;/u&gt;, immer an der Bach ent-
+lang nach &lt;u&gt;Gammertingen&lt;/u&gt;, das malerisch auf einem Berg
+an Bach und verlassenen Talhang liegt. An einer Ei-
+chen bewaldeten Kuppe u. auf dem Weg dorthin folgendes fest-
+gestellt werden: &lt;u&gt;An einer Bachstelle&lt;/u&gt;, dort wo eine hölzerne
+Brücke rechts der Straße abzweigt eine &lt;u&gt;Bachstelze&lt;/u&gt; junger.
+Aus dem Wiesengrund längs der Bach tönt der Schnarren
+mehrerer &lt;u&gt;Wachtelkönige&lt;/u&gt;. Eine &lt;u&gt;Wachtel&lt;/u&gt; eile nicht weit
+mit sich.
+&lt;u&gt;Am Berg dorthin&lt;/u&gt; und auch dem Rückweg
+in kurze Strecken war zu erkennen.
+An auf der rechten Seite liegenden Garten-
+skizze kann die Situation von &lt;u&gt;Gammertingen&lt;/u&gt; ganz gut
+erläutern.</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <ImageRegion id="r02" custom="type:ImageRegion">
+      <Coords points="214,1623 1262,1623 1262,3099 214,3099"/>
+    </ImageRegion>
+    <TextRegion id="r03" custom="type:PageNumberRegion">
+      <Coords points="1251,2944 1295,2944 1295,3245 1251,3245"/>
+      <TextEquiv>
+        <Unicode>5.</Unicode>
+      </TextEquiv>
+    </TextRegion>
+  </Page>
+</PcGts>

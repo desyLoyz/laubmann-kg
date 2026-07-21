@@ -1,0 +1,71 @@
+<PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15">
+  <Metadata>
+    <Creator>journal_processor</Creator>
+    <Created>2026-03-18T22:37:37.990338+00:00</Created>
+  </Metadata>
+  <Page imageFilename="900847d2-aabe-4b16-b0e6-203b103bd1e1_0048_L.png" imageWidth="1675" imageHeight="2675">
+    <ReadingOrder>
+      <OrderedGroup id="reading_order">
+        <RegionRefIndexed index="1" regionRef="r01"/>
+        <RegionRefIndexed index="2" regionRef="r02"/>
+        <RegionRefIndexed index="3" regionRef="r03"/>
+        <RegionRefIndexed index="4" regionRef="r04"/>
+      </OrderedGroup>
+    </ReadingOrder>
+    <TextRegion id="r01" custom="type:PageNumberRegion">
+      <Coords points="226,195 322,195 322,295 226,295"/>
+      <TextEquiv>
+        <Unicode>86.</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <TextRegion id="r02" custom="type:ParagraphRegion">
+      <Coords points="214,267 1486,267 1486,787 214,787"/>
+      <TextEquiv>
+        <Unicode>um teils am Mainufer, zum kleineren Teil am
+Berge da zu übernachten.
+Wohin die Käuze im Winter zum Nächtigen zie-
+gen, wissen wir bis heute noch nicht.
+Neuerdings konnte ich beobachten, daß ein Wald-
+kauz der Bäume an der Isar nächtigt, vorausgesetzt, er
+nicht bei niederen Wasserstand freie Kiesbänke gefun-
+den haben.</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <TextRegion id="r03" custom="type:ParagraphRegion">
+      <Coords points="214,784 1486,784 1486,2348 214,2348"/>
+      <TextEquiv>
+        <Unicode>7. December 1917. &lt;u&gt;München&lt;/u&gt;.
+In der Zool. Sammlung, München, befindet sich
+ein ♂ des &lt;u&gt;Schwarzkehligen Fliegenschnäppers&lt;/u&gt; aus der Um-
+gegend von Kaufbeuren vom 12. Mai 1909. Der Vogel
+kam aus meiner Sammlung und dürfte wohl von Chr.
+präpariert worden sein. Er gab mir über das Vorkom-
+men der Art keinerlei Anhaltspunkte und auch ich ha-
+be die Art bis heute bei Kaufbeuren nicht mehr ange-
+troffen. In der Literatur fand ich über die Art für un-
+seren Fall nur folgendes: J. G. Leu, Die im Regierungsbezir-
+ke Schwaben und Neuburg vorkommenden Vögel, 18
+p. 7 schreibt: „Sehr selten auf dem Durchzug; beobach-
+tet im Kambachthale und bei Memmingen.“ Laut
+Naumannia, 1855, p. 80 schreibt: „Selten und nur
+auf der Wanderung im Kammelthale.“ Wüstmann, Die
+Vögel des Regierungsbezirkes Schwaben und Neuburg, 18
+p. 124 bemerkt: „Der Schwarzkehlchen... erscheint
+Schwaben meist nur im März und September auf dem
+Durchzuge. Es gelang mir nur einmal, nämlich im
+Mai 1886, ein brütendes Pärchen bei Inningen un-
+weit Augsburg zu beobachten...“ Sonst macht wie Jäckel
+allgemeine Bemerkungen. Dagegen finden sich in den
+Annalen immer wiederhafte folgende auf diese Art
+zu deutende Stellen: II, 1901, p. 93: „Kaufbeuren: selten
+nur auf dem Durchzuge (Büchner).“ (i) IV, 1904, p. 213</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <TextRegion id="r04" custom="type:FootnoteRegion">
+      <Coords points="234,2354 1255,2354 1255,2473 234,2473"/>
+      <TextEquiv>
+        <Unicode>1.) Büchner war Rektor an der Realschule in</Unicode>
+      </TextEquiv>
+    </TextRegion>
+  </Page>
+</PcGts>

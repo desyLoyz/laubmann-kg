@@ -26,3 +26,7 @@ Changelog:
 - Use Keep a Changelog section headers: Added, Changed, Deprecated, Removed, Fixed, Security.
 - Write changelog entries in German; keep section headers in English.
 - Move entries from [Unreleased] to a versioned section only when releasing a new version.
+
+Git:
+- Never push to the remote repository unless the user explicitly asks.
+- The user pushes commits themselves; do not offer or run `git push` proactively.

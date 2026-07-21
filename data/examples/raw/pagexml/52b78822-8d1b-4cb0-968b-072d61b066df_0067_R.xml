@@ -1,0 +1,23 @@
+<PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15">
+  <Metadata>
+    <Creator>journal_processor</Creator>
+    <Created>2026-03-11T23:34:54.099645+00:00</Created>
+  </Metadata>
+  <Page imageFilename="52b78822-8d1b-4cb0-968b-072d61b066df_0067_R.png" imageWidth="1633" imageHeight="2572">
+    <ReadingOrder>
+      <OrderedGroup id="reading_order">
+        <RegionRefIndexed index="1" regionRef="r01"/>
+        <RegionRefIndexed index="2" regionRef="r02"/>
+      </OrderedGroup>
+    </ReadingOrder>
+    <TextRegion id="r01" custom="type:PageNumberRegion">
+      <Coords points="1360,126 1438,126 1438,214 1360,214"/>
+      <TextEquiv>
+        <Unicode>97</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <ImageRegion id="r02" custom="type:ImageRegion">
+      <Coords points="21,111 1367,111 1367,2346 21,2346"/>
+    </ImageRegion>
+  </Page>
+</PcGts>

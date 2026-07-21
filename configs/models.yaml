@@ -1,10 +1,10 @@
 # LLM and vision model configuration
 layout_detection:
-  provider: openai
-  model: gpt-4o
+  provider: google
+  model: gemini-3.0-flash
 transcription:
-  provider: openai
-  model: gpt-4o
+  provider: google
+  model: gemini-3.0-flash
 extraction:
-  provider: openai
-  model: gpt-4o
+  provider: google
+  model: gemini-3.5-flash

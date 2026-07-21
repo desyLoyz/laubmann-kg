@@ -1,0 +1,61 @@
+<PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15">
+  <Metadata>
+    <Creator>journal_processor</Creator>
+    <Created>2026-03-18T22:37:13.831056+00:00</Created>
+  </Metadata>
+  <Page imageFilename="900847d2-aabe-4b16-b0e6-203b103bd1e1_0047_R.png" imageWidth="1675" imageHeight="2675">
+    <ReadingOrder>
+      <OrderedGroup id="reading_order">
+        <RegionRefIndexed index="1" regionRef="r01"/>
+        <RegionRefIndexed index="2" regionRef="r02"/>
+      </OrderedGroup>
+    </ReadingOrder>
+    <TextRegion id="r01" custom="type:PageNumberRegion">
+      <Coords points="1373,195 1499,195 1499,317 1373,317"/>
+      <TextEquiv>
+        <Unicode>85.</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <TextRegion id="r02" custom="type:ParagraphRegion">
+      <Coords points="38,254 1477,254 1477,2446 38,2446"/>
+      <TextEquiv>
+        <Unicode>viel reicheren Eindruck als die am Wörthsee, was nament-
+lich durch die Verschiedenheit des Ufergeländes, hier Schilf und
+hohes Riedgras, am Wörthsee aber meist nur hohe Baumwände
+hervorgerufen werden mag. Ich habe am Vormittag vom
+Schirme aus lange Zeit die Möven beobachtet. Ungefähr alle 20-
+30 min erhebt sich in der einen Bucht entlang ein großer
+Teil der Seevögel mit lautem Geschrei einige Meter in die
+Luft, schwärmt ungefähr 1-2 min über dem Wasser hin
+und her, um sich dann wieder zu beruhigen und nieder zu
+lassen. Einen Grund für dies sonderbare Benehmen konnte
+ich nicht in Erfahrung bringen.
+Es herrschte lange Zeit die Anschauung, daß die Möven, die
+im Winter in großer Zahl die Isar und die Kanäle im
+englischen Garten zu München besuchen und uns Städ-
+ter durch ihren Flug künste und ihr lärmendes Treiben
+in so hohem Grade erfreuen, allabendlich, in den Winter-
+monaten schon um 3 &lt;u&gt;h&lt;/u&gt; nachmittags, München verlas-
+sen, um am Starnberger- resp. Maininger See zu näch-
+tigen. Nun wissen wir aber einwandfrei, daß in den Win-
+termonaten am Maininger See, der völlig zugefroren ist,
+sowohl, wie auch am Starnberger See fast keine Möven er-
+scheinen, jedenfalls aber nicht so viele, wie wir sie in Mün-
+chen an der Winterabenseite der Stadt verlassen sehen.
+Dagegen konnte ich in den letzten März- und ersten Apriltagen
+1915 bei Sonnenschein am Maininger See feststellen, daß in den Nach-
+mittagsstunden zwischen 4-6 &lt;u&gt;h&lt;/u&gt; in der Richtung von München her
+große Scharen von Möven an den See kommen, von den schon
+anwesenden mit lautem Geschrei begrüßt werden, und sich am See
+niederlassen. Nur eine kleine Anzahl erhebt sich gegen 7 &lt;u&gt;h&lt;/u&gt;
+wieder, und streicht zur Nachtruhe an den Starnberger See,
+der Groe nächtigt am Maininger See.
+Wir wissen also folgendes:
+Die im Winter in München lebenden Möven nächtigen
+im Winter &lt;u&gt;nicht&lt;/u&gt; am Maininger See. Doch fliegen sie in
+den Frühjahrsmonaten nach Eisfreiwerden der See vor
+Beginn der Brutzeit wahrscheinlich abends dorthin,</Unicode>
+      </TextEquiv>
+    </TextRegion>
+  </Page>
+</PcGts>

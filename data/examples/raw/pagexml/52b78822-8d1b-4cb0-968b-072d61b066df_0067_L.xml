@@ -1,0 +1,66 @@
+<PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15">
+  <Metadata>
+    <Creator>journal_processor</Creator>
+    <Created>2026-03-11T23:34:17.058293+00:00</Created>
+  </Metadata>
+  <Page imageFilename="52b78822-8d1b-4cb0-968b-072d61b066df_0067_L.png" imageWidth="1633" imageHeight="2572">
+    <ReadingOrder>
+      <OrderedGroup id="reading_order">
+        <RegionRefIndexed index="1" regionRef="r01"/>
+        <RegionRefIndexed index="2" regionRef="r02"/>
+        <RegionRefIndexed index="3" regionRef="r03"/>
+      </OrderedGroup>
+    </ReadingOrder>
+    <TextRegion id="r01" custom="type:PageNumberRegion">
+      <Coords points="176,132 270,132 270,222 176,222"/>
+      <TextEquiv>
+        <Unicode>96</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <TextRegion id="r02" custom="type:ParagraphRegion">
+      <Coords points="176,198 1596,198 1596,826 176,826"/>
+      <TextEquiv>
+        <Unicode>mal zum Opfer gefallen.&quot;
+      Wenn es sich, was leider zu befürchten ist, in die-
+sem Falle um den Horst am Giebel im Hintersteiner Tal
+handelt, dann wäre auf Grund der &quot;Schutzverordnung
+für den Bezirkamt Sonthofen&quot; ein Einschreiten der
+unteren Behörde dringend zu wünschen.
+      Heute wurden durch Oberlehrer E. Barthel aus Streitberg,
+Oberfranken, zwei junge, bereits flügge &lt;u&gt;Wanderfalken&lt;/u&gt; einge-
+sandt, als ein sicherer Nachweis für das Horsten dieser edlen
+Vögel in Bayern. Belegexemplare in der Zool. Sammlung.</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <TextRegion id="r03" custom="type:ParagraphRegion">
+      <Coords points="176,857 1596,857 1596,2385 176,2385"/>
+      <TextEquiv>
+        <Unicode>29. Mai 1925. &lt;u&gt;München - Gammertingen&lt;/u&gt;.
+Wir fahren über Augsburg - Ulm - Zwiefalten-
+dorf, wo wir um 12 h Nachts ankommen und von wo wir
+noch ca 5/4 Stunden über Zwiefaltenkloster nach Gamm-
+ertingen zu gehen haben. München ab: 5 &lt;sup&gt;1/2&lt;/sup&gt;.
+Zwischen München - Augsburg nach der Sta-
+tion Mering auf den Feldern einige &lt;u&gt;Kiebitze&lt;/u&gt;. Über dem
+Lech heute ein möwenartiger Vogel, der sich aber aus der
+weiten Ferne nicht näher ansprechen lässt.
+Von Zwiefaltendorf, der Bahnstation im Donau Tal
+an der Linie Ulm - Sigmaringen, führt der Weg Albwärts
+über Baach und Zwiefaltenkloster, immer der Aach ent-
+lang nach Gammertingen, das malerisch auf einem von
+der Aach durchbrochenen Talschluß liegt. An nächtli-
+chem Vogelleben konnte auf dem Weg noch folgendes fest-
+gestellt werden: Zwischen Zwiefaltendorf und dem Ortchen
+Baach rechts der Straße schwirrt ein &lt;u&gt;Flussschwirlsänger&lt;/u&gt;.
+Aus dem Wiesenland längs der Aach tönt das Schnarren
+mehrerer &lt;u&gt;Wachtelkönige&lt;/u&gt;. Eine &lt;u&gt;Waldohreule&lt;/u&gt; ruft ihr
+pich pich.
+Im Dorf Zwiefalten ist auf dem Kirchturm
+das besetzte &lt;u&gt;Storchennest&lt;/u&gt; zu erkennen.
+Die auf der nächsten Seite beigegebene Karten-
+skizze kann die Situation von Gammertingen ganz gut
+erläutern.</Unicode>
+      </TextEquiv>
+    </TextRegion>
+  </Page>
+</PcGts>

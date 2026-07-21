@@ -1,0 +1,67 @@
+<PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15">
+  <Metadata>
+    <Creator>journal_processor</Creator>
+    <Created>2026-03-18T22:37:12.010823+00:00</Created>
+  </Metadata>
+  <Page imageFilename="900847d2-aabe-4b16-b0e6-203b103bd1e1_0047_L.png" imageWidth="1675" imageHeight="2675">
+    <ReadingOrder>
+      <OrderedGroup id="reading_order">
+        <RegionRefIndexed index="1" regionRef="r01"/>
+        <RegionRefIndexed index="2" regionRef="r02"/>
+        <RegionRefIndexed index="3" regionRef="r03"/>
+      </OrderedGroup>
+    </ReadingOrder>
+    <TextRegion id="r01" custom="type:PageNumberRegion">
+      <Coords points="238,198 331,198 331,285 238,285"/>
+      <TextEquiv>
+        <Unicode>84</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <TextRegion id="r02" custom="type:ParagraphRegion">
+      <Coords points="172,265 1507,265 1507,1256 172,1256"/>
+      <TextEquiv>
+        <Unicode>Im gegenüberliegenden Schilfsaume sind 9 mit 6 Jungen
+die sich aber noch nicht aus dem schützenden Schilf- und
+Schachtelhalm-Dickicht auf die freie Fläche trauen wag[en].
+Erst gegen 1/2 7 h führt die alte Ente ihre Brut auf das off[ene]
+Wasser und holt durch eifriges Tauchen Nahrung vom
+Grunde herauf. Doch auch beim Tauchen vergißt
+keineswegs ihre Vorsicht.
+Die jungen Entchen sind äußerst flinke Taucher
+die sich schon eifrig bemühen, der alten Ente das Tauch[en]
+nach zu machen. Nur gelingt es ihnen noch nicht,
+da notwendige Stoßkraft noch mangelt.
+Die Tafelente wurde bei uns in Bayern südlich
+Donau meist nur in den Monaten Januar bis Ma[i]
+und dann wieder im Spätherbst beobachtet, um so int[er-]
+essanter mag ihr Brüten am Maininger See sein.
+Auch im Sommer 1916 habe ich die Tafelente heute
+am Maininger See angetroffen.</Unicode>
+      </TextEquiv>
+    </TextRegion>
+    <TextRegion id="r03" custom="type:ParagraphRegion">
+      <Coords points="172,1249 1507,1249 1507,2438 172,2438"/>
+      <TextEquiv>
+        <Unicode>3.) &lt;u&gt;Larus ridibundus L.&lt;/u&gt; Lachmöve.
+Im Maivinger See befindet sich eine ziemlich zahl-
+reiche Mövenkolonie. Die Brutpaare schwanken je nach
+Jahren zwischen 100 und 300. Sie ist also bei weitem klei-
+ner als die bekannte Kolonie am Wörthsee. Doch wenn beide Koloni-
+en mit einander in einer gewissen Verbindung stehen, die
+darin besteht, daß die Zahl der Brutpaare bei der einen kurz
+steigt, wenn in der andern eine starke Beunruhigung oder
+ein böses Brutgeschäft verursacht wird.
+Die Möven brüten an verschiednen Stellen, so daß man
+der Kolonie gewissermaßen von Zweigniederlassungen spre-
+chen könnte. Die Nester befinden sich in den meisten Fällen
+einem moorigen, mit Schilf und Gras bewachsenen
+Terrain, das auf der einen Seite vom offenen Wasser begrenzt
+wird, während es von dem festen Land durch ausgedehn-
+tes, nicht passierbares Sumpfland getrennt und gesichert
+ist.
+Am 25. Mai 1915 war das Brutgeschäft natürlich
+schon in vollem Gange. Die ganze Kolonie macht einen</Unicode>
+      </TextEquiv>
+    </TextRegion>
+  </Page>
+</PcGts>

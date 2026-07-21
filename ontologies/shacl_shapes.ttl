@@ -1,3 +1,449 @@
-@prefix sh: <http://www.w3.org/ns/shacl#> .
+# =============================================================
+# HistOrniGraph / Laubmann Knowledge Graph
+# SHACL Validation Shapes  –  shacl_shapes.ttl
+# Validates instance data against lkg_ontology.ttl constraints
+# Usage: pyshacl -s shacl_shapes.ttl -d <data>.ttl -f human
+# =============================================================
 
-# TODO: define SHACL shapes
+@prefix lkg:     <https://lkg.example.org/ontology#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix dwc:     <http://rs.tdwg.org/dwc/terms/> .
+@prefix rico:    <https://www.ica.org/standards/RiC/ontology#> .
+@prefix oa:      <http://www.w3.org/ns/oa#> .
+@prefix geo:     <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# =============================================================
+# 1. DIARY VOLUME / PAGE  (archival structure)
+# =============================================================
+
+lkg:DiaryVolumeShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:DiaryVolume ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Jeder DiaryVolume benötigt ein rdfs:label (z. B. Bandnummer)." ;
+        sh:severity sh:Violation ;
+    ] .
+
+lkg:DiaryPageShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:DiaryPage ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:message "Jede DiaryPage benötigt ein rdfs:label (z. B. Seitennummer)." ;
+        sh:severity sh:Warning ;
+    ] .
+
+# =============================================================
+# 2. DIARY ENTRY  (zentrale semantische Einheit)
+# =============================================================
+
+lkg:DiaryEntryShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:DiaryEntry ;
+
+    # Pflicht: Datum
+    sh:property [
+        sh:path lkg:entryDate ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "DiaryEntry muss genau ein entryDate (xsd:date) besitzen." ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Pflicht: Rohtext (Nachvollziehbarkeit / Provenienz)
+    sh:property [
+        sh:path lkg:rawText ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "DiaryEntry sollte den transkribierten Rohtext (lkg:rawText) enthalten." ;
+        sh:severity sh:Warning ;
+    ] ;
+
+    # Empfehlung: Band-Zuordnung
+    sh:property [
+        sh:path lkg:hasVolume ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class lkg:DiaryVolume ;
+        sh:message "DiaryEntry sollte genau einem DiaryVolume zugeordnet sein." ;
+        sh:severity sh:Warning ;
+    ] ;
+
+    # Empfehlung: mind. eine inhaltliche Aussage (Observation ODER Reise)
+    sh:or (
+        [ sh:path lkg:containsObservation ; sh:minCount 1 ]
+        [ sh:path lkg:containsTravelEvent ; sh:minCount 1 ]
+    ) ;
+    sh:message "DiaryEntry sollte mindestens eine Observation oder ein TravelEvent enthalten – sonst vermutlich Segmentierungsfehler." ;
+    sh:severity sh:Warning .
+
+# =============================================================
+# 3. SOURCE REGION  (Provenienz)
+# =============================================================
+
+lkg:SourceRegionShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:SourceRegion ;
+    sh:node [
+        a sh:NodeShape ;
+        sh:class oa:Annotation ;
+    ] ;
+    sh:message "SourceRegion muss eine gültige oa:Annotation-Struktur besitzen (Provenienz zum Scan)." .
+
+# =============================================================
+# 4. OBSERVATION EVENT  (Kernentität der NER)
+# =============================================================
+
+lkg:ObservationEventShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:ObservationEvent ;
+
+    # PFLICHT: verlinkter Taxon (kein Orphan-Observation ohne Art)
+    sh:property [
+        sh:path lkg:observedTaxon ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class lkg:Taxon ;
+        sh:message "ObservationEvent MUSS genau einen lkg:observedTaxon referenzieren." ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # PFLICHT: Rückverweis auf Entry (Traceability!)
+    sh:property [
+        sh:path lkg:derivedFromEntry ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class lkg:DiaryEntry ;
+        sh:message "ObservationEvent MUSS über lkg:derivedFromEntry auf seinen DiaryEntry zurückverweisen (verhindert Orphan Nodes)." ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # PFLICHT: Rohtext-Beleg für Nachvollziehbarkeit
+    sh:property [
+        sh:path lkg:verbatimNotes ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "ObservationEvent sollte den originalen Diariumstext (lkg:verbatimNotes) enthalten." ;
+        sh:severity sh:Warning ;
+    ] ;
+
+    # EMPFEHLUNG: Ort
+    sh:property [
+        sh:path lkg:observedAt ;
+        sh:maxCount 1 ;
+        sh:class lkg:Place ;
+        sh:message "ObservationEvent sollte einen Ort (lkg:observedAt) referenzieren." ;
+        sh:severity sh:Warning ;
+    ] ;
+
+    # EMPFEHLUNG: Evidenztyp
+    sh:property [
+        sh:path lkg:hasEvidence ;
+        sh:maxCount 3 ;
+        sh:class lkg:ObservationEvidence ;
+        sh:message "ObservationEvent sollte mind. einen Evidenztyp (visuell/auditiv/Nest) haben." ;
+        sh:severity sh:Warning ;
+    ] ;
+
+    # KONSISTENZ: wenn individualCount gesetzt, muss countQualifier vorhanden sein
+    sh:property [
+        sh:path lkg:individualCount ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:message "lkg:individualCount muss eine positive Ganzzahl sein." ;
+        sh:severity sh:Violation ;
+    ] .
+
+# =============================================================
+# 5. TRAVEL EVENT / LEG
+# =============================================================
+
+lkg:TravelEventShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:TravelEvent ;
+    sh:property [
+        sh:path lkg:hasLeg ;
+        sh:minCount 1 ;
+        sh:class lkg:TravelLeg ;
+        sh:message "TravelEvent MUSS mindestens einen TravelLeg (lkg:hasLeg) besitzen." ;
+        sh:severity sh:Violation ;
+    ] .
+
+lkg:TravelLegShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:TravelLeg ;
+
+    sh:property [
+        sh:path lkg:departurePlace ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class lkg:Place ;
+        sh:message "TravelLeg MUSS genau einen Abfahrtsort (lkg:departurePlace) haben." ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    sh:property [
+        sh:path lkg:arrivalPlace ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class lkg:Place ;
+        sh:message "TravelLeg MUSS genau einen Ankunftsort (lkg:arrivalPlace) haben." ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    sh:property [
+        sh:path lkg:transportMode ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ( "train" "foot" "boat" "car" "carriage" "bicycle" "unknown" ) ;
+        sh:message "TravelLeg sollte ein bekanntes transportMode-Vokabular verwenden." ;
+        sh:severity sh:Warning ;
+    ] ;
+
+    # Zeitlogik: Ankunft muss nach Abfahrt liegen (wenn beide vorhanden)
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "arrivalTime muss zeitlich nach departureTime liegen." ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX lkg: <https://lkg.example.org/ontology#>
+            SELECT $this WHERE {
+                $this lkg:departureTime ?dep .
+                $this lkg:arrivalTime ?arr .
+                FILTER (?arr <= ?dep)
+            }
+        """ ;
+    ] .
+
+# =============================================================
+# 6. PLACE / HABITAT / ROUTE
+# =============================================================
+
+lkg:PlaceShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:Place ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:message "Place benötigt ein rdfs:label (Ortsname)." ;
+        sh:severity sh:Violation ;
+    ] ;
+    # Empfehlung: Koordinaten für geographische Verwertbarkeit
+    sh:property [
+        sh:path geo:lat ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive -90 ;
+        sh:maxInclusive 90 ;
+        sh:message "geo:lat muss zwischen -90 und 90 liegen." ;
+        sh:severity sh:Violation ;
+    ] ;
+    sh:property [
+        sh:path geo:long ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:minInclusive -180 ;
+        sh:maxInclusive 180 ;
+        sh:message "geo:long muss zwischen -180 und 180 liegen." ;
+        sh:severity sh:Violation ;
+    ] .
+
+lkg:HabitatShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:Habitat ;
+    sh:property [
+        sh:path dwc:habitat ;
+        sh:minCount 1 ;
+        sh:message "Habitat sollte dwc:habitat-Beschreibung enthalten." ;
+        sh:severity sh:Warning ;
+    ] .
+
+lkg:RouteShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:Route ;
+    sh:property [
+        sh:path lkg:routePoint ;
+        sh:minCount 2 ;
+        sh:class lkg:Place ;
+        sh:message "Route sollte mind. 2 routePoints besitzen (sonst keine sinnvolle Route)." ;
+        sh:severity sh:Warning ;
+    ] .
+
+# =============================================================
+# 7. TAXON
+# =============================================================
+
+lkg:TaxonShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:Taxon ;
+
+    # PFLICHT: mind. Vernacular-Name (auch wenn Art unbestimmt)
+    sh:property [
+        sh:path lkg:vernacularNameDE ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Taxon MUSS einen deutschen Vernacular-Namen (lkg:vernacularNameDE) haben – auch bei unbestimmter Art." ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # EMPFEHLUNG: wissenschaftlicher Name ODER Unsicherheits-Notiz
+    sh:or (
+        [ sh:path lkg:scientificName ; sh:minCount 1 ]
+        [ sh:path <http://www.w3.org/2004/02/skos/core#note> ; sh:minCount 1 ]
+    ) ;
+    sh:message "Taxon sollte entweder scientificName ODER eine skos:note zur Unsicherheit haben." ;
+    sh:severity sh:Warning .
+
+# =============================================================
+# 8. OBSERVATION EVIDENCE / BIRDCALL / BEHAVIOUR
+# =============================================================
+
+lkg:ObservationEvidenceShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:ObservationEvidence ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:message "ObservationEvidence sollte ein beschreibendes rdfs:label haben." ;
+        sh:severity sh:Warning ;
+    ] .
+
+lkg:BirdCallShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:BirdCall ;
+    sh:property [
+        sh:path lkg:callTranscription ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "BirdCall MUSS eine callTranscription (Lautschrift) enthalten." ;
+        sh:severity sh:Violation ;
+    ] ;
+    sh:property [
+        sh:path lkg:callType ;
+        sh:maxCount 1 ;
+        sh:in ( "song" "call" "alarm" "drumming" "unknown" ) ;
+        sh:message "callType sollte bekanntes Vokabular verwenden." ;
+        sh:severity sh:Warning ;
+    ] .
+
+lkg:BehaviourNoteShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:BehaviourNote ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:message "BehaviourNote sollte ein beschreibendes rdfs:label haben." ;
+        sh:severity sh:Warning ;
+    ] .
+
+# =============================================================
+# 9. TIME ESTIMATE
+# =============================================================
+
+lkg:TimeEstimateShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:TimeEstimate ;
+
+    sh:property [
+        sh:path time:hasBeginning ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "TimeEstimate MUSS time:hasBeginning besitzen." ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    sh:property [
+        sh:path time:hasEnd ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "TimeEstimate MUSS time:hasEnd besitzen." ;
+        sh:severity sh:Violation ;
+    ] ;
+
+    # Empfehlung: Begründung der Schätzung (Unsicherheitsdoku, Difficulty #2)
+    sh:property [
+        sh:path <http://www.w3.org/2004/02/skos/core#note> ;
+        sh:minCount 1 ;
+        sh:message "TimeEstimate sollte eine skos:note mit der Ableitungslogik enthalten (Nachvollziehbarkeit der Schätzung)." ;
+        sh:severity sh:Warning ;
+    ] ;
+
+    # Zeitlogik: Ende muss nach Beginn liegen
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "time:hasEnd muss zeitlich nach time:hasBeginning liegen." ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX time: <http://www.w3.org/2006/time#>
+            SELECT $this WHERE {
+                $this time:hasBeginning ?b .
+                $this time:hasEnd ?e .
+                FILTER (?e <= ?b)
+            }
+        """ ;
+    ] .
+
+# =============================================================
+# 10. PERSON
+# =============================================================
+
+lkg:PersonShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:Person ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:message "Person benötigt ein rdfs:label (Name)." ;
+        sh:severity sh:Violation ;
+    ] .
+
+# =============================================================
+# 11. GLOBALE ORPHAN-NODE-PRÜFUNG
+# (verhindert freistehende Observations ohne jeden Kontext –
+#  ergänzt die Pflicht-Property-Checks aus Abschnitt 4 als
+#  zusätzliches Sicherheitsnetz über SPARQL)
+# =============================================================
+
+lkg:NoOrphanObservationShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:ObservationEvent ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "ObservationEvent ist nicht über containsObservation mit einem DiaryEntry verlinkt (Orphan Node)." ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX lkg: <https://lkg.example.org/ontology#>
+            SELECT $this WHERE {
+                $this a lkg:ObservationEvent .
+                FILTER NOT EXISTS { ?entry lkg:containsObservation $this }
+            }
+        """ ;
+    ] .
+
+lkg:NoOrphanTravelLegShape
+    a sh:NodeShape ;
+    sh:targetClass lkg:TravelLeg ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "TravelLeg ist keinem TravelEvent über hasLeg zugeordnet (Orphan Node)." ;
+        sh:severity sh:Violation ;
+        sh:select """
+            PREFIX lkg: <https://lkg.example.org/ontology#>
+            SELECT $this WHERE {
+                $this a lkg:TravelLeg .
+                FILTER NOT EXISTS { ?event lkg:hasLeg $this }
+            }
+        """ ;
+    ] .

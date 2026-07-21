@@ -1,3 +1,376 @@
-@prefix laubmann: <http://example.org/laubmann/> .
+# =============================================================
+# HistOrniGraph / Laubmann Knowledge Graph
+# Project Ontology  –  lkg_ontology.ttl
+# Namespace: https://lkg.example.org/ontology#
+# =============================================================
 
-# TODO: define ontology classes and properties
+@prefix lkg:     <https://lkg.example.org/ontology#> .
+@prefix dwc:     <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri:  <http://rs.tdwg.org/dwc/iri/> .
+@prefix oa:      <http://www.w3.org/ns/oa#> .
+@prefix rico:    <https://www.ica.org/standards/RiC/ontology#> .
+@prefix geo:     <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix schema:  <https://schema.org/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix time:    <http://www.w3.org/2006/time#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+
+# -------------------------------------------------------------
+# Ontology Declaration
+# -------------------------------------------------------------
+<https://lkg.example.org/ontology>
+    a owl:Ontology ;
+    rdfs:label "Laubmann Knowledge Graph Ontology"@en ;
+    rdfs:comment "Project ontology for the HistOrniGraph KG, modelling diary entries, ornithological observations, travel events, and source references from the field journals of Adolf Laubmann."@en ;
+    owl:versionInfo "0.1.0" .
+
+# =============================================================
+# CLASSES
+# =============================================================
+
+# --- Archival / Source Structure ----------------------------
+
+lkg:DiaryVolume
+    a owl:Class ;
+    rdfs:label "Diary Volume"@en , "Tagebuchband"@de ;
+    rdfs:comment "A single bound volume of the field journal."@en ;
+    rdfs:subClassOf rico:Record .
+
+lkg:DiaryPage
+    a owl:Class ;
+    rdfs:label "Diary Page"@en , "Tagebuchseite"@de ;
+    rdfs:subClassOf rico:Record .
+
+lkg:DiaryEntry
+    a owl:Class ;
+    rdfs:label "Diary Entry"@en , "Tagebucheintrag"@de ;
+    rdfs:comment "The primary semantic unit: a dated, located entry written by the observer."@en ;
+    rdfs:subClassOf rico:Record .
+
+lkg:SourceRegion
+    a owl:Class ;
+    rdfs:label "Source Region"@en ;
+    rdfs:comment "A detected layout region on a scanned page (from HistOrniGraph pipeline)."@en ;
+    rdfs:subClassOf oa:Annotation .
+
+# --- Events -------------------------------------------------
+
+lkg:ObservationEvent
+    a owl:Class ;
+    rdfs:label "Observation Event"@en , "Beobachtungsereignis"@de ;
+    rdfs:comment "A single ornithological or natural-history observation reported in a diary entry."@en ;
+    rdfs:subClassOf dwc:Event .
+
+lkg:TravelEvent
+    a owl:Class ;
+    rdfs:label "Travel Event"@en , "Reiseereignis"@de ;
+    rdfs:comment "A journey or movement described in a diary entry (train, foot, boat, etc.)."@en ;
+    rdfs:subClassOf dwc:Event .
+
+lkg:TravelLeg
+    a owl:Class ;
+    rdfs:label "Travel Leg"@en , "Reiseabschnitt"@de ;
+    rdfs:comment "A single segment of a journey (e.g. one train leg or one walking leg)."@en ;
+    rdfs:subClassOf lkg:TravelEvent .
+
+# --- Locations ----------------------------------------------
+
+lkg:Place
+    a owl:Class ;
+    rdfs:label "Place"@en , "Ort"@de ;
+    rdfs:comment "A named location: city, village, station, river, habitat, or route point."@en ;
+    rdfs:subClassOf geo:SpatialThing .
+
+lkg:Habitat
+    a owl:Class ;
+    rdfs:label "Habitat"@en ;
+    rdfs:comment "An ecological habitat type associated with an observation."@en ;
+    rdfs:subClassOf lkg:Place .
+
+lkg:Route
+    a owl:Class ;
+    rdfs:label "Route"@en , "Reiseroute"@de ;
+    rdfs:comment "An ordered sequence of places forming a travel route."@en .
+
+# --- Organisms ----------------------------------------------
+
+lkg:Taxon
+    a owl:Class ;
+    rdfs:label "Taxon"@en ;
+    rdfs:comment "A biological taxon (species, genus, family) observed or mentioned."@en ;
+    rdfs:subClassOf dwc:Taxon .
+
+# --- Agents -------------------------------------------------
+
+lkg:Person
+    a owl:Class ;
+    rdfs:label "Person"@en ;
+    rdfs:comment "A person mentioned in the diary: observer, collector, correspondent, cited author."@en ;
+    rdfs:subClassOf schema:Person .
+
+# --- Observation Traits ------------------------------------
+
+lkg:ObservationEvidence
+    a owl:Class ;
+    rdfs:label "Observation Evidence"@en , "Beobachtungsbeleg"@de ;
+    rdfs:comment "How the organism was detected: visual, auditory, nest, specimen, etc."@en .
+
+lkg:BirdCall
+    a owl:Class ;
+    rdfs:label "Bird Call"@en , "Vogelruf"@de ;
+    rdfs:comment "A specific vocalisation noted in the diary."@en ;
+    rdfs:subClassOf lkg:ObservationEvidence .
+
+lkg:BehaviourNote
+    a owl:Class ;
+    rdfs:label "Behaviour Note"@en , "Verhaltensnotiz"@de ;
+    rdfs:comment "A noted behaviour of the observed organism."@en .
+
+# --- Time ---------------------------------------------------
+
+lkg:TimeEstimate
+    a owl:Class ;
+    rdfs:label "Time Estimate"@en , "Zeitschätzung"@de ;
+    rdfs:comment "A derived or estimated time interval, e.g. inferred from travel duration."@en ;
+    rdfs:subClassOf time:Interval .
+
+# =============================================================
+# PROPERTIES
+# =============================================================
+
+# --- Entry structure ----------------------------------------
+
+lkg:hasVolume
+    a owl:ObjectProperty ;
+    rdfs:label "has volume"@en ;
+    rdfs:domain lkg:DiaryEntry ;
+    rdfs:range lkg:DiaryVolume .
+
+lkg:hasPage
+    a owl:ObjectProperty ;
+    rdfs:label "has page"@en ;
+    rdfs:domain lkg:DiaryEntry ;
+    rdfs:range lkg:DiaryPage .
+
+lkg:hasSourceRegion
+    a owl:ObjectProperty ;
+    rdfs:label "has source region"@en ;
+    rdfs:range lkg:SourceRegion .
+
+lkg:entryDate
+    a owl:DatatypeProperty ;
+    rdfs:label "entry date"@en ;
+    rdfs:domain lkg:DiaryEntry ;
+    rdfs:range xsd:date .
+
+lkg:rawText
+    a owl:DatatypeProperty ;
+    rdfs:label "raw transcription text"@en ;
+    rdfs:range xsd:string .
+
+# --- Entry → Events -----------------------------------------
+
+lkg:containsObservation
+    a owl:ObjectProperty ;
+    rdfs:label "contains observation"@en ;
+    rdfs:domain lkg:DiaryEntry ;
+    rdfs:range lkg:ObservationEvent .
+
+lkg:containsTravelEvent
+    a owl:ObjectProperty ;
+    rdfs:label "contains travel event"@en ;
+    rdfs:domain lkg:DiaryEntry ;
+    rdfs:range lkg:TravelEvent .
+
+lkg:hasLeg
+    a owl:ObjectProperty ;
+    rdfs:label "has leg"@en ;
+    rdfs:domain lkg:TravelEvent ;
+    rdfs:range lkg:TravelLeg .
+
+# --- Observation properties ---------------------------------
+
+lkg:observedTaxon
+    a owl:ObjectProperty ;
+    rdfs:label "observed taxon"@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range lkg:Taxon ;
+    rdfs:subPropertyOf dwciri:taxon .
+
+lkg:observedAt
+    a owl:ObjectProperty ;
+    rdfs:label "observed at"@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range lkg:Place ;
+    rdfs:subPropertyOf dwciri:inDescribedPlace .
+
+lkg:observedDuring
+    a owl:ObjectProperty ;
+    rdfs:label "observed during"@en ;
+    rdfs:comment "Links an observation to the travel leg or event during which it occurred."@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range lkg:TravelLeg .
+
+lkg:hasTimeEstimate
+    a owl:ObjectProperty ;
+    rdfs:label "has time estimate"@en ;
+    rdfs:range lkg:TimeEstimate .
+
+lkg:hasEvidence
+    a owl:ObjectProperty ;
+    rdfs:label "has evidence"@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range lkg:ObservationEvidence .
+
+lkg:hasBehaviour
+    a owl:ObjectProperty ;
+    rdfs:label "has behaviour"@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range lkg:BehaviourNote .
+
+lkg:hasHabitat
+    a owl:ObjectProperty ;
+    rdfs:label "has habitat"@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range lkg:Habitat .
+
+lkg:individualCount
+    a owl:DatatypeProperty ;
+    rdfs:label "individual count"@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf dwc:individualCount .
+
+lkg:countQualifier
+    a owl:DatatypeProperty ;
+    rdfs:label "count qualifier"@en ;
+    rdfs:comment "Qualifier for count: exact, minimum, approximate, plural-unspecified."@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range xsd:string .
+
+lkg:verbatimNotes
+    a owl:DatatypeProperty ;
+    rdfs:label "verbatim notes"@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range xsd:string .
+
+# --- Bird call / vocalisation -------------------------------
+
+lkg:callTranscription
+    a owl:DatatypeProperty ;
+    rdfs:label "call transcription"@en ;
+    rdfs:comment "Phonetic transcription of the bird call as written in the diary."@en ;
+    rdfs:domain lkg:BirdCall ;
+    rdfs:range xsd:string .
+
+lkg:callType
+    a owl:DatatypeProperty ;
+    rdfs:label "call type"@en ;
+    rdfs:comment "Type of vocalisation: song, call, alarm, drumming, etc."@en ;
+    rdfs:domain lkg:BirdCall ;
+    rdfs:range xsd:string .
+
+# --- Travel properties --------------------------------------
+
+lkg:departurePlace
+    a owl:ObjectProperty ;
+    rdfs:label "departure place"@en ;
+    rdfs:domain lkg:TravelLeg ;
+    rdfs:range lkg:Place .
+
+lkg:arrivalPlace
+    a owl:ObjectProperty ;
+    rdfs:label "arrival place"@en ;
+    rdfs:domain lkg:TravelLeg ;
+    rdfs:range lkg:Place .
+
+lkg:departureTime
+    a owl:DatatypeProperty ;
+    rdfs:label "departure time"@en ;
+    rdfs:domain lkg:TravelLeg ;
+    rdfs:range xsd:dateTime .
+
+lkg:arrivalTime
+    a owl:DatatypeProperty ;
+    rdfs:label "arrival time"@en ;
+    rdfs:domain lkg:TravelLeg ;
+    rdfs:range xsd:dateTime .
+
+lkg:transportMode
+    a owl:DatatypeProperty ;
+    rdfs:label "transport mode"@en ;
+    rdfs:domain lkg:TravelLeg ;
+    rdfs:range xsd:string .
+
+lkg:viaPlace
+    a owl:ObjectProperty ;
+    rdfs:label "via place"@en ;
+    rdfs:domain lkg:TravelLeg ;
+    rdfs:range lkg:Place .
+
+lkg:hasRoute
+    a owl:ObjectProperty ;
+    rdfs:label "has route"@en ;
+    rdfs:domain lkg:TravelLeg ;
+    rdfs:range lkg:Route .
+
+lkg:routePoint
+    a owl:ObjectProperty ;
+    rdfs:label "route point"@en ;
+    rdfs:domain lkg:Route ;
+    rdfs:range lkg:Place .
+
+lkg:routeOrder
+    a owl:DatatypeProperty ;
+    rdfs:label "route order"@en ;
+    rdfs:domain lkg:Place ;
+    rdfs:range xsd:integer .
+
+# --- Place properties ---------------------------------------
+
+lkg:placeName
+    a owl:DatatypeProperty ;
+    rdfs:label "place name"@en ;
+    rdfs:domain lkg:Place ;
+    rdfs:range xsd:string .
+
+lkg:verbatimLocality
+    a owl:DatatypeProperty ;
+    rdfs:label "verbatim locality"@en ;
+    rdfs:domain lkg:Place ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dwc:verbatimLocality .
+
+# --- Taxon properties ---------------------------------------
+
+lkg:vernacularNameDE
+    a owl:DatatypeProperty ;
+    rdfs:label "vernacular name (German)"@en ;
+    rdfs:domain lkg:Taxon ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dwc:vernacularName .
+
+lkg:scientificName
+    a owl:DatatypeProperty ;
+    rdfs:label "scientific name"@en ;
+    rdfs:domain lkg:Taxon ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dwc:scientificName .
+
+# --- Provenance / source linking ----------------------------
+
+lkg:derivedFromEntry
+    a owl:ObjectProperty ;
+    rdfs:label "derived from entry"@en ;
+    rdfs:domain lkg:ObservationEvent ;
+    rdfs:range lkg:DiaryEntry ;
+    rdfs:subPropertyOf prov:wasDerivedFrom .
+
+lkg:hasAnnotation
+    a owl:ObjectProperty ;
+    rdfs:label "has annotation"@en ;
+    rdfs:range oa:Annotation .
