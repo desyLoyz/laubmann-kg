@@ -1,6 +1,6 @@
 # =============================================================
 # HistOrniGraph / Laubmann Knowledge Graph
-# Project Ontology  –  lkg_ontology.ttl
+# Project Ontology  /  lkg_ontology.ttl
 # Namespace: https://lkg.example.org/ontology#
 # =============================================================
 
@@ -74,8 +74,8 @@ lkg:TravelEvent
 lkg:TravelLeg
     a owl:Class ;
     rdfs:label "Travel Leg"@en , "Reiseabschnitt"@de ;
-    rdfs:comment "A single segment of a journey (e.g. one train leg or one walking leg)."@en ;
-    rdfs:subClassOf lkg:TravelEvent .
+    rdfs:comment "A single segment of a journey (e.g. one train leg or one walking leg)."@en .
+
 
 # --- Locations ----------------------------------------------
 

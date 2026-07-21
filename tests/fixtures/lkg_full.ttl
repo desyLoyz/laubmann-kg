@@ -259,3 +259,24 @@ data:evidence_Storch_nest a lkg:ObservationEvidence ;
 data:timeest_obs_Storch a lkg:TimeEstimate ;
     time:hasBeginning "1925-05-30T00:00:00"^^xsd:dateTime ;
     time:hasEnd       "1925-05-30T01:15:00"^^xsd:dateTime .
+# - - - Ergänzungen 21.7.2026
+data:volume_unknown a lkg:DiaryVolume ;
+    rdfs:label "Band unbekannt"@de .
+
+data:place_LechRiverCrossing a lkg:Place ;
+    rdfs:label "Lechüberquerung"@de .
+
+data:place_MunichToAugsburgRoute a lkg:Place ;
+    rdfs:label "Strecke München–Augsburg"@de .
+
+data:place_ZwiefaltendorfToGossenzugen a lkg:Place ;
+    rdfs:label "Strecke Zwiefaltendorf–Gossenzugen"@de .
+
+data:place_ZwiefaltendorfToBaach a lkg:Place ;
+    rdfs:label "Strecke Zwiefaltendorf–Baach"@de .
+
+data:place_Zwiefaltenkloster a lkg:Place ;
+    rdfs:label "Zwiefaltenkloster"@de .
+
+data:place_Baach a lkg:Place ;
+    rdfs:label "Baach"@de .
