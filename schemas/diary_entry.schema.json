@@ -1,5 +1,407 @@
 {
+  "$defs": {
+    "BehaviourNoteModel": {
+      "properties": {
+        "description": {
+          "description": "Beschreibung des Verhaltens (z.B. 'brütend', 'flügge Junge eingesandt').",
+          "title": "Description",
+          "type": "string"
+        },
+        "reproductive_condition": {
+          "anyOf": [
+            {
+              "enum": [
+                "breeding",
+                "non-breeding"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Fortpflanzungsstatus (dwc:reproductiveCondition).",
+          "title": "Reproductive Condition"
+        }
+      },
+      "required": [
+        "description"
+      ],
+      "title": "BehaviourNoteModel",
+      "type": "object"
+    },
+    "BirdCallModel": {
+      "properties": {
+        "call_type": {
+          "default": "unknown",
+          "description": "Art des Rufs (z.B. 'song' für Gesang, 'call' für Ruf).",
+          "enum": [
+            "song",
+            "call",
+            "alarm",
+            "drumming",
+            "unknown"
+          ],
+          "title": "Call Type",
+          "type": "string"
+        },
+        "call_transcription": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Lautmalerische Umschrift aus dem Text (z.B. 'pich pich', 'Schnarren').",
+          "title": "Call Transcription"
+        }
+      },
+      "title": "BirdCallModel",
+      "type": "object"
+    },
+    "EvidenceModel": {
+      "properties": {
+        "type": {
+          "description": "Art des Belegs (Sichtbeobachtung, Gehört, Balg/Spezimen, Nestfund).",
+          "enum": [
+            "visual",
+            "auditory",
+            "specimen",
+            "nest",
+            "other"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "bird_call": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BirdCallModel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Details zum Ruf, falls es sich um einen akustischen Beleg handelt."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "EvidenceModel",
+      "type": "object"
+    },
+    "ObservationEventModel": {
+      "properties": {
+        "label": {
+          "description": "Kurzer Titel der Beobachtung (z.B. 'Kiebitz-Beobachtung bei Mering').",
+          "title": "Label",
+          "type": "string"
+        },
+        "observed_taxon": {
+          "$ref": "#/$defs/TaxonModel"
+        },
+        "observed_at": {
+          "$ref": "#/$defs/PlaceModel",
+          "description": "Ort der Beobachtung."
+        },
+        "verbatim_notes": {
+          "description": "Der originale Textausschnitt zur Beobachtung (lkg:verbatimNotes).",
+          "title": "Verbatim Notes",
+          "type": "string"
+        },
+        "count_qualifier": {
+          "default": "plural-unspecified",
+          "description": "Mengenangabe-Klassifikation (z.B. 'plural-unspecified' bei 'einige').",
+          "enum": [
+            "exact",
+            "minimum",
+            "approximate",
+            "plural-unspecified",
+            "single"
+          ],
+          "title": "Count Qualifier",
+          "type": "string"
+        },
+        "individual_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Genaue Anzahl Individuen, falls exakt beziffert.",
+          "title": "Individual Count"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EvidenceModel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "behaviour": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/BehaviourNoteModel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "time_estimate": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TimeEstimateModel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Zeitschätzung für die Beobachtung."
+        }
+      },
+      "required": [
+        "label",
+        "observed_taxon",
+        "observed_at",
+        "verbatim_notes"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "PlaceModel": {
+      "properties": {
+        "name": {
+          "description": "Standardisierter Name des Ortes (z.B. 'München', 'Zwiefaltendorf').",
+          "title": "Name",
+          "type": "string"
+        },
+        "verbatim_locality": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Der exakte Textausschnitt, wie der Ort im Tagebuch genannt wird (dwc:verbatimLocality).",
+          "title": "Verbatim Locality"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "PlaceModel",
+      "type": "object"
+    },
+    "TaxonModel": {
+      "properties": {
+        "vernacular_name_de": {
+          "description": "Deutscher Trivialname des Vogels (z.B. 'Kiebitz', 'Wachtelkönig').",
+          "title": "Vernacular Name De",
+          "type": "string"
+        },
+        "scientific_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Wissenschaftlicher (lateinischer) Name, falls im Text genannt oder eindeutig bestimmbar (z.B. 'Vanellus vanellus').",
+          "title": "Scientific Name"
+        }
+      },
+      "required": [
+        "vernacular_name_de"
+      ],
+      "title": "TaxonModel",
+      "type": "object"
+    },
+    "TimeEstimateModel": {
+      "properties": {
+        "beginning": {
+          "description": "Geschätzter Startzeitpunkt (ISO 8601, z.B. '1925-05-29T17:00:00').",
+          "format": "date-time",
+          "title": "Beginning",
+          "type": "string"
+        },
+        "end": {
+          "description": "Geschätzter Endzeitpunkt (ISO 8601, z.B. '1925-05-29T18:30:00').",
+          "format": "date-time",
+          "title": "End",
+          "type": "string"
+        },
+        "note": {
+          "description": "Begründung/Herleitung der Schätzung (skos:note, z.B. 'Abfahrt München 17:00 Uhr; Mering ca. 60 min später').",
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "beginning",
+        "end",
+        "note"
+      ],
+      "title": "TimeEstimateModel",
+      "type": "object"
+    },
+    "TravelEventModel": {
+      "properties": {
+        "label": {
+          "description": "Titel der Reise (z.B. 'Reise München – Gammertingen').",
+          "title": "Label",
+          "type": "string"
+        },
+        "legs": {
+          "description": "Die einzelnen Abschnitte der Reise.",
+          "items": {
+            "$ref": "#/$defs/TravelLegModel"
+          },
+          "title": "Legs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "label",
+        "legs"
+      ],
+      "title": "TravelEventModel",
+      "type": "object"
+    },
+    "TravelLegModel": {
+      "properties": {
+        "transport_mode": {
+          "description": "Transportmittel (lkg:transportMode).",
+          "enum": [
+            "train",
+            "foot",
+            "carriage",
+            "boat",
+            "car",
+            "unknown"
+          ],
+          "title": "Transport Mode",
+          "type": "string"
+        },
+        "departure_place": {
+          "$ref": "#/$defs/PlaceModel",
+          "description": "Startpunkt des Abschnitts."
+        },
+        "arrival_place": {
+          "$ref": "#/$defs/PlaceModel",
+          "description": "Endpunkt des Abschnitts."
+        },
+        "departure_time": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Abfahrtszeit, falls bekannt oder schätzbar.",
+          "title": "Departure Time"
+        },
+        "arrival_time": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Ankunftszeit, falls bekannt oder schätzbar.",
+          "title": "Arrival Time"
+        },
+        "via_places": {
+          "description": "Orte, die auf dem Weg passiert wurden.",
+          "items": {
+            "$ref": "#/$defs/PlaceModel"
+          },
+          "title": "Via Places",
+          "type": "array"
+        }
+      },
+      "required": [
+        "transport_mode",
+        "departure_place",
+        "arrival_place"
+      ],
+      "title": "TravelLegModel",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "entry_date": {
+      "description": "Das Datum des Eintrags im Format YYYY-MM-DD (lkg:entryDate).",
+      "format": "date",
+      "title": "Entry Date",
+      "type": "string"
+    },
+    "label": {
+      "description": "Titel des Eintrags (z.B. 'Tagebucheintrag 29. Mai 1925').",
+      "title": "Label",
+      "type": "string"
+    },
+    "raw_text": {
+      "description": "Der rohe, transkribierte Text dieses Eintrags.",
+      "title": "Raw Text",
+      "type": "string"
+    },
+    "travel_event": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TravelEventModel"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Die im Eintrag beschriebene Reise."
+    },
+    "observations": {
+      "description": "Alle im Eintrag erwähnten Vogelbeobachtungen.",
+      "items": {
+        "$ref": "#/$defs/ObservationEventModel"
+      },
+      "title": "Observations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "entry_date",
+    "label",
+    "raw_text"
+  ],
   "title": "DiaryEntry",
-  "type": "object",
-  "properties": {}
+  "type": "object"
 }

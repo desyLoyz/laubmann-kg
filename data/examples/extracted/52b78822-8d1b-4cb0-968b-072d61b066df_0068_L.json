@@ -1,0 +1,128 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/52b78822-8d1b-4cb0-968b-072d61b066df_0068_L.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "1.0.0",
+    "confidence": null,
+    "extracted_at": "2026-08-18T15:50:05.411014Z"
+  },
+  "diary_entry": {
+    "entry_date": "1925-06-15",
+    "label": "Tagebucheintrag (ca. 15. Juni 1925)",
+    "raw_text": "dich heute ein merkwürdiger Vogel, der mich aus der\nweiten Ferne wohl etwas erwarten lässt.\nVon Beizstetten an der Bahnstation ein breites Tal\nan der Linie Ulm - Sigmaringen, führt der Weg abwärts\nüber Bach und Beizstetten Kloster, immer an der Bach ent-\nlang nach Gammertingen, das malerisch auf einem Berg\nan Bach und verlassenen Talhang liegt. An einer Ei-\nchen bewaldeten Kuppe u. auf dem Weg dorthin folgendes fest-\ngestellt werden: An einer Bachstelle, dort wo eine hölzerne\nBrücke rechts der Straße abzweigt eine Bachstelze junger.\nAus dem Wiesengrund längs der Bach tönt der Schnarren\nmehrerer Wachtelkönige. Eine Wachtel eile nicht weit\nmit sich.\nAm Berg dorthin und auch dem Rückweg\nin kurze Strecken war zu erkennen.\nAn auf der rechten Seite liegenden Garten-\nskizze kann die Situation von Gammertingen ganz gut\nerläutern.\n\n*[ImageRegion: map]* This is a hand-drawn map on grid paper showing a section of the Danube river and its tributaries in southern Germany. It features several towns and landmarks marked with red dots and labels, with green shaded areas likely representing forested or elevated terrain.",
+    "travel_event": {
+      "label": "Wanderung von Beizstetten nach Gammertingen",
+      "legs": [
+        {
+          "transport_mode": "foot",
+          "departure_place": {
+            "name": "Beizstetten",
+            "verbatim_locality": "Beizstetten"
+          },
+          "arrival_place": {
+            "name": "Gammertingen",
+            "verbatim_locality": "Gammertingen"
+          },
+          "departure_time": "1925-06-15T09:00:00+01:00",
+          "arrival_time": null,
+          "via_places": [
+            {
+              "name": "Beizstetten Kloster",
+              "verbatim_locality": "Beizstetten Kloster"
+            }
+          ]
+        }
+      ]
+    },
+    "observations": [
+      {
+        "label": "Bachstelze-Beobachtung nahe Gammertingen",
+        "observed_taxon": {
+          "vernacular_name_de": "Bachstelze",
+          "scientific_name": "Motacilla alba"
+        },
+        "observed_at": {
+          "name": "Gammertingen",
+          "verbatim_locality": "An einer Bachstelle, dort wo eine hölzerne Brücke rechts der Straße abzweigt"
+        },
+        "verbatim_notes": "An einer Bachstelle, dort wo eine hölzerne Brücke rechts der Straße abzweigt eine Bachstelze junger.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "junger",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": {
+          "beginning": "1925-06-15T09:00:00+01:00",
+          "end": "1925-06-15T13:00:00+01:00",
+          "note": "Beobachtung auf der Wanderung von Beizstetten nach Gammertingen, geschätzt auf den Vormittag zwischen 9 und 13 Uhr."
+        }
+      },
+      {
+        "label": "Wachtelkönig-Beobachtung bei Gammertingen",
+        "observed_taxon": {
+          "vernacular_name_de": "Wachtelkönig",
+          "scientific_name": "Crex crex"
+        },
+        "observed_at": {
+          "name": "Gammertingen",
+          "verbatim_locality": "Aus dem Wiesengrund längs der Bach"
+        },
+        "verbatim_notes": "Aus dem Wiesengrund längs der Bach tönt der Schnarren mehrerer Wachtelkönige.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": {
+          "type": "auditory",
+          "bird_call": {
+            "call_type": "song",
+            "call_transcription": "Schnarren"
+          }
+        },
+        "behaviour": {
+          "description": "schnarrend (rufend)",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": {
+          "beginning": "1925-06-15T09:00:00+01:00",
+          "end": "1925-06-15T13:00:00+01:00",
+          "note": "Beobachtung auf der Wanderung von Beizstetten nach Gammertingen, geschätzt auf den Vormittag zwischen 9 und 13 Uhr."
+        }
+      },
+      {
+        "label": "Wachtel-Beobachtung bei Gammertingen",
+        "observed_taxon": {
+          "vernacular_name_de": "Wachtel",
+          "scientific_name": "Coturnix coturnix"
+        },
+        "observed_at": {
+          "name": "Gammertingen",
+          "verbatim_locality": "auf dem Weg dorthin"
+        },
+        "verbatim_notes": "Eine Wachtel eile nicht weit mit sich.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1925-06-15T09:00:00+01:00",
+          "end": "1925-06-15T13:00:00+01:00",
+          "note": "Beobachtung auf der Wanderung von Beizstetten nach Gammertingen, geschätzt auf den Vormittag zwischen 9 und 13 Uhr."
+        }
+      }
+    ]
+  }
+}

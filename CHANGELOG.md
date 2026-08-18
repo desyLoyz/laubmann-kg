@@ -26,12 +26,17 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - Erste Tests unter `tests/` (Schema-Validierung, Placeholder für Export-Stages)
 - `README.md`, `.gitignore`, `.env.example`
 - Dev-Abhängigkeiten: `pytest` (optional via `[dev]`)
+- Pydantic-Modelle für die LLM-Extraktion (`DiaryEntryModel` und Submodelle) in `src/laubmann_kg/extraction/schemas.py`
+- LLM-Extraktor `extract_from_text` und Stage-Runner in `src/laubmann_kg/extraction/observations.py` (Structured Outputs, Prompt-Laden, Disk-Cache)
+- Versionierte Prompt-Vorlage `prompts/extraction_prompt.yaml` (v1.0.0) für Beobachtungen, Reisen, Belege und Zeitschätzungen
+- LLM-Hilfsmodule: nativer Gemini-Client, OpenAI-Client, Prompt-Loader, Structured-Output-Parsing, Retry und Cache
+- JSON-Lese-/Schreibhilfen in `src/laubmann_kg/io/json.py`
 
 ### Changed
 
 - Flache Stage-Module (`preprocess.py`, `detect_layout.py` usw.) in thematische Subpackages überführt
-- CLI importiert Stage-Funktionen aus den neuen Subpackages (`preprocessing`, `layout`, `diary` usw.)
-- `.cursorrules`: Regel ergänzt, dass der Nutzer Commits selbst pusht
+- CLI-Befehl `extract-observations` ruft `laubmann_kg.extraction.observations.run` auf
+- LLM-Client für Google authentisiert AI-Studio-Keys (`AQ.…`) ausschließlich per `x-goog-api-key` gegen die Interactions API, ohne OAuth-Bearer und ohne `?key=` in der URL
 
 ## [0.1.0] - 2026-06-18
 

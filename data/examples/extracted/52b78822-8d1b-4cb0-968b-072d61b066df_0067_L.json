@@ -1,0 +1,234 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/52b78822-8d1b-4cb0-968b-072d61b066df_0067_L.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "1.0.0",
+    "confidence": null,
+    "extracted_at": "2026-08-18T15:49:33.848596Z"
+  },
+  "diary_entry": {
+    "entry_date": "1925-05-29",
+    "label": "Tagebucheintrag 29. Mai 1925",
+    "raw_text": "mal zum Opfer gefallen.\"\n      Wenn es sich, was leider zu befürchten ist, in die-\nsem Falle um den Horst am Giebel im Hintersteiner Tal\nhandelt, dann wäre auf Grund der \"Schutzverordnung\nfür den Bezirkamt Sonthofen\" ein Einschreiten der\nunteren Behörde dringend zu wünschen.\n      Heute wurden durch Oberlehrer E. Barthel aus Streitberg,\nOberfranken, zwei junge, bereits flügge Wanderfalken einge-\nsandt, als ein sicherer Nachweis für das Horsten dieser edlen\nVögel in Bayern. Belegexemplare in der Zool. Sammlung.\n\n29. Mai 1925. München - Gammertingen.\nWir fahren über Augsburg - Ulm - Zwiefalten-\ndorf, wo wir um 12 h Nachts ankommen und von wo wir\nnoch ca 5/4 Stunden über Zwiefaltenkloster nach Gamm-\nertingen zu gehen haben. München ab: 5 1/2.\nZwischen München - Augsburg nach der Sta-\ntion Mering auf den Feldern einige Kiebitze.\nÜber dem Lech heute ein möwenartiger Vogel, der sich\naber aus der weiten Ferne nicht näher ansprechen lässt.\nVon Zwiefaltendorf, der Bahnstation im Donau Tal\nan der Linie Ulm - Sigmaringen, führt der Weg Albwärts\nüber Baach und Zwiefaltenkloster, immer der Aach ent-\nlang nach Gammertingen, das malerisch auf einem von\nder Aach durchbrochenen Talschluß liegt. An nächtli-\nchem Vogelleben konnte auf dem Weg noch folgendes fest-\ngestellt werden: Zwischen Zwiefaltendorf und dem Ortchen\nBaach rechts der Straße schwirrt ein Flussschwirlsänger.\nAus dem Wiesenland längs der Aach tönt das Schnarren\nmehrerer Wachtelkönige. Eine Waldohreule ruft ihr\npich pich.\nIm Dorf Zwiefalten ist auf dem Kirchturm\ndas besetzte Storchennest zu erkennen.\nDie auf der nächsten Seite beigegebene Karten-\nskizze kann die Situation von Gammertingen ganz gut\nerläutern.",
+    "travel_event": {
+      "label": "Reise München - Gammertingen",
+      "legs": [
+        {
+          "transport_mode": "train",
+          "departure_place": {
+            "name": "München",
+            "verbatim_locality": "München"
+          },
+          "arrival_place": {
+            "name": "Zwiefaltendorf",
+            "verbatim_locality": "Zwiefaltendorf"
+          },
+          "departure_time": "1925-05-29T17:30:00+01:00",
+          "arrival_time": null,
+          "via_places": [
+            {
+              "name": "Mering",
+              "verbatim_locality": "Station Mering"
+            },
+            {
+              "name": "Augsburg",
+              "verbatim_locality": "Augsburg"
+            },
+            {
+              "name": "Ulm",
+              "verbatim_locality": "Ulm"
+            }
+          ]
+        },
+        {
+          "transport_mode": "foot",
+          "departure_place": {
+            "name": "Zwiefaltendorf",
+            "verbatim_locality": "Zwiefaltendorf"
+          },
+          "arrival_place": {
+            "name": "Gammertingen",
+            "verbatim_locality": "Gammertingen"
+          },
+          "departure_time": "1925-05-30T00:00:00+01:00",
+          "arrival_time": null,
+          "via_places": [
+            {
+              "name": "Baach",
+              "verbatim_locality": "Baach"
+            },
+            {
+              "name": "Zwiefalten",
+              "verbatim_locality": "Zwiefaltenkloster"
+            }
+          ]
+        }
+      ]
+    },
+    "observations": [
+      {
+        "label": "Kiebitze bei Mering",
+        "observed_taxon": {
+          "vernacular_name_de": "Kiebitz",
+          "scientific_name": "Vanellus vanellus"
+        },
+        "observed_at": {
+          "name": "Mering",
+          "verbatim_locality": "auf den Feldern ... nach der Station Mering"
+        },
+        "verbatim_notes": "Zwischen München - Augsburg nach der Station Mering auf den Feldern einige Kiebitze.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1925-05-29T17:45:00+01:00",
+          "end": "1925-05-29T18:15:00+01:00",
+          "note": "Abfahrt in München um 17:30 Uhr (5 1/2); die Passage von Mering erfolgt schätzungsweise 15 bis 45 Minuten nach der Abfahrt."
+        }
+      },
+      {
+        "label": "Möwenartiger Vogel über dem Lech",
+        "observed_taxon": {
+          "vernacular_name_de": "möwenartiger Vogel",
+          "scientific_name": null
+        },
+        "observed_at": {
+          "name": "Lech",
+          "verbatim_locality": "Über dem Lech"
+        },
+        "verbatim_notes": "Über dem Lech heute ein möwenartiger Vogel, der sich aber aus der weiten Ferne nicht näher ansprechen lässt.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1925-05-29T18:00:00+01:00",
+          "end": "1925-05-29T18:30:00+01:00",
+          "note": "Überquerung des Lechs kurz vor Augsburg, schätzungsweise 30 bis 60 Minuten nach der Abfahrt in München (17:30 Uhr)."
+        }
+      },
+      {
+        "label": "Flussschwirlsänger bei Baach",
+        "observed_taxon": {
+          "vernacular_name_de": "Flussschwirlsänger",
+          "scientific_name": "Locustella fluviatilis"
+        },
+        "observed_at": {
+          "name": "Baach",
+          "verbatim_locality": "Zwischen Zwiefaltendorf und dem Ortchen Baach rechts der Straße"
+        },
+        "verbatim_notes": "Zwischen Zwiefaltendorf und dem Ortchen Baach rechts der Straße schwirrt ein Flussschwirlsänger.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "auditory",
+          "bird_call": {
+            "call_type": "song",
+            "call_transcription": "schwirrt"
+          }
+        },
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1925-05-30T00:00:00+01:00",
+          "end": "1925-05-30T00:20:00+01:00",
+          "note": "Beobachtung kurz nach der Ankunft in Zwiefaltendorf um Mitternacht (12 h Nachts) zu Beginn des Fußmarsches Richtung Baach."
+        }
+      },
+      {
+        "label": "Wachtelkönige an der Aach",
+        "observed_taxon": {
+          "vernacular_name_de": "Wachtelkönig",
+          "scientific_name": "Crex crex"
+        },
+        "observed_at": {
+          "name": "Zwiefalter Aach",
+          "verbatim_locality": "Aus dem Wiesenland längs der Aach"
+        },
+        "verbatim_notes": "Aus dem Wiesenland längs der Aach tönt das Schnarren mehrerer Wachtelkönige.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": {
+          "type": "auditory",
+          "bird_call": {
+            "call_type": "song",
+            "call_transcription": "Schnarren"
+          }
+        },
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1925-05-30T00:00:00+01:00",
+          "end": "1925-05-30T01:15:00+01:00",
+          "note": "Während des gesamten, etwa 1 1/4 Stunden dauernden Fußmarsches entlang der Aach nach Mitternacht."
+        }
+      },
+      {
+        "label": "Waldohreule an der Aach",
+        "observed_taxon": {
+          "vernacular_name_de": "Waldohreule",
+          "scientific_name": "Asio otus"
+        },
+        "observed_at": {
+          "name": "Zwiefalter Aach",
+          "verbatim_locality": "auf dem Weg"
+        },
+        "verbatim_notes": "Eine Waldohreule ruft ihr pich pich.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "auditory",
+          "bird_call": {
+            "call_type": "call",
+            "call_transcription": "pich pich"
+          }
+        },
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1925-05-30T00:00:00+01:00",
+          "end": "1925-05-30T01:15:00+01:00",
+          "note": "Während des nächtlichen Fußmarsches entlang des Weges nach Mitternacht registriert."
+        }
+      },
+      {
+        "label": "Storchennest in Zwiefalten",
+        "observed_taxon": {
+          "vernacular_name_de": "Storch",
+          "scientific_name": "Ciconia ciconia"
+        },
+        "observed_at": {
+          "name": "Zwiefalten",
+          "verbatim_locality": "Im Dorf Zwiefalten ... auf dem Kirchturm"
+        },
+        "verbatim_notes": "Im Dorf Zwiefalten ist auf dem Kirchturm das besetzte Storchennest zu erkennen.",
+        "count_qualifier": "single",
+        "individual_count": null,
+        "evidence": {
+          "type": "nest",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "besetztes Storchennest",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": {
+          "beginning": "1925-05-30T00:20:00+01:00",
+          "end": "1925-05-30T00:45:00+01:00",
+          "note": "Passage des Ortes Zwiefalten (Zwiefaltenkloster) auf dem Fußmarsch, schätzungsweise 20-45 Minuten nach dem Start in Zwiefaltendorf."
+        }
+      }
+    ]
+  }
+}

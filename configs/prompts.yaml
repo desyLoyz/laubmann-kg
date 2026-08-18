@@ -3,7 +3,8 @@ layout_detection: prompts/layout_detection.md
 diary_entry_detection: prompts/diary_entry_detection.md
 region_transcription: prompts/region_transcription.md
 entity_extraction: prompts/entity_extraction.md
-observation_extraction: prompts/observation_extraction.md
+extraction: prompts/extraction_prompt.yaml
+observation_extraction: prompts/extraction_prompt.yaml
 citation_classification: prompts/citation_classification.md
 taxon_normalization: prompts/taxon_normalization.md
 jsonld_generation: prompts/jsonld_generation.md

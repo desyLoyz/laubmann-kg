@@ -1,0 +1,78 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/900847d2-aabe-4b16-b0e6-203b103bd1e1_0047_L.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "1.0.0",
+    "confidence": null,
+    "extracted_at": "2026-08-18T15:51:39.356846Z"
+  },
+  "diary_entry": {
+    "entry_date": "1915-05-25",
+    "label": "Tagebucheintrag 25. Mai 1915",
+    "raw_text": "Im gegenüberliegenden Schilfsaume sind 9 mit 6 Jungen\ndie sich aber noch nicht aus dem schützenden Schilf- und\nSchachtelhalm-Dickicht auf die freie Fläche trauen wag[en].\nErst gegen 1/2 7 h führt die alte Ente ihre Brut auf das off[ene]\nWasser und holt durch eifriges Tauchen Nahrung vom\nGrunde herauf. Doch auch beim Tauchen vergißt\nkeineswegs ihre Vorsicht.\nDie jungen Entchen sind äußerst flinke Taucher\ndie sich schon eifrig bemühen, der alten Ente das Tauch[en]\nnach zu machen. Nur gelingt es ihnen noch nicht,\nda notwendige Stoßkraft noch mangelt.\nDie Tafelente wurde bei uns in Bayern südlich\nDonau meist nur in den Monaten Januar bis Ma[i]\nund dann wieder im Spätherbst beobachtet, um so int[er-]\nessanter mag ihr Brüten am Maininger See sein.\nAuch im Sommer 1916 habe ich die Tafelente heute\nam Maininger See angetroffen.\n\n3.) Larus ridibundus L. Lachmöve.\nIm Maivinger See befindet sich eine ziemlich zahl-\nreiche Mövenkolonie. Die Brutpaare schwanken je nach\nJahren zwischen 100 und 300. Sie ist also bei weitem klei-\nner als die bekannte Kolonie am Wörthsee. Doch wenn beide Koloni-\nen mit einander in einer gewissen Verbindung stehen, die\ndarin besteht, daß die Zahl der Brutpaare bei der einen kurz\nsteigt, wenn in der andern eine starke Beunruhigung oder\nein böses Brutgeschäft verursacht wird.\nDie Möven brüten an verschiednen Stellen, so daß man\nder Kolonie gewissermaßen von Zweigniederlassungen spre-\nchen könnte. Die Nester befinden sich in den meisten Fällen\neinem moorigen, mit Schilf und Gras bewachsenen\nTerrain, das auf der einen Seite vom offenen Wasser begrenzt\nwird, während es von dem festen Land durch ausgedehn-\ntes, nicht passierbares Sumpfland getrennt und gesichert\nist.\nAm 25. Mai 1915 war das Brutgeschäft natürlich\nschon in vollem Gange. Die ganze Kolonie macht einen",
+    "travel_event": null,
+    "observations": [
+      {
+        "label": "Tafelenten-Beobachtung am Maininger See",
+        "observed_taxon": {
+          "vernacular_name_de": "Tafelente",
+          "scientific_name": "Aythya ferina"
+        },
+        "observed_at": {
+          "name": "Maininger See",
+          "verbatim_locality": "Maininger See"
+        },
+        "verbatim_notes": "Im gegenüberliegenden Schilfsaume sind 9 mit 6 Jungen die sich aber noch nicht aus dem schützenden Schilf- und Schachtelhalm-Dickicht auf die freie Fläche trauen wag[en]. Erst gegen 1/2 7 h führt die alte Ente ihre Brut auf das off[ene] Wasser und holt durch eifriges Tauchen Nahrung vom Grunde herauf. Doch auch beim Tauchen vergißt keineswegs ihre Vorsicht. Die jungen Entchen sind äußerst flinke Taucher die sich schon eifrig bemühen, der alten Ente das Tauch[en] nach zu machen. Nur gelingt es ihnen noch nicht, da notwendige Stoßkraft noch mangelt. Die Tafelente wurde bei uns in Bayern südlich Donau meist nur in den Monaten Januar bis Ma[i] und dann wieder im Spätherbst beobachtet, um so int[er-] essanter mag ihr Brüten am Maininger See sein.",
+        "count_qualifier": "exact",
+        "individual_count": 7,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "Führt 6 Junge auf das offene Wasser und taucht nach Nahrung",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": {
+          "beginning": "1915-05-25T18:00:00+01:00",
+          "end": "1915-05-25T19:30:00+01:00",
+          "note": "Der Text gibt explizit die Uhrzeit 'gegen 1/2 7 h' (18:30 Uhr) für das Heraustreten der Ente mit ihrer Brut an."
+        }
+      },
+      {
+        "label": "Lachmöwen-Kolonie am Maivinger See",
+        "observed_taxon": {
+          "vernacular_name_de": "Lachmöve",
+          "scientific_name": "Chroicocephalus ridibundus"
+        },
+        "observed_at": {
+          "name": "Maininger See",
+          "verbatim_locality": "Maivinger See"
+        },
+        "verbatim_notes": "3.) Larus ridibundus L. Lachmöve. Im Maivinger See befindet sich eine ziemlich zahl- reiche Mövenkolonie. Die Brutpaare schwanken je nach Jahren zwischen 100 und 300. ... Am 25. Mai 1915 war das Brutgeschäft natürlich schon in vollem Gange.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": {
+          "type": "nest",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "Brutgeschäft in Brutkolonie in vollem Gange",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": {
+          "beginning": "1915-05-25T15:00:00+01:00",
+          "end": "1915-05-25T19:30:00+01:00",
+          "note": "Beobachtung der Brutkolonie am Nachmittag des Exkursionstages im zeitlichen Kontext der Entenbeobachtung."
+        }
+      }
+    ]
+  }
+}

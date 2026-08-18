@@ -1,0 +1,75 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/900847d2-aabe-4b16-b0e6-203b103bd1e1_0048_L.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "1.0.0",
+    "confidence": null,
+    "extracted_at": "2026-08-18T15:52:37.427043Z"
+  },
+  "diary_entry": {
+    "entry_date": "1917-12-07",
+    "label": "Tagebucheintrag 7. Dezember 1917",
+    "raw_text": "um teils am Mainufer, zum kleineren Teil am\nBerge da zu übernachten.\nWohin die Käuze im Winter zum Nächtigen zie-\ngen, wissen wir bis heute noch nicht.\nNeuerdings konnte ich beobachten, daß ein Wald-\nkauz der Bäume an der Isar nächtigt, vorausgesetzt, er\nnicht bei niederen Wasserstand freie Kiesbänke gefun-\nden haben.\n\n7. December 1917. <u>München</u>.\nIn der Zool. Sammlung, München, befindet sich\nein ♂ des <u>Schwarzkehligen Fliegenschnäppers</u> aus der Um-\ngegend von Kaufbeuren vom 12. Mai 1909. Der Vogel\nkam aus meiner Sammlung und dürfte wohl von Chr.\npräpariert worden sein. Er gab mir über das Vorkom-\nmen der Art keinerlei Anhaltspunkte und auch ich ha-\nbe die Art bis heute bei Kaufbeuren nicht mehr ange-\ntroffen. In der Literatur fand ich über die Art für un-\nsen Fall nur folgendes: J. G. Leu, Die im Regierungsbezir-\nke Schwaben und Neuburg vorkommenden Vögel, 18\np. 7 schreibt: „Sehr selten auf dem Durchzug; beobach-\ntet im Kambachthale und bei Memmingen.“ Laut\nNaumannia, 1855, p. 80 schreibt: „Selten und nur\nauf der Wanderung im Kammelthale.“ Wüstmann, Die\nVögel des Regierungsbezirkes Schwaben und Neuburg, 18\np. 124 bemerkt: „Der Schwarzkehlchen... erscheint\nSchwaben meist nur im März und September auf dem\nDurchzuge. Es gelang mir nur einmal, nämlich im\nMai 1886, ein brütendes Pärchen bei Inningen un-\nweit Augsburg zu beobachten...“ Sonst macht wie Jäckel\nallgemeine Bemerkungen. Dagegen finden sich in den\nAnnalen immer wiederhafte folgende auf diese Art\nzu deutende Stellen: II, 1901, p. 93: „Kaufbeuren: selten\nnur auf dem Durchzuge (Büchner).“ (i) IV, 1904, p. 213\n\n[^footnote]: 1.) Büchner war Rektor an der Realschule in",
+    "travel_event": null,
+    "observations": [
+      {
+        "label": "Waldkauz-Beobachtung an der Isar",
+        "observed_taxon": {
+          "vernacular_name_de": "Waldkauz",
+          "scientific_name": "Strix aluco"
+        },
+        "observed_at": {
+          "name": "München",
+          "verbatim_locality": "an der Isar"
+        },
+        "verbatim_notes": "Neuerdings konnte ich beobachten, daß ein Wald-\nkauz der Bäume an der Isar nächtigt, vorausgesetzt, er\nnicht bei niederen Wasserstand freie Kiesbänke gefun-\nden haben.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "nächtigt in Bäumen",
+          "reproductive_condition": "non-breeding"
+        },
+        "time_estimate": {
+          "beginning": "1917-12-01T00:00:00-01:00",
+          "end": "1917-12-07T00:00:00-01:00",
+          "note": "Die Beobachtung wird als 'neuerdings' vor dem 7. Dezember 1917 beschrieben, daher wird ein Zeitfenster in der Woche vor dem Eintrag angenommen."
+        }
+      },
+      {
+        "label": "Schwarzkehliger Fliegenschnäpper in der Zoologischen Staatssammlung",
+        "observed_taxon": {
+          "vernacular_name_de": "Schwarzkehliger Fliegenschnäpper",
+          "scientific_name": null
+        },
+        "observed_at": {
+          "name": "München",
+          "verbatim_locality": "Zool. Sammlung, München"
+        },
+        "verbatim_notes": "In der Zool. Sammlung, München, befindet sich ein ♂ des Schwarzkehligen Fliegenschnäppers aus der Umgegend von Kaufbeuren vom 12. Mai 1909. Der Vogel kam aus meiner Sammlung und dürfte wohl von Chr. präpariert worden sein.",
+        "count_qualifier": "exact",
+        "individual_count": 1,
+        "evidence": {
+          "type": "specimen",
+          "bird_call": null
+        },
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1917-12-07T09:00:00-01:00",
+          "end": "1917-12-07T17:00:00-01:00",
+          "note": "Dokumentation und Untersuchung des Sammlungsbälges am Datum des Tagebucheintrags (7. Dezember 1917) während typischer Tagesstunden."
+        }
+      }
+    ]
+  }
+}

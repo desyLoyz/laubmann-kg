@@ -1,0 +1,135 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/900847d2-aabe-4b16-b0e6-203b103bd1e1_0046_L.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "1.0.0",
+    "confidence": null,
+    "extracted_at": "2026-08-18T15:50:40.406114Z"
+  },
+  "diary_entry": {
+    "entry_date": "1917-11-24",
+    "label": "Tagebucheintragungen November und Dezember 1917",
+    "raw_text": "Anrelliertes zusammengezogen. Etwas Zaunkönigarti-\nges konnte ich aber nicht herausfinden.\nIn dem laublosen Astwerk der Ausbünke am lin-\nken Ufer höre ich den charakteristischen Ruf der Weiden-\nmeise und komme diesmal durch die Gunst der Um-\nstände auf ca 5 m an den Vogel heran, so daß ich mit Hil-\nfe des Glases ganz genau die hellen Kappenränder und die\nbräunlichen Flanken unterscheiden kann. Auch schien\nmir das matte Schwarz des Scheitels etwas weiter in den\nNacken hinab zu reichen als bei der Glanzkopfmeise (specie).\nIch glaubte schon im Sommer diese Art in den Auen ober-\nhalb der Wehr gehört zu haben, bei der dichten Belaubung\nkonnte ich damals aber nicht nahe genug an den Vogel\nherankommen. Vgl. auch die Bemerkungen auf p.\n52 und 55.\nSonst trieben sich in den Ausbünken nur noch ein-\nzelne Kohlmeisen herum.\nIm großen und ganzen sieht man recht wenig Vö-\ngel, wohl eine Folge des Windes, der arg kalt geht.\n\n24. November 1917. Rauhfrost.\nAuf dem Friedhof hörte ich aus den Föhren und\nmantigen Bäumen das Singen und Lachen der Jun-\ngels.\n\n2. December 1917. München.\nIch gebe im folgenden einen Nachtrag aus älteren\nBeobachtungen über besonders interessante Arten aus\ndem Gebiete Mairinger-See. (Vergl. Verh. ornith. Ges.\nBayern, XII, 4, 1916).\n1.) Ixobrychus minutus (L.) Zwergrohrdommel.\nAls ich am 25. Mai 1915 vom Waldrand im Westen des\nSee aus mit dem Fernglas die Rohrwaldungen und\nBlänken absuchte, erhob sich plötzlich eine Zwergrohr-\ndommel aus dem Schilf und flog von den Möwen der\nKolonie mit lautem Geschrei verfolgt, ungefähr 20 m",
+    "travel_event": null,
+    "observations": [
+      {
+        "label": "Beobachtung einer Weidenmeise",
+        "observed_taxon": {
+          "vernacular_name_de": "Weidenmeise",
+          "scientific_name": "Poecile montanus"
+        },
+        "observed_at": {
+          "name": "Unbekannt",
+          "verbatim_locality": "am linken Ufer"
+        },
+        "verbatim_notes": "In dem laublosen Astwerk der Ausbünke am lin-\nken Ufer höre ich den charakteristischen Ruf der Weiden-\nmeise und komme diesmal durch die Gunst der Um-\nstände auf ca 5 m an den Vogel heran, so daß ich mit Hil-\nfe des Glases ganz genau die hellen Kappenränder und die\nbräunlichen Flanken unterscheiden kann.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "visual",
+          "bird_call": {
+            "call_type": "call",
+            "call_transcription": null
+          }
+        },
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1917-11-23T08:00:00+01:00",
+          "end": "1917-11-23T16:00:00+01:00",
+          "note": "Das genaue Datum dieser undatierten Fortsetzung vor dem 24. November 1917 ist unklar, daher auf den Vortag tagsüber geschätzt."
+        }
+      },
+      {
+        "label": "Beobachtung einzelner Kohlmeisen",
+        "observed_taxon": {
+          "vernacular_name_de": "Kohlmeise",
+          "scientific_name": "Parus major"
+        },
+        "observed_at": {
+          "name": "Unbekannt",
+          "verbatim_locality": "in den Ausbünken"
+        },
+        "verbatim_notes": "Sonst trieben sich in den Ausbünken nur noch ein-\nzelne Kohlmeisen herum.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "trieben sich herum",
+          "reproductive_condition": "non-breeding"
+        },
+        "time_estimate": {
+          "beginning": "1917-11-23T08:00:00+01:00",
+          "end": "1917-11-23T16:00:00+01:00",
+          "note": "Undatiert vor dem 24. November 1917; analog zur Weidenmeise auf den Vortag tagsüber geschätzt."
+        }
+      },
+      {
+        "label": "Beobachtung von Jungels auf dem Friedhof",
+        "observed_taxon": {
+          "vernacular_name_de": "Jungels",
+          "scientific_name": null
+        },
+        "observed_at": {
+          "name": "Unbekannt",
+          "verbatim_locality": "Auf dem Friedhof"
+        },
+        "verbatim_notes": "Auf dem Friedhof hörte ich aus den Föhren und\nmantigen Bäumen das Singen und Lachen der Jun-\ngels.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": {
+          "type": "auditory",
+          "bird_call": {
+            "call_type": "song",
+            "call_transcription": null
+          }
+        },
+        "behaviour": {
+          "description": "Singen und Lachen aus den Föhren und mantigen Bäumen",
+          "reproductive_condition": null
+        },
+        "time_estimate": {
+          "beginning": "1917-11-24T08:00:00+01:00",
+          "end": "1917-11-24T16:00:00+01:00",
+          "note": "Beobachtung am 24. November 1917 laut Datumseintrag; Uhrzeit nicht genannt, typisches Tageslichtfenster geschätzt."
+        }
+      },
+      {
+        "label": "Historische Beobachtung einer Zwergrohrdommel am Mairinger-See",
+        "observed_taxon": {
+          "vernacular_name_de": "Zwergrohrdommel",
+          "scientific_name": "Ixobrychus minutus"
+        },
+        "observed_at": {
+          "name": "Mairinger-See",
+          "verbatim_locality": "vom Waldrand im Westen des See"
+        },
+        "verbatim_notes": "Als ich am 25. Mai 1915 vom Waldrand im Westen des\nSee aus mit dem Fernglas die Rohrwaldungen und\nBlänken absuchte, erhob sich plötzlich eine Zwergrohr-\ndommel aus dem Schilf und flog von den Möwen der\nKolonie mit lautem Geschrei verfolgt, ungefähr 20 m",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "erhob sich plötzlich aus dem Schilf und flog von Möwen verfolgt",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": {
+          "beginning": "1915-05-25T08:00:00+01:00",
+          "end": "1915-05-25T18:00:00+01:00",
+          "note": "Beobachtungsdatum im Nachtrag explizit als 25. Mai 1915 angegeben. Uhrzeit nicht genannt, tagsüber geschätzt."
+        }
+      }
+    ]
+  }
+}

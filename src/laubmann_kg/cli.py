@@ -7,7 +7,8 @@ from typing import Callable
 
 import typer
 
-from laubmann_kg import diary, dwca, evaluation, extraction, kg, layout, preprocessing, transcription
+from laubmann_kg import diary, dwca, evaluation, kg, layout, preprocessing, transcription
+from laubmann_kg.extraction.observations import run as extract_observations_run
 from laubmann_kg.logging_config import setup_logging
 
 app = typer.Typer(
@@ -74,7 +75,7 @@ def extract_observations_cmd(
     output_dir: Path = typer.Option(..., "--output-dir", help="Directory for output files."),
 ) -> None:
     """Extract structured observations from transcriptions."""
-    _run_stage(extraction.run, config, input_dir, output_dir)
+    _run_stage(extract_observations_run, config, input_dir, output_dir)
 
 
 @app.command("export-jsonld")

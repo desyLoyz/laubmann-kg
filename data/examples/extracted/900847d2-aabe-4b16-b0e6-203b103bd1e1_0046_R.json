@@ -1,0 +1,87 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/900847d2-aabe-4b16-b0e6-203b103bd1e1_0046_R.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "1.0.0",
+    "confidence": null,
+    "extracted_at": "2026-08-18T15:51:17.671041Z"
+  },
+  "diary_entry": {
+    "entry_date": "1915-05-25",
+    "label": "Tagebucheintrag 25. und 26. Mai 1915",
+    "raw_text": "aus, um sich alsbald wieder im Schilf niederzulassen.\nDiese Art gehört m. E. nach in Bayern noch nicht zu\nden seltenen Vögeln; ich glaube vielmehr, daß sie in all\nden größeren weitausgedehnten Rohrwaldungen, deren wir\nin Bayern noch ziemlich viele besitzen, zu finden ist. Nur\nist es in den meisten Fällen ein Spiel des Zufalles, ein Exem-\nplar zu sehen und entgegen der großen Rohrdommel,\ndie sich durch ihr Brüllen weithin bemerkbar macht,\nist die kleine Rohrdommel meist so schweigsam, daß\nman sie höchstens aus nächster Nähe verhören kann.\nDer Paarungsruf, der nicht etwa laut klingt und etwa\ndurch das Quaken der Frösche übertönt werden kann, klingt\nwie rü rü rü, der in kürzeren oder längeren Abständen\ngebracht wird. Ich selbst habe den Vogel nur an dem einen\nTage gesehen und weder früher noch nachher rufen hören.\n2.) <u>Nyroca ferina ferina</u> (L.) <u>Tafelente</u>.\nAm 25. Mai 1915 konnte ich beim Abrücken des Sees\nmit dem Glas an den 3 auffallend kontrastierenden Farben,\ndem rotbraunen Kopf und Hals, dem silbergrauen Kör-\nper und dem schwarzen Schwanz des ♂ der Tafelente er-\nkennen. Schon von weitem kann man an dem tief ein-\ngetauchten Hinterkörper der Ente die Tauchente er-\nkennen.\nVom Schirm aus beobachteten wir, meine Frau und\nich, am gleichen Tage morgens 10<sup>h</sup> noch ein ♂ und ♀.\nNamentlich am ♀ fällt der im Verhältnis zum dicken\nKopf etwas schlanke Hals auf.\nAm Nachmittag des 26. Mai waren wir bei sehr war-\nmem Wetter wieder im Beobachtungsschirm. Zuerst\nkamen zwei ♂♂ angeflogen, dann kam noch eines,\ndie aber bald durch eine Bewegung meiner mit - der Mücken\nbelästigten Umgang unmöglich - und [?] bald wieder abstrich-\nchen.\nLange Stunden blieb es ganz ruhig, die Mittagshitze\nbrütet über dem See, und lähmt anscheinend alle Lebens-\nbetätigung. Erst gegen 6<sup>h</sup> abends erscheint im Rohrricht",
+    "travel_event": null,
+    "observations": [
+      {
+        "label": "Tafelenten-Beobachtung beim Abrücken des Sees",
+        "observed_taxon": {
+          "vernacular_name_de": "Tafelente",
+          "scientific_name": "Aythya ferina"
+        },
+        "observed_at": {
+          "name": "See",
+          "verbatim_locality": "See"
+        },
+        "verbatim_notes": "Am 25. Mai 1915 konnte ich beim Abrücken des Sees mit dem Glas an den 3 auffallend kontrastierenden Farben, dem rotbraunen Kopf und Hals, dem silbergrauen Körper und dem schwarzen Schwanz des ♂ der Tafelente erkennen.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1915-05-25T08:00:00+01:00",
+          "end": "1915-05-25T10:00:00+01:00",
+          "note": "Beobachtung erfolgte am Vormittag beim Abrücken des Sees, noch vor der darauf folgenden Schirmbeobachtung um 10:00 Uhr morgens."
+        }
+      },
+      {
+        "label": "Tafelenten-Beobachtung im Beobachtungsschirm",
+        "observed_taxon": {
+          "vernacular_name_de": "Tafelente",
+          "scientific_name": "Aythya ferina"
+        },
+        "observed_at": {
+          "name": "See",
+          "verbatim_locality": "Schirm"
+        },
+        "verbatim_notes": "Vom Schirm aus beobachteten wir, meine Frau und ich, am gleichen Tage morgens 10h noch ein ♂ und ♀.",
+        "count_qualifier": "exact",
+        "individual_count": 2,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1915-05-25T10:00:00+01:00",
+          "end": "1915-05-25T11:00:00+01:00",
+          "note": "Ausdrücklich für 10:00 Uhr morgens am 25. Mai 1915 datiert, mit einer geschätzten Beobachtungsdauer von einer Stunde."
+        }
+      },
+      {
+        "label": "Tafelenten-Beobachtung am Nachmittag",
+        "observed_taxon": {
+          "vernacular_name_de": "Tafelente",
+          "scientific_name": "Aythya ferina"
+        },
+        "observed_at": {
+          "name": "See",
+          "verbatim_locality": "Beobachtungsschirm"
+        },
+        "verbatim_notes": "Am Nachmittag des 26. Mai waren wir bei sehr warmem Wetter wieder im Beobachtungsschirm. Zuerst kamen zwei ♂♂ angeflogen, dann kam noch eines, die aber bald durch eine Bewegung meiner mit - der Mücken belästigten Umgang unmöglich - und [?] bald wieder abstrichen.",
+        "count_qualifier": "exact",
+        "individual_count": 3,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1915-05-26T14:00:00+01:00",
+          "end": "1915-05-26T17:00:00+01:00",
+          "note": "Am Nachmittag des 26. Mai vor dem Einbruch des Abends (gegen 6 Uhr abends)."
+        }
+      }
+    ]
+  }
+}
