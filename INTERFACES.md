@@ -27,6 +27,23 @@ month_source, year_form, loc_source
 
 `text_clean` is the extraction input; hyphenated line breaks are already joined.
 
+A 34-volume dump belongs at `data/corpus/entries.csv` (gitignored), not in
+`data/review/` (that directory is the linking/QA decision tables). Subsets are
+selected in config, not by copying a second CSV:
+
+```
+sample:
+  volume: 2                 # optional; null = all volumes
+  entry_id_from: L02-e0001  # inclusive, Lxx-eNNNN string order
+  entry_id_to: L02-e0020
+  entry_ids: [L02-e0001]    # optional explicit list (intersects the range)
+  offset: 0
+  limit: 0                  # 0 = no cap; still the smoke-test "first N"
+```
+
+See `configs/sample_range.yaml`. Each export writes `html/graph.json` for the
+explorer (`tools/Laubmann-KG_Explorer.html`).
+
 **Deltas from the frozen contract in the task brief** (handled, not blocking):
 
 - Delivered file has `preview`; the brief did not list it. Ignored by the loader.

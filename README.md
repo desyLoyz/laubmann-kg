@@ -25,6 +25,22 @@ pip install -e ".[dev]"
 cp .env.example .env
 ```
 
+## Sample range (ontology / prompt review)
+
+Place the corpus CSV at `data/corpus/entries.csv` (not under `data/review/`).
+Edit the inclusive `entry_id_from` / `entry_id_to` in `configs/sample_range.yaml`, then:
+
+```bash
+laubmann-kg export-all \
+  --config configs/sample_range.yaml \
+  --input-dir data/corpus \
+  --output-dir data/exports/sample_runs/offline-L02-e0001-e0020
+```
+
+Use `configs/sample_range_llm.yaml` for a Gemini pass (isolated cache
+`data/cache/llm_sample`). Open `tools/Laubmann-KG_Explorer.html`, load each run’s
+`html/graph.json` as A and B, and switch to **compare**.
+
 ## CLI
 
 ```bash

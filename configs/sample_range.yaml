@@ -1,0 +1,48 @@
+# Review subset: a range of entries from the corpus CSV.
+# Point corpus.entries at data/corpus/entries.csv (the 34-volume dump).
+# Edit sample.entry_id_from / entry_id_to (inclusive) or sample.entry_ids.
+#
+#   laubmann-kg export-all \
+#     --config configs/sample_range.yaml \
+#     --input-dir data/corpus \
+#     --output-dir data/exports/sample_runs/offline-L02-e0001-e0020
+#
+# Each run writes rdf/ jsonld/ dwca/ review/ html/graph.json + html/index.html.
+# Open tools/Laubmann-KG_Explorer.html and load two html/graph.json files to compare.
+
+corpus:
+  entries: data/corpus/entries.csv
+
+sample:
+  volume: 2
+  entry_id_from: L02-e0001
+  entry_id_to: L02-e0020
+  # entry_ids: [L02-e0001, L02-e0004]   # optional explicit list (intersects the range)
+  # offset: 0
+  # limit: 0                            # 0 = no cap after the range
+
+extraction:
+  backend: offline          # rule-based, deterministic, network-free
+
+taxa:
+  links_long_path: null
+
+qa:
+  enabled: true
+  exclude: true
+  coverage:
+    enabled: true
+    path: configs/volume_coverage.yaml
+
+paths:
+  ontology: ontologies/laubmann.ttl
+  shapes: ontologies/shacl_shapes.ttl
+  jsonld_context: schemas/jsonld_context.json
+
+dwca:
+  publisher: Laubmann KG Project
+  license: CC-BY-4.0
+  title: "Laubmann KG — sample range (offline)"
+  package_id: laubmann-kg-sample-range
+
+validate: true
