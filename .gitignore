@@ -26,6 +26,7 @@ data/cache/**/*
 !data/cache/**/.gitkeep
 data/corpus/**/*
 !data/corpus/**/.gitkeep
+output/
 
 # IDE
 .idea/

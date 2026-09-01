@@ -1,0 +1,155 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/900847d2-aabe-4b16-b0e6-203b103bd1e1_0048_L.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "unversioned",
+    "confidence": null,
+    "extracted_at": "2026-08-24T09:29:15.129358Z"
+  },
+  "diary_entry": {
+    "entry_date": "1917-12-07",
+    "label": "Tagebucheintrag 7. Dezember 1917",
+    "raw_text": "um teils am Mainufer, zum kleineren Teil am\nBerge da zu übernachten.\nWohin die Käuze im Winter zum Nächtigen zie-\ngen, wissen wir bis heute noch nicht.\nNeuerdings konnte ich beobachten, daß ein Wald-\nkauz der Bäume an der Isar nächtigt, vorausgesetzt, er\nnicht bei niederen Wasserstand freie Kiesbänke gefun-\nden haben.\n\n7. December 1917. München.\nIn der Zool. Sammlung, München, befindet sich\nein ♂ des Schwarzkehligen Fliegenschnäppers aus der Um-\ngegend von Kaufbeuren vom 12. Mai 1909. Der Vogel\nkam aus meiner Sammlung und dürfte wohl von Chr.\npräpariert worden sein. Er gab mir über das Vorkom-\nmen der Art keinerlei Anhaltspunkte und auch ich ha-\nbe die Art bis heute bei Kaufbeuren nicht mehr ange-\ntroffen. In der Literatur fand ich über die Art für un-\nsen Fall nur folgendes: J. G. Leu, Die im Regierungsbezir-\nke Schwaben und Neuburg vorkommenden Vögel, 18\np. 7 schreibt: „Sehr selten auf dem Durchzug; beobach-\ntet im Kambachthale und bei Memmingen.“ Laut\nNaumannia, 1855, p. 80 schreibt: „Selten und nur\nauf der Wanderung im Kammelthale.“ Wüstmann, Die\nVögel des Regierungsbezirkes Schwaben und Neuburg, 18\np. 124 bemerkt: „Der Schwarzkehlchen... erscheint\nSchwaben meist nur im März und September auf dem\nDurchzuge. Es gelang mir nur einmal, nämlich im\nMai 1886, ein brütendes Pärchen bei Inningen un-\nweit Augsburg zu beobachten...“ Sonst macht wie Jäckel\nallgemeine Bemerkungen. Dagegen finden sich in den\nAnnalen immer wiederhafte folgende auf diese Art\nzu deutende Stellen: II, 1901, p. 93: „Kaufbeuren: selten\nnur auf dem Durchzuge (Büchner).“ (i) IV, 1904, p. 213\n\n1.) Büchner war Rektor an der Realschule in",
+    "travel_event": null,
+    "observations": [
+      {
+        "label": "Waldkauz-Beobachtung an der Isar",
+        "observed_taxon": {
+          "vernacular_name_de": "Waldkauz",
+          "scientific_name": "Strix aluco"
+        },
+        "observed_at": {
+          "name": "Isar",
+          "verbatim_locality": "an der Isar"
+        },
+        "verbatim_notes": "Neuerdings konnte ich beobachten, daß ein Waldkauz der Bäume an der Isar nächtigt, vorausgesetzt, er nicht bei niederen Wasserstand freie Kiesbänke gefunden haben.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "nächtigt",
+          "reproductive_condition": "non-breeding"
+        },
+        "time_estimate": null
+      },
+      {
+        "label": "Kauz-Beobachtung (allgemein)",
+        "observed_taxon": {
+          "vernacular_name_de": "Kauz",
+          "scientific_name": null
+        },
+        "observed_at": {
+          "name": "München",
+          "verbatim_locality": null
+        },
+        "verbatim_notes": "Wohin die Käuze im Winter zum Nächtigen ziegen, wissen wir bis heute noch nicht.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": null
+      },
+      {
+        "label": "Schwarzkehliger Fliegenschnäpper-Beobachtung bei Kaufbeuren",
+        "observed_taxon": {
+          "vernacular_name_de": "Schwarzkehliger Fliegenschnäpper",
+          "scientific_name": null
+        },
+        "observed_at": {
+          "name": "Kaufbeuren",
+          "verbatim_locality": "Umgegend von Kaufbeuren"
+        },
+        "verbatim_notes": "In der Zool. Sammlung, München, befindet sich ein ♂ des Schwarzkehligen Fliegenschnäppers aus der Umgegend von Kaufbeuren vom 12. Mai 1909.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "specimen",
+          "bird_call": null
+        },
+        "behaviour": null,
+        "time_estimate": null
+      },
+      {
+        "label": "Schwarzkehliger Fliegenschnäpper-Beobachtung bei Memmingen",
+        "observed_taxon": {
+          "vernacular_name_de": "Schwarzkehliger Fliegenschnäpper",
+          "scientific_name": null
+        },
+        "observed_at": {
+          "name": "Memmingen",
+          "verbatim_locality": "im Kambachthale und bei Memmingen"
+        },
+        "verbatim_notes": "J. G. Leu, Die im Regierungsbezirke Schwaben und Neuburg vorkommenden Vögel, 18 p. 7 schreibt: „Sehr selten auf dem Durchzug; beobachtet im Kambachthale und bei Memmingen.“",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": null
+      },
+      {
+        "label": "Schwarzkehliger Fliegenschnäpper-Beobachtung im Kammelthal",
+        "observed_taxon": {
+          "vernacular_name_de": "Schwarzkehliger Fliegenschnäpper",
+          "scientific_name": null
+        },
+        "observed_at": {
+          "name": "Kammelthal",
+          "verbatim_locality": "im Kammelthale"
+        },
+        "verbatim_notes": "Laut Naumannia, 1855, p. 80 schreibt: „Selten und nur auf der Wanderung im Kammelthale.“",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": null
+      },
+      {
+        "label": "Schwarzkehlchen-Beobachtung bei Inningen",
+        "observed_taxon": {
+          "vernacular_name_de": "Schwarzkehlchen",
+          "scientific_name": "Saxicola rubicola"
+        },
+        "observed_at": {
+          "name": "Inningen",
+          "verbatim_locality": "bei Inningen unweit Augsburg"
+        },
+        "verbatim_notes": "Es gelang mir nur einmal, nämlich im Mai 1886, ein brütendes Pärchen bei Inningen unweit Augsburg zu beobachten...",
+        "count_qualifier": "exact",
+        "individual_count": 2,
+        "evidence": null,
+        "behaviour": {
+          "description": "brütendes Pärchen",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": null
+      },
+      {
+        "label": "Schwarzkehliger Fliegenschnäpper-Beobachtung bei Kaufbeuren (Büchner)",
+        "observed_taxon": {
+          "vernacular_name_de": "Schwarzkehliger Fliegenschnäpper",
+          "scientific_name": null
+        },
+        "observed_at": {
+          "name": "Kaufbeuren",
+          "verbatim_locality": "Kaufbeuren"
+        },
+        "verbatim_notes": "II, 1901, p. 93: „Kaufbeuren: selten nur auf dem Durchzuge (Büchner).“",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": null
+      }
+    ]
+  }
+}

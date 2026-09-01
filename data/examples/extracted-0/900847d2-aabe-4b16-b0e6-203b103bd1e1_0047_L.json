@@ -1,0 +1,80 @@
+{
+  "entry": {
+    "entry_uid": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0047_L",
+    "entry_id": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0047_L",
+    "volume": 1,
+    "page_uid": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0047_L",
+    "page_id": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0047_L",
+    "region_uid": null,
+    "scan": null,
+    "entry_date": null,
+    "verbatim_event_date": null,
+    "location_raw": null,
+    "text_clean": "# Page 84\n\nIm gegenüberliegenden Schilfsaume sind 9 mit 6 Jungen\ndie sich aber noch nicht aus dem schützenden Schilf- und\nSchachtelhalm-Dickicht auf die freie Fläche trauen wag[en].\nErst gegen 1/2 7 h führt die alte Ente ihre Brut auf das off[ene]\nWasser und holt durch eifriges Tauchen Nahrung vom\nGrunde herauf. Doch auch beim Tauchen vergißt\nkeineswegs ihre Vorsicht.\nDie jungen Entchen sind äußerst flinke Taucher\ndie sich schon eifrig bemühen, der alten Ente das Tauch[en]\nnach zu machen. Nur gelingt es ihnen noch nicht,\nda notwendige Stoßkraft noch mangelt.\nDie Tafelente wurde bei uns in Bayern südlich\nDonau meist nur in den Monaten Januar bis Ma[i]\nund dann wieder im Spätherbst beobachtet, um so int[er-]\nessanter mag ihr Brüten am Maininger See sein.\nAuch im Sommer 1916 habe ich die Tafelente heute\nam Maininger See angetroffen.\n\n3.) <u>Larus ridibundus L.</u> Lachmöve.\nIm Maivinger See befindet sich eine ziemlich zahl-\nreiche Mövenkolonie. Die Brutpaare schwanken je nach\nJahren zwischen 100 und 300. Sie ist also bei weitem klei-\nner als die bekannte Kolonie am Wörthsee. Doch wenn beide Koloni-\nen mit einander in einer gewissen Verbindung stehen, die\ndarin besteht, daß die Zahl der Brutpaare bei der einen kurz\nsteigt, wenn in der andern eine starke Beunruhigung oder\nein böses Brutgeschäft verursacht wird.\nDie Möven brüten an verschiednen Stellen, so daß man\nder Kolonie gewissermaßen von Zweigniederlassungen spre-\nchen könnte. Die Nester befinden sich in den meisten Fällen\neinem moorigen, mit Schilf und Gras bewachsenen\nTerrain, das auf der einen Seite vom offenen Wasser begrenzt\nwird, während es von dem festen Land durch ausgedehn-\ntes, nicht passierbares Sumpfland getrennt und gesichert\nist.\nAm 25. Mai 1915 war das Brutgeschäft natürlich\nschon in vollem Gange. Die ganze Kolonie macht einen\n",
+    "travel_events": [],
+    "persons": [],
+    "weather": null,
+    "place": null,
+    "entry_kind": null,
+    "entry_date_end": null,
+    "date_plausible": null,
+    "date_note": null,
+    "header_date": null
+  },
+  "observations": [
+    {
+      "entry_uid": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0047_L",
+      "taxon": {
+        "vernacular_de": "Lachmöwe",
+        "scientific_name": "Chroicocephalus ridibundus",
+        "taxon_iri": null,
+        "match_method": "gazetteer",
+        "confidence": 0.9,
+        "note": null,
+        "gbif_key": null,
+        "gbif_match_type": null,
+        "gbif_canonical_name": null,
+        "rank": null,
+        "is_bird": null,
+        "higher_taxonomy": [],
+        "alt_names": []
+      },
+      "verbatim_notes": "</u> Lachmöve.",
+      "place": null,
+      "individual_count": null,
+      "count_qualifier": null,
+      "evidence": [
+        {
+          "kind": "visual",
+          "label": "Sichtbeobachtung",
+          "occurrence_status": "present",
+          "is_call": false,
+          "call_type": null,
+          "call_transcription": null
+        }
+      ],
+      "behaviour": [],
+      "habitat": null,
+      "occurrence_remarks": null,
+      "index": 0,
+      "record_type": "field-observation",
+      "observer": null,
+      "literature_citation": null,
+      "locality": null,
+      "occurrence_status": "present",
+      "count_min": null,
+      "count_max": null,
+      "sex": null,
+      "life_stage": null,
+      "breeding_evidence": null,
+      "vitality": null,
+      "movement_kind": null,
+      "flight_direction": null,
+      "identification_qualifier": null,
+      "event_date": null,
+      "event_time": null,
+      "flags": [],
+      "taxon_verbatim": null
+    }
+  ]
+}

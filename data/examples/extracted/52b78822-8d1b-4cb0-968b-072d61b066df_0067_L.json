@@ -1,0 +1,235 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/52b78822-8d1b-4cb0-968b-072d61b066df_0067_L.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "unversioned",
+    "confidence": null,
+    "extracted_at": "2026-08-24T09:25:08.201150Z"
+  },
+  "diary_entry": {
+    "entry_date": "1925-05-29",
+    "label": "Tagebucheintrag 29. Mai 1925",
+    "raw_text": "mal zum Opfer gefallen.\"\n      Wenn es sich, was leider zu befürchten ist, in die-\nsem Falle um den Horst am Giebel im Hintersteiner Tal\nhandelt, dann wäre auf Grund der \"Schutzverordnung\nfür den Bezirkamt Sonthofen\" ein Einschreiten der\nunteren Behörde dringend zu wünschen.\n      Heute wurden durch Oberlehrer E. Barthel aus Streitberg,\nOberfranken, zwei junge, bereits flügge Wanderfalken einge-\nsandt, als ein sicherer Nachweis für das Horsten dieser edlen\nVögel in Bayern. Belegexemplare in der Zool. Sammlung.\n\n29. Mai 1925. München - Gammertingen.\nWir fahren über Augsburg - Ulm - Zwiefalten-\ndorf, wo wir um 12 h Nachts ankommen und von wo wir\nnoch ca 5/4 Stunden über Zwiefaltenkloster nach Gamm-\nertingen zu gehen haben. München ab: 5 1/2.\nZwischen München - Augsburg nach der Sta-\ntion Mering auf den Feldern einige Kiebitze.\nÜber dem Lech heute ein möwenartiger Vogel, der\nsich aber aus der weiten Ferne nicht näher anspre-\nchen lässt.\nVon Zwiefaltendorf, der Bahnstation im Donau Tal\nan der Linie Ulm - Sigmaringen, führt der Weg Albwärts\nüber Baach und Zwiefaltenkloster, immer der Aach ent-\nlang nach Gammertingen, das malerisch auf einem von\nder Aach durchbrochenen Talschluß liegt. An nächtli-\nchem Vogelleben konnte auf dem Weg noch folgendes fest-\ngestellt werden: Zwischen Zwiefaltendorf und dem Ortchen\nBaach rechts der Straße schwirrt ein Flussschwirlsänger.\nAus dem Wiesenland längs der Aach tönt das Schnarren\nmehrerer Wachtelkönige. Eine Waldohreule ruft ihr\npich pich.\nIm Dorf Zwiefalten ist auf dem Kirchturm\ndas besetzte Storchennest zu erkennen.\nDie auf der nächsten Seite beigegebene Karten-\nskizze kann die Situation von Gammertingen ganz gut\nerläutern.",
+    "travel_event": {
+      "label": "Reise München – Gammertingen",
+      "legs": [
+        {
+          "transport_mode": "train",
+          "departure_place": {
+            "name": "München",
+            "verbatim_locality": "München"
+          },
+          "arrival_place": {
+            "name": "Zwiefaltendorf",
+            "verbatim_locality": "Zwiefaltendorf"
+          },
+          "departure_time": "1925-05-29T17:30:00+01:00",
+          "arrival_time": null,
+          "via_places": [
+            {
+              "name": "Augsburg",
+              "verbatim_locality": "Augsburg"
+            },
+            {
+              "name": "Ulm",
+              "verbatim_locality": "Ulm"
+            }
+          ]
+        },
+        {
+          "transport_mode": "foot",
+          "departure_place": {
+            "name": "Zwiefaltendorf",
+            "verbatim_locality": "Zwiefaltendorf"
+          },
+          "arrival_place": {
+            "name": "Gammertingen",
+            "verbatim_locality": "Gammertingen"
+          },
+          "departure_time": null,
+          "arrival_time": null,
+          "via_places": [
+            {
+              "name": "Baach",
+              "verbatim_locality": "Baach"
+            },
+            {
+              "name": "Zwiefalten",
+              "verbatim_locality": "Zwiefaltenkloster"
+            }
+          ]
+        }
+      ]
+    },
+    "observations": [
+      {
+        "label": "Wanderfalken-Einsendung von Streitberg",
+        "observed_taxon": {
+          "vernacular_name_de": "Wanderfalke",
+          "scientific_name": "Falco peregrinus"
+        },
+        "observed_at": {
+          "name": "Streitberg",
+          "verbatim_locality": "Streitberg, Oberfranken"
+        },
+        "verbatim_notes": "Heute wurden durch Oberlehrer E. Barthel aus Streitberg, Oberfranken, zwei junge, bereits flügge Wanderfalken eingesandt, als ein sicherer Nachweis für das Horsten dieser edlen Vögel in Bayern. Belegexemplare in der Zool. Sammlung.",
+        "count_qualifier": "exact",
+        "individual_count": 2,
+        "evidence": {
+          "type": "specimen",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "flügge Junge eingesandt (Belegexemplare in der Zool. Sammlung)",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": null
+      },
+      {
+        "label": "Kiebitz-Beobachtung bei Mering",
+        "observed_taxon": {
+          "vernacular_name_de": "Kiebitz",
+          "scientific_name": "Vanellus vanellus"
+        },
+        "observed_at": {
+          "name": "Mering",
+          "verbatim_locality": "nach der Station Mering"
+        },
+        "verbatim_notes": "Zwischen München - Augsburg nach der Station Mering auf den Feldern einige Kiebitze.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": null
+      },
+      {
+        "label": "Möwenartiger Vogel über dem Lech",
+        "observed_taxon": {
+          "vernacular_name_de": "möwenartiger Vogel",
+          "scientific_name": null
+        },
+        "observed_at": {
+          "name": "Lech",
+          "verbatim_locality": "Über dem Lech"
+        },
+        "verbatim_notes": "Über dem Lech heute ein möwenartiger Vogel, der sich aber aus der weiten Ferne nicht näher ansprechen lässt.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": null,
+        "time_estimate": null
+      },
+      {
+        "label": "Flussschwirlsänger bei Baach",
+        "observed_taxon": {
+          "vernacular_name_de": "Flussschwirl",
+          "scientific_name": "Locustella fluviatilis"
+        },
+        "observed_at": {
+          "name": "Baach",
+          "verbatim_locality": "Zwischen Zwiefaltendorf und dem Ortchen Baach rechts der Straße"
+        },
+        "verbatim_notes": "Zwischen Zwiefaltendorf und dem Ortchen Baach rechts der Straße schwirrt ein Flussschwirlsänger.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "auditory",
+          "bird_call": {
+            "call_type": "song",
+            "call_transcription": "schwirrt"
+          }
+        },
+        "behaviour": {
+          "description": "schwirrt",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": null
+      },
+      {
+        "label": "Wachtelkönig-Beobachtung an der Aach",
+        "observed_taxon": {
+          "vernacular_name_de": "Wachtelkönig",
+          "scientific_name": "Crex crex"
+        },
+        "observed_at": {
+          "name": "Aach",
+          "verbatim_locality": "längs der Aach"
+        },
+        "verbatim_notes": "Aus dem Wiesenland längs der Aach tönt das Schnarren mehrerer Wachtelkönige.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": {
+          "type": "auditory",
+          "bird_call": {
+            "call_type": "song",
+            "call_transcription": "Schnarren"
+          }
+        },
+        "behaviour": {
+          "description": "Schnarren mehrerer Vögel im Wiesenland",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": null
+      },
+      {
+        "label": "Waldohreule rufend auf dem Weg",
+        "observed_taxon": {
+          "vernacular_name_de": "Waldohreule",
+          "scientific_name": "Asio otus"
+        },
+        "observed_at": {
+          "name": "Zwiefalten",
+          "verbatim_locality": "auf dem Weg"
+        },
+        "verbatim_notes": "Eine Waldohreule ruft ihr pich pich.",
+        "count_qualifier": "single",
+        "individual_count": 1,
+        "evidence": {
+          "type": "auditory",
+          "bird_call": {
+            "call_type": "call",
+            "call_transcription": "pich pich"
+          }
+        },
+        "behaviour": {
+          "description": "ruft ihr pich pich",
+          "reproductive_condition": null
+        },
+        "time_estimate": null
+      },
+      {
+        "label": "Storchennest in Zwiefalten",
+        "observed_taxon": {
+          "vernacular_name_de": "Weißstorch",
+          "scientific_name": "Ciconia ciconia"
+        },
+        "observed_at": {
+          "name": "Zwiefalten",
+          "verbatim_locality": "Im Dorf Zwiefalten... auf dem Kirchturm"
+        },
+        "verbatim_notes": "Im Dorf Zwiefalten ist auf dem Kirchturm das besetzte Storchennest zu erkennen.",
+        "count_qualifier": "single",
+        "individual_count": null,
+        "evidence": {
+          "type": "nest",
+          "bird_call": null
+        },
+        "behaviour": {
+          "description": "besetztes Storchennest auf dem Kirchturm",
+          "reproductive_condition": "breeding"
+        },
+        "time_estimate": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "entry": {
+    "entry_uid": "52b78822-8d1b-4cb0-968b-072d61b066df_0067_R",
+    "entry_id": "52b78822-8d1b-4cb0-968b-072d61b066df_0067_R",
+    "volume": 1,
+    "page_uid": "52b78822-8d1b-4cb0-968b-072d61b066df_0067_R",
+    "page_id": "52b78822-8d1b-4cb0-968b-072d61b066df_0067_R",
+    "region_uid": null,
+    "scan": null,
+    "entry_date": null,
+    "verbatim_event_date": null,
+    "location_raw": null,
+    "text_clean": "# Page 97\n\n*[ImageRegion: map]* This is a hand-drawn, color-coded map on grid paper depicting a river valley with various settlements and geographical features. The map uses blue for water, green for forested or elevated areas, and red dots to mark specific locations, likely related to ornithological observations.\n",
+    "travel_events": [],
+    "persons": [],
+    "weather": null,
+    "place": null,
+    "entry_kind": null,
+    "entry_date_end": null,
+    "date_plausible": null,
+    "date_note": null,
+    "header_date": null
+  },
+  "observations": []
+}

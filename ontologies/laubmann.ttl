@@ -73,7 +73,7 @@
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:rights "Creative Commons Attribution 4.0 International (CC BY 4.0)"@en ;
     dcterms:issued "2026-07-22"^^xsd:date ;
-    dcterms:modified "2026-08-19"^^xsd:date ;
+    dcterms:modified "2026-08-19"^^xsd:date ;dwc
     dcterms:source <https://github.com/Maelkolb/laubmann-kg_TP> ;
     rdfs:seeAlso <https://github.com/Maelkolb/laubmann-kg_TP> , <https://w3id.org/laubmann-kg/vocabularies> , <https://w3id.org/laubmann-kg/shapes> ;
     dcterms:subject "ornithology"@en , "field diaries"@en , "biodiversity data"@en , "Darwin Core"@en ;

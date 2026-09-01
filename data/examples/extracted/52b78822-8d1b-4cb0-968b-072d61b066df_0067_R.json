@@ -1,0 +1,23 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/52b78822-8d1b-4cb0-968b-072d61b066df_0067_R.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "unversioned",
+    "confidence": null,
+    "extracted_at": "2026-08-24T09:25:18.952261Z"
+  },
+  "diary_entry": {
+    "entry_date": "1900-01-01",
+    "label": "Tagebucheintrag ohne Datum (Karte)",
+    "raw_text": "Page 97\n\n*[ImageRegion: map]* This is a hand-drawn, color-coded map on grid paper depicting a river valley with various settlements and geographical features. The map uses blue for water, green for forested or elevated areas, and red dots to mark specific locations, likely related to ornithological observations.",
+    "travel_event": null,
+    "observations": []
+  }
+}

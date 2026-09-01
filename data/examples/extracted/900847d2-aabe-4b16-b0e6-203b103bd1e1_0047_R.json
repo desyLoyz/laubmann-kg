@@ -1,0 +1,124 @@
+{
+  "provenance": {
+    "source_path": "data/examples/raw/md/900847d2-aabe-4b16-b0e6-203b103bd1e1_0047_R.md",
+    "volume": "vol01",
+    "page": null,
+    "side": null,
+    "region": null,
+    "text_span": null,
+    "model": "gemini-3.5-flash",
+    "provider": "google",
+    "prompt_id": "observation_extraction",
+    "prompt_version": "unversioned",
+    "confidence": null,
+    "extracted_at": "2026-08-24T09:28:42.348950Z"
+  },
+  "diary_entry": {
+    "entry_date": "1915-04-05",
+    "label": "Tagebucheintrag April 1915",
+    "raw_text": "viel reicheren Eindruck als die am Wörthsee, was nament-\nlich durch die Verschiedenheit des Ufergeländes, hier Schilf und\nhohes Riedgras, am Wörthsee aber meist nur hohe Baumwände\nhervorgerufen werden mag. Ich habe am Vormittag vom\nSchirme aus lange Zeit die Möven beobachtet. Ungefähr alle 20-\n30 min erhebt sich in der einen Bucht entlang ein großer\nTeil der Seevögel mit lautem Geschrei einige Meter in die\nLuft, schwärmt ungefähr 1-2 min über dem Wasser hin\nund her, um sich dann wieder zu beruhigen und nieder zu\nlassen. Einen Grund für dies sonderbare Benehmen konnte\nich nicht in Erfahrung bringen.\nEs herrschte lange Zeit die Anschauung, daß die Möven, die\nim Winter in großer Zahl die Isar und die Kanäle im\nenglischen Garten zu München besuchen und uns Städ-\nter durch ihren Flug künste und ihr lärmendes Treiben\nin so hohem Grade erfreuen, allabendlich, in den Winter-\nmonaten schon um 3 h nachmittags, München verlas-\nsen, um am Starnberger- resp. Maininger See zu näch-\ntigen. Nun wissen wir aber einwandfrei, daß in den Win-\ntermonaten am Maininger See, der völlig zugefroren ist,\nsowohl, wie auch am Starnberger See fast keine Möven er-\nscheinen, jedenfalls aber nicht so viele, wie wir sie in Mün-\nchen an der Winterabenseite der Stadt verlassen sehen.\nDagegen konnte ich in den letzten März- und ersten Apriltagen\n1915 bei Sonnenschein am Maininger See feststellen, daß in den Nach-\nmittagsstunden zwischen 4-6 h in der Richtung von München her\ngroße Scharen von Möven an den See kommen, von den schon\nanwesenden mit lautem Geschrei begrüßt werden, und sich am See\nniederlassen. Nur eine kleine Anzahl erhebt sich gegen 7 h\nwieder, und streicht zur Nachtruhe an den Starnberger See,\nder Groe nächtigt am Maininger See.\nWir wissen also folgendes:\nDie im Winter in München lebenden Möven nächtigen\nim Winter nicht am Maininger See. Doch fliegen sie in\nden Frühjahrsmonaten nach Eisfreiwerden der See vor\nBeginn der Brutzeit wahrscheinlich abends dorthin,\n",
+    "travel_event": null,
+    "observations": [
+      {
+        "label": "Möwen-Beobachtung am Maisinger See",
+        "observed_taxon": {
+          "vernacular_name_de": "Möwe",
+          "scientific_name": "Laridae"
+        },
+        "observed_at": {
+          "name": "Maisinger See",
+          "verbatim_locality": "Maininger See"
+        },
+        "verbatim_notes": "Ich habe am Vormittag vom Schirme aus lange Zeit die Möven beobachtet. Ungefähr alle 20- 30 min erhebt sich in der einen Bucht entlang ein großer Teil der Seevögel mit lautem Geschrei einige Meter in die Luft, schwärmt ungefähr 1-2 min über dem Wasser hin und her, um sich dann wieder zu beruhigen und nieder zu lassen.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": {
+          "type": "visual",
+          "bird_call": null
+        },
+        "behaviour": null,
+        "time_estimate": null
+      },
+      {
+        "label": "Möwen in München",
+        "observed_taxon": {
+          "vernacular_name_de": "Möwe",
+          "scientific_name": "Laridae"
+        },
+        "observed_at": {
+          "name": "München",
+          "verbatim_locality": "München"
+        },
+        "verbatim_notes": "Es herrschte lange Zeit die Anschauung, daß die Möven, die im Winter in großer Zahl die Isar und die Kanäle im englischen Garten zu München besuchen und uns Städ- ter durch ihren Flug künste und ihr lärmendes Treiben in so hohem Grade erfreuen, allabendlich, in den Winter- monaten schon um 3 h nachmittags, München verlas- sen, um am Starnberger- resp. Maininger See zu näch- tigen.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1915-04-05T15:00:00Z",
+          "end": "1915-04-05T16:00:00Z",
+          "note": "Uhrzeitangabe im Text: 'schon um 3 h nachmittags'."
+        }
+      },
+      {
+        "label": "Abwesenheit von Möwen im Winter am Maisinger See",
+        "observed_taxon": {
+          "vernacular_name_de": "Möwe",
+          "scientific_name": "Laridae"
+        },
+        "observed_at": {
+          "name": "Maisinger See",
+          "verbatim_locality": "Maininger See"
+        },
+        "verbatim_notes": "Nun wissen wir aber einwandfrei, daß in den Wintermonaten am Maininger See, der völlig zugefroren ist, sowohl, wie auch am Starnberger See fast keine Möven er- scheinen, jedenfalls aber nicht so viele, wie wir sie in Mün- chen an der Winterabenseite der Stadt verlassen sehen.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": null
+      },
+      {
+        "label": "Ankunft von Möwen am Maisinger See",
+        "observed_taxon": {
+          "vernacular_name_de": "Möwe",
+          "scientific_name": "Laridae"
+        },
+        "observed_at": {
+          "name": "Maisinger See",
+          "verbatim_locality": "Maininger See"
+        },
+        "verbatim_notes": "Dagegen konnte ich in den letzten März- und ersten Apriltagen 1915 bei Sonnenschein am Maininger See feststellen, daß in den Nach- mittagsstunden zwischen 4-6 h in der Richtung von München her große Scharen von Möven an den See kommen, von den schon anwesenden mit lautem Geschrei begrüßt werden, und sich am See niederlassen.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1915-04-01T16:00:00Z",
+          "end": "1915-04-01T18:00:00Z",
+          "note": "Beobachtet zwischen 4-6 h in den letzten März- und ersten Apriltagen 1915."
+        }
+      },
+      {
+        "label": "Möwen wechseln zum Starnberger See",
+        "observed_taxon": {
+          "vernacular_name_de": "Möwe",
+          "scientific_name": "Laridae"
+        },
+        "observed_at": {
+          "name": "Starnberger See",
+          "verbatim_locality": "Starnberger See"
+        },
+        "verbatim_notes": "Nur eine kleine Anzahl erhebt sich gegen 7 h wieder, und streicht zur Nachtruhe an den Starnberger See, der Groe nächtigt am Maininger See.",
+        "count_qualifier": "plural-unspecified",
+        "individual_count": null,
+        "evidence": null,
+        "behaviour": null,
+        "time_estimate": {
+          "beginning": "1915-04-01T19:00:00Z",
+          "end": "1915-04-01T19:30:00Z",
+          "note": "Uhrzeitangabe im Text: 'gegen 7 h' (abends)."
+        }
+      }
+    ]
+  }
+}

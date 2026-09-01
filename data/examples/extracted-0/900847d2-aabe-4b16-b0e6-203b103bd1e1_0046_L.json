@@ -1,0 +1,80 @@
+{
+  "entry": {
+    "entry_uid": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0046_L",
+    "entry_id": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0046_L",
+    "volume": 1,
+    "page_uid": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0046_L",
+    "page_id": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0046_L",
+    "region_uid": null,
+    "scan": null,
+    "entry_date": null,
+    "verbatim_event_date": null,
+    "location_raw": null,
+    "text_clean": "# Page 82.\n\nAnrelliertes zusammengezogen. Etwas Zaunkönigarti-\nges konnte ich aber nicht herausfinden.\nIn dem laublosen Astwerk der Ausbünke am lin-\nken Ufer höre ich den charakteristischen Ruf der <u>Weiden-</u>\n<u>meise</u> und komme diesmal durch die Gunst der Um-\nstände auf ca 5 m an den Vogel heran, so daß ich mit Hil-\nfe des Glases ganz genau die hellen Kappenränder und die\nbräunlichen Flanken unterscheiden kann. Auch schien\nmir das matte Schwarz des Scheitels etwas weiter in den\nNacken hinab zu reichen als bei der Glanzkopfmeise (specie).\nIch glaubte schon im Sommer diese Art in den Auen ober-\nhalb der Wehr gehört zu haben, bei der dichten Belaubung\nkonnte ich damals aber nicht nahe genug an den Vogel\nherankommen. Vgl. auch die Bemerkungen auf p.\n52 und 55.\nSonst trieben sich in den Ausbünken nur noch ein-\nzelne Kohlmeisen herum.\nIm großen und ganzen sieht man recht wenig Vö-\ngel, wohl eine Folge des Windes, der arg kalt geht.\n\n24. November 1917. <u>Rauhfrost</u>.\nAuf dem Friedhof hörte ich aus den Föhren und\nmantigen Bäumen das Singen und Lachen der <u>Jun-</u>\n<u>gels</u>.\n\n2. December 1917. <u>München</u>.\nIch gebe im folgenden einen Nachtrag aus älteren\nBeobachtungen über besonders interessante Arten aus\ndem Gebiete Mairinger-See. (Vergl. Verh. ornith. Ges.\nBayern, XII, 4, 1916).\n1.) <u>Ixobrychus minutus</u> (L.) <u>Zwergrohrdommel</u>.\nAls ich am 25. Mai 1915 vom Waldrand im Westen des\nSee aus mit dem Fernglas die Rohrwaldungen und\nBlänken absuchte, erhob sich plötzlich eine Zwergrohr-\ndommel aus dem Schilf und flog von den Möwen der\nKolonie mit lautem Geschrei verfolgt, ungefähr 20 m\n",
+    "travel_events": [],
+    "persons": [],
+    "weather": null,
+    "place": null,
+    "entry_kind": null,
+    "entry_date_end": null,
+    "date_plausible": null,
+    "date_note": null,
+    "header_date": null
+  },
+  "observations": [
+    {
+      "entry_uid": "900847d2-aabe-4b16-b0e6-203b103bd1e1_0046_L",
+      "taxon": {
+        "vernacular_de": "Kohlmeise",
+        "scientific_name": "Parus major",
+        "taxon_iri": null,
+        "match_method": "gazetteer",
+        "confidence": 0.9,
+        "note": null,
+        "gbif_key": null,
+        "gbif_match_type": null,
+        "gbif_canonical_name": null,
+        "rank": null,
+        "is_bird": null,
+        "higher_taxonomy": [],
+        "alt_names": []
+      },
+      "verbatim_notes": "Sonst trieben sich in den Ausbünken nur noch ein-\nzelne Kohlmeisen herum.",
+      "place": null,
+      "individual_count": 1,
+      "count_qualifier": "exact",
+      "evidence": [
+        {
+          "kind": "visual",
+          "label": "Sichtbeobachtung",
+          "occurrence_status": "present",
+          "is_call": false,
+          "call_type": null,
+          "call_transcription": null
+        }
+      ],
+      "behaviour": [],
+      "habitat": null,
+      "occurrence_remarks": null,
+      "index": 0,
+      "record_type": "field-observation",
+      "observer": null,
+      "literature_citation": null,
+      "locality": null,
+      "occurrence_status": "present",
+      "count_min": null,
+      "count_max": null,
+      "sex": null,
+      "life_stage": null,
+      "breeding_evidence": null,
+      "vitality": null,
+      "movement_kind": null,
+      "flight_direction": null,
+      "identification_qualifier": null,
+      "event_date": null,
+      "event_time": null,
+      "flags": [],
+      "taxon_verbatim": null
+    }
+  ]
+}
