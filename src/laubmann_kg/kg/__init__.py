@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 from pathlib import Path
 from typing import Optional
@@ -33,6 +34,26 @@ def export(config: dict, input_dir: Optional[Path], output_dir: Path,
     context = config.get("paths", {}).get("jsonld_context", "schemas/jsonld_context.json")
     write_jsonld(graph, jsonld_path, Path(context))
 
+    from laubmann_kg.kg.explorer import write_explorer
+    explorer_meta = {
+        "source": ttl_path.name,
+        "ontology": (config.get("paths") or {}).get("ontology", "ontologies/laubmann.ttl"),
+        "triples": len(graph),
+        "sample": config.get("sample") or {},
+        "backend": (result.provenance or {}).get("backend"),
+        "model": (result.provenance or {}).get("model"),
+        "prompt_sha256": (result.provenance or {}).get("prompt_sha256"),
+        "started_at": (result.provenance or {}).get("started_at"),
+    }
+    explorer = write_explorer(result, output_dir, meta=explorer_meta)
+    (output_dir / "run.json").write_text(
+        json.dumps({**explorer_meta, "entries": len(result.entries),
+                     "observations": len(result.observations),
+                     "ttl": str(ttl_path), "explorer": explorer},
+                    ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
     conforms = True
     if validate and config.get("validate", True):
         paths = config.get("paths", {})
@@ -51,6 +72,7 @@ def export(config: dict, input_dir: Optional[Path], output_dir: Path,
         "ttl": str(ttl_path),
         "jsonld": str(jsonld_path),
         "shacl_conforms": conforms,
+        "explorer": explorer,
     }
 
 

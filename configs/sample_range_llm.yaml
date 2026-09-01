@@ -1,0 +1,60 @@
+# Same subset as configs/sample_range.yaml, Gemini backend.
+# Requires: pip install -e ".[llm]"  and GOOGLE_API_KEY (or GEMINI_API_KEY).
+# Cache is isolated from the 34-volume run so prompt experiments stay cheap.
+#
+#   laubmann-kg export-all \
+#     --config configs/sample_range_llm.yaml \
+#     --input-dir data/corpus \
+#     --output-dir data/exports/sample_runs/llm-L02-e0001-e0020
+
+corpus:
+  entries: data/corpus/entries.csv
+
+sample:
+  volume: 2
+  entry_id_from: L02-e0001
+  entry_id_to: L02-e0020
+
+extraction:
+  backend: llm
+  provider: google
+  model: gemini-3.5-flash
+  api_key_env: GOOGLE_API_KEY
+  temperature: 0.0
+  max_output_tokens: 16384
+  timeout: 120
+  cache_dir: data/cache/llm_sample
+  prompt_dir: prompts
+
+taxa:
+  links_long_path: null
+
+qa:
+  enabled: true
+  exclude: true
+  coverage:
+    enabled: true
+    path: configs/volume_coverage.yaml
+
+linking:
+  enabled: false
+  offline: false
+  cache_dir: data/cache/linking
+  review_dir: data/review
+  taxa:
+    enabled: true
+  persons:
+    enabled: true
+
+paths:
+  ontology: ontologies/laubmann.ttl
+  shapes: ontologies/shacl_shapes.ttl
+  jsonld_context: schemas/jsonld_context.json
+
+dwca:
+  publisher: Laubmann KG Project
+  license: CC-BY-4.0
+  title: "Laubmann KG — sample range (LLM)"
+  package_id: laubmann-kg-sample-range-llm
+
+validate: true

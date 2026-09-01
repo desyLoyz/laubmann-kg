@@ -75,19 +75,51 @@ def _resolve_corpus(config: dict, input_dir: Optional[Path]) -> tuple[Path, Opti
 
 
 def build_entry(row: dict) -> DiaryEntry:
+    entry_id = row.get("entry_id") or ""
+    # Some corpus dumps omit the content-addressed uids; fall back so observations
+    # still get a stable provenance key (never collide on an empty string).
+    entry_uid = row.get("entry_uid") or (f"e_{entry_id}" if entry_id else "")
     return DiaryEntry(
-        entry_uid=row.get("entry_uid", ""),
-        entry_id=row.get("entry_id", ""),
+        entry_uid=entry_uid,
+        entry_id=entry_id,
         volume=int(row.get("volume") or 0),
-        page_uid=row.get("page_uid", ""),
-        page_id=row.get("page_id", ""),
-        region_uid=row.get("region_uid") or None,
+        page_uid=row.get("page_uid") or row.get("page_id") or "",
+        page_id=row.get("page_id") or "",
+        region_uid=row.get("region_uid") or row.get("region_id") or None,
         scan=row.get("scan") or None,
         entry_date=normalize_date(row.get("date_raw"), row.get("date_norm")),
         verbatim_event_date=row.get("date_raw") or None,
         location_raw=row.get("location_raw") or None,
         text_clean=row.get("text_clean") or row.get("text_raw") or "",
     )
+
+
+def select_sample_rows(rows: list[dict], sample: dict) -> list[dict]:
+    """Restrict the corpus to a review subset.
+
+    Applied after the volume filter, in this order: explicit ``entry_ids``,
+    inclusive ``entry_id_from`` / ``entry_id_to`` (string compare, so the
+    zero-padded ``L02-e0100`` form sorts correctly), then ``offset`` /
+    ``limit``. An empty sample dict returns ``rows`` unchanged.
+    """
+    sample = sample or {}
+    entry_ids = sample.get("entry_ids")
+    if entry_ids:
+        wanted = {str(x) for x in entry_ids}
+        rows = [row for row in rows if (row.get("entry_id") or "") in wanted]
+    start = sample.get("entry_id_from")
+    if start:
+        rows = [row for row in rows if (row.get("entry_id") or "") >= str(start)]
+    end = sample.get("entry_id_to")
+    if end:
+        rows = [row for row in rows if (row.get("entry_id") or "") <= str(end)]
+    offset = int(sample.get("offset") or 0)
+    if offset:
+        rows = rows[offset:]
+    limit = int(sample.get("limit") or 0)
+    if limit:
+        rows = rows[:limit]
+    return rows
 
 
 def _prompt_fingerprint(prompt_dir: Path, name: str = "observation_extraction") -> Optional[str]:
@@ -152,18 +184,21 @@ def run_pipeline(config: dict, input_dir: Optional[Path] = None) -> ExtractionRe
     entries_csv, multimodal_path = _resolve_corpus(config, input_dir)
     sample = config.get("sample", {}) or {}
     volume = sample.get("volume")
-    limit = int(sample.get("limit") or 0)
     extract, provenance = _build_extractor(config)
 
     rows = read_entries(entries_csv, volume=int(volume) if volume is not None else None)
-    if limit:
-        rows = rows[:limit]           # smoke tests: first N entries only
+    rows = select_sample_rows(rows, sample)
     total = len(rows)
     extraction_cfg = config.get("extraction", {})
     backend = (extraction_cfg.get("backend") or "offline").lower()
     concurrency = max(1, int(extraction_cfg.get("concurrency", 1)))
-    logger.info("extracting %d entries (volume=%s, limit=%s, backend=%s, concurrency=%d)",
-                total, volume, limit or "none", backend, concurrency)
+    logger.info(
+        "extracting %d entries (volume=%s, entry_id_from=%s, entry_id_to=%s, "
+        "limit=%s, backend=%s, concurrency=%d)",
+        total, volume, sample.get("entry_id_from") or "none",
+        sample.get("entry_id_to") or "none", sample.get("limit") or "none",
+        backend, concurrency,
+    )
 
     result = ExtractionResult(provenance=provenance)
 
