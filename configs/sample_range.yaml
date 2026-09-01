@@ -1,11 +1,13 @@
 # Review subset: a range of entries from the corpus CSV.
-# Point corpus.entries at data/corpus/entries.csv (the 34-volume dump).
-# Edit sample.entry_id_from / entry_id_to (inclusive) or sample.entry_ids.
+# Default extractor: Gemini observation_extraction (same prompt as the full run).
+# Requires: pip install -e ".[dev,llm]"  and GOOGLE_API_KEY in .env (or the env).
+# Cache is isolated from the 34-volume run (data/cache/llm_sample).
+# Rule-based alternative: configs/sample_range_offline.yaml
 #
 #   laubmann-kg export-all \
 #     --config configs/sample_range.yaml \
 #     --input-dir data/corpus \
-#     --output-dir data/exports/sample_runs/offline-L02-e0001-e0020
+#     --output-dir data/exports/sample_runs/llm-L02-e0001-e0020
 #
 # Each run writes rdf/ jsonld/ dwca/ review/ html/graph.json + html/index.html.
 # Open tools/Laubmann-KG_Explorer.html and load two html/graph.json files to compare.
@@ -22,7 +24,15 @@ sample:
   # limit: 0                            # 0 = no cap after the range
 
 extraction:
-  backend: offline          # rule-based, deterministic, network-free
+  backend: llm
+  provider: google
+  model: gemini-3.5-flash       # keep in sync with configs/models.yaml extraction.model
+  api_key_env: GOOGLE_API_KEY
+  temperature: 0.0
+  max_output_tokens: 16384
+  timeout: 120
+  cache_dir: data/cache/llm_sample
+  prompt_dir: prompts           # prompts/observation_extraction.md
 
 taxa:
   links_long_path: null
@@ -34,6 +44,16 @@ qa:
     enabled: true
     path: configs/volume_coverage.yaml
 
+linking:
+  enabled: false             # sample graphs compare extraction, not GBIF/Wikidata merges
+  offline: false
+  cache_dir: data/cache/linking
+  review_dir: data/review
+  taxa:
+    enabled: true
+  persons:
+    enabled: true
+
 paths:
   ontology: ontologies/laubmann.ttl
   shapes: ontologies/shacl_shapes.ttl
@@ -42,7 +62,7 @@ paths:
 dwca:
   publisher: Laubmann KG Project
   license: CC-BY-4.0
-  title: "Laubmann KG — sample range (offline)"
+  title: "Laubmann KG — sample range (LLM)"
   package_id: laubmann-kg-sample-range
 
 validate: true

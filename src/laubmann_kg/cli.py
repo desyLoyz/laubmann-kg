@@ -8,6 +8,7 @@ from typing import Callable
 import typer
 
 from laubmann_kg import diary, dwca, evaluation, extraction, kg, layout, preprocessing, transcription
+from laubmann_kg.env import load_dotenv
 from laubmann_kg.logging_config import setup_logging
 
 app = typer.Typer(
@@ -24,6 +25,7 @@ def _run_stage(
     output_dir: Path,
 ) -> None:
     setup_logging()
+    load_dotenv()
     stage(config=config, input_dir=input_dir, output_dir=output_dir)
 
 

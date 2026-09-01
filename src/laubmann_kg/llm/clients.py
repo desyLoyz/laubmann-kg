@@ -167,6 +167,7 @@ class GeminiClient:  # pragma: no cover - needs credentials + network
         if not key:
             raise RuntimeError(
                 f"No API key found. Set {self._api_key_env} (or GEMINI_API_KEY) "
+                "in the environment or in a .env file in the project directory "
                 "to use the Gemini extraction backend."
             )
         try:

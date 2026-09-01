@@ -28,18 +28,21 @@ cp .env.example .env
 ## Sample range (ontology / prompt review)
 
 Place the corpus CSV at `data/corpus/entries.csv` (not under `data/review/`).
-Edit the inclusive `entry_id_from` / `entry_id_to` in `configs/sample_range.yaml`, then:
+Default extractor is Gemini (`prompts/observation_extraction.md`), same as the
+full run. Requires `pip install -e ".[dev,llm]"` and `GOOGLE_API_KEY` in `.env` (loaded
+automatically from the project directory). Edit the inclusive `entry_id_from` /
+`entry_id_to` in `configs/sample_range.yaml`, then:
 
 ```bash
 laubmann-kg export-all \
   --config configs/sample_range.yaml \
   --input-dir data/corpus \
-  --output-dir data/exports/sample_runs/offline-L02-e0001-e0020
+  --output-dir data/exports/sample_runs/llm-L02-e0001-e0020
 ```
 
-Use `configs/sample_range_llm.yaml` for a Gemini pass (isolated cache
-`data/cache/llm_sample`). Open `tools/Laubmann-KG_Explorer.html`, load each run’s
-`html/graph.json` as A and B, and switch to **compare**.
+Calls are cached under `data/cache/llm_sample`. For a network-free gazetteer
+pass use `configs/sample_range_offline.yaml`. Open `tools/Laubmann-KG_Explorer.html`,
+load each run’s `html/graph.json` as A and B, and switch to **compare**.
 
 ## CLI
 

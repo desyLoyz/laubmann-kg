@@ -18,6 +18,7 @@ from typing import Optional
 
 import yaml
 
+from laubmann_kg.env import load_dotenv
 from laubmann_kg.extraction.observations import extract_observations
 from laubmann_kg.io.csv import read_entries
 from laubmann_kg.io.metadata import read_multimodal
@@ -181,6 +182,7 @@ def _build_extractor(config: dict) -> tuple:
 
 
 def run_pipeline(config: dict, input_dir: Optional[Path] = None) -> ExtractionResult:
+    load_dotenv()
     entries_csv, multimodal_path = _resolve_corpus(config, input_dir)
     sample = config.get("sample", {}) or {}
     volume = sample.get("volume")

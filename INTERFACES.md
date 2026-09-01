@@ -41,8 +41,9 @@ sample:
   limit: 0                  # 0 = no cap; still the smoke-test "first N"
 ```
 
-See `configs/sample_range.yaml`. Each export writes `html/graph.json` for the
-explorer (`tools/Laubmann-KG_Explorer.html`).
+See `configs/sample_range.yaml` (Gemini `observation_extraction` by default;
+`configs/sample_range_offline.yaml` for the rule-based gazetteer). Each export
+writes `html/graph.json` for the explorer (`tools/Laubmann-KG_Explorer.html`).
 
 **Deltas from the frozen contract in the task brief** (handled, not blocking):
 
