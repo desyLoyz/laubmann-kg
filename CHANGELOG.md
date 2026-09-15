@@ -13,6 +13,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **Explorer für Laufvergleiche.** Export schreibt `html/graph.json` plus die Explorer-Schale. `tools/Laubmann-KG_Explorer.html` lädt zwei `graph.json`-Dateien (A/B) und zeigt eine Compare-Ansicht je Eintrag. Snapshot mit eingebettetem 34-Bände-Graph bleibt lokal als `tools/explorer/*.full.html`.
 - **`.env` wird geladen.** CLI und `run_pipeline` setzen `GOOGLE_API_KEY` / `GEMINI_API_KEY` aus einer `.env` im Arbeitsverzeichnis oder Projektroot (bestehende Umgebungsvariablen bleiben unangetastet). Zuvor las der Client nur den Prozess.
 - **Ontologie 0.5.0 (Ziel 1: Zeit- und Raumqualifikation).** Beobachtungen tragen optional `lkg:spatialContext`, `lkg:microhabitat`, `lkg:relativeElevation`, `lkg:timeOfDay`, `lkg:daylightPhase`, `dwc:samplingProtocol`, `lkg:observationRadiusMeters` (gespiegelt als `dwc:coordinateUncertaintyInMeters`), `lkg:spatialConfidence`. Der LLM-Prompt trennt Ortsname (`locality`) vom Beobachterstandpunkt; ein eigener `lkg:Place` entsteht weiter über `lkg:hasLocality`, wenn er vom Eintragsort abweicht. DwC-A-Occurrence erhält `samplingProtocol` und `coordinateUncertaintyInMeters`.
+- **Explorer zeigt Ziel-1-Felder.** Beobachtungsliste, Karteikarte und RDF-Statements-Tabelle rendern `timeOfDay`, `spatialContext`, Radius/`samplingProtocol` u. a.; sie sitzen auf der Observation, nicht auf dem DiaryEntry.
 
 ### Added (2026-08-19 — Bandabdeckung/Datumskorrektur, Entity-Resolution, externe Verlinkung von Habitaten und Orten; Ontologie 0.4.1/0.4.2/0.4.3)
 

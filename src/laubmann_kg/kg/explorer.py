@@ -218,6 +218,10 @@ def graph_from_result(result, meta: Optional[dict] = None) -> dict[str, Any]:
                 rec["rad"] = obs.estimated_radius_m
             if obs.spatial_confidence:
                 rec["sconf"] = obs.spatial_confidence
+            if obs.altitude_m is not None:
+                rec["altm"] = obs.altitude_m
+            if obs.observation_duration_minutes is not None:
+                rec["dur"] = obs.observation_duration_minutes
             if obs.taxon_verbatim:
                 rec["tv"] = obs.taxon_verbatim
             if obs.literature_citation:

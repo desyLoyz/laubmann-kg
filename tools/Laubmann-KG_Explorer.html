@@ -1353,6 +1353,15 @@ svg.leaflet-image-layer.leaflet-interactive path {
     if (o.vit) rows.push(['dwc:vitality', lit(o.vit)]); if (o.mv) rows.push(['lkg:movementKind', lit(o.mv)]); if (o.dir) rows.push(['lkg:flightDirection', lit(o.dir, '@de')]);
     if (o.iq) rows.push(['dwc:identificationQualifier', lit(o.iq)]);
     rows.push(['dwc:eventDate', lit(o.d || (o.ei != null ? E[o.ei].date : ''), '^^xsd:date')]); if (o.tm) rows.push(['dwc:eventTime', lit(o.tm)]);
+    if (o.tod) rows.push(['lkg:timeOfDay', lit(o.tod)]); if (o.dl) rows.push(['lkg:daylightPhase', lit(o.dl)]);
+    if (o.sc) rows.push(['lkg:spatialContext', lit(o.sc, '@de')]);
+    if (o.mh) rows.push(['lkg:microhabitat', lit(o.mh, '@de')]);
+    if (o.re) rows.push(['lkg:relativeElevation', lit(o.re, '@de')]);
+    if (o.altm != null) rows.push(['lkg:altitudeM', lit(o.altm, '^^xsd:decimal')]);
+    if (o.rad != null) { rows.push(['lkg:observationRadiusMeters', lit(o.rad, '^^xsd:integer')]); rows.push(['dwc:coordinateUncertaintyInMeters', lit(o.rad, '^^xsd:integer')]); }
+    if (o.sconf) rows.push(['lkg:spatialConfidence', lit(o.sconf)]);
+    if (o.sp) rows.push(['dwc:samplingProtocol', lit(o.sp, '@de')]);
+    if (o.dur != null) rows.push(['lkg:observationDurationMinutes', lit(o.dur, '^^xsd:integer')]);
     [...new Set((o.ev || []).map(ev => ev[0]))].forEach(k => rows.push(['lkg:evidenceKind', `lkg:evidence_${esc(k)} <span class="muted">(skos:Concept)</span>`]));
     (o.voc || []).forEach((v, k) => rows.push(['lkg:hasVocalisation', `data:vocalisation_obs_${esc(o.u)}_${k} <span class="muted">a lkg:Vocalisation · dcterms:isPartOf ↑ · lkg:callType "${esc(v[0] || 'unknown')}"${v[1] ? ' · lkg:callTranscription "' + esc(v[1]) + '"' : ''}</span>`]));
     (o.beh || []).forEach(b => rows.push(['dwc:behavior', lit(b, '@de')]));
@@ -1407,7 +1416,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     const ring1 = [], ring2 = [], edges = [], seen = new Map();
     const ent = (kind, idx, label, tip) => { const id = kind + ':' + idx; if (!seen.has(id)) { const w = kind === 'taxa' ? T[idx].n : kind === 'places' ? P[idx].n : kind === 'persons' ? PE[idx].n : 0; const nd = { id, kind, i: idx, label, tip, r: 6, w, onclick: () => open(kind, idx) }; seen.set(id, nd); ring2.push(nd); } return id; };
     (e.obs || []).forEach((oi, k) => { const o = O[oi]; const nid = 'o:' + oi;
-      ring1.push({ id: nid, kind: 'obs', oi, label: `${k + 1} · ${obsLabel(o)}`, tip: (o.v || '').slice(0, 160), r: 4 + Math.min(4, Math.log2((o.n || 1) + 1)), hollow: o.st === 'absent', onclick: () => showObs(oi, true) });
+      ring1.push({ id: nid, kind: 'obs', oi, label: `${k + 1} · ${obsLabel(o)}`, tip: [o.sc, o.tod, o.rad != null ? o.rad + ' m' : null, (o.v || '').slice(0, 160)].filter(Boolean).join(' · '), r: 4 + Math.min(4, Math.log2((o.n || 1) + 1)), hollow: o.st === 'absent', onclick: () => showObs(oi, true) });
       edges.push(['c', nid, 'contains']);
       if (o.t != null) edges.push([nid, ent('taxa', o.t, T[o.t].name, T[o.t].sci), 'taxon']);
       if (o.p != null) edges.push([nid, ent('places', o.p, P[o.p].name, P[o.p].kind), o.own ? 'loc' : 'at', !o.own]);
@@ -1455,7 +1464,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <article class="doc" id="doc"><div class="doc-head"><span class="doc-date">${esc(e.vdate || e.date || 'o. D.')}</span>${e.pname ? `<span class="doc-place">${esc(e.pname)}</span>` : ''}<span class="doc-src">Vol. ${e.vol}${e.page ? ' · ' + esc(e.page.replace(/^Vol\. \d+ · /, '').replace(/\s*\(.*\)\s*$/, '')) : ''}</span></div><div class="doc-body" lang="de">${html || '<span class="muted">(no text)</span>'}</div></article>
       <div id="obscard"></div>
       <h3>observations<span class="r">${(e.obs || []).length}</span></h3>
-      <div class="obslist">${(e.obs || []).map((oi, k) => `<div><span class="no">${k + 1}</span><span class="link" data-oi="${oi}">${esc(obsLabel(O[oi]))}</span>${O[oi].p != null && O[oi].own ? ` <span class="muted">· ${esc(P[O[oi].p].name)}</span>` : ''}${O[oi].by != null && O[oi].by !== LAUB ? ` <span class="muted">· ${esc(PE[O[oi].by].name)}</span>` : ''}</div>`).join('') || '<span class="muted">none</span>'}</div>
+      <div class="obslist">${(e.obs || []).map((oi, k) => `<div><span class="no">${k + 1}</span><span class="link" data-oi="${oi}">${esc(obsLabel(O[oi]))}</span>${O[oi].p != null && O[oi].own ? ` <span class="muted">· ${esc(P[O[oi].p].name)}</span>` : ''}${O[oi].tod ? ` <span class="muted">· ${esc(O[oi].tod)}${O[oi].tm ? ' ' + esc(O[oi].tm) : ''}</span>` : (O[oi].tm ? ` <span class="muted">· ${esc(O[oi].tm)}</span>` : '')}${O[oi].rad != null ? ` <span class="muted">· ${O[oi].rad} m</span>` : ''}${O[oi].by != null && O[oi].by !== LAUB ? ` <span class="muted">· ${esc(PE[O[oi].by].name)}</span>` : ''}</div>`).join('') || '<span class="muted">none</span>'}</div>
       ${e.w ? `<h3>weather<span class="r">${pfx('lkg:WeatherReport')}</span></h3><div class="small">${esc(e.w.v)}${e.w.t != null ? ` · ${e.w.t}°${e.w.u || ''}` : ''}${e.w.pr ? ' · ' + e.w.pr : ''}${e.w.sky ? ' · ' + e.w.sky : ''}${e.w.wind ? ' · ' + esc(e.w.wind) : ''}</div>` : ''}
       ${(e.tr || []).length ? `<h3>journey<span class="r">${pfx('lkg:TravelEvent')} · ${pfx('lkg:TravelLeg')}</span></h3><div class="small">${e.tr.map(legs => legs.map(l => `${l.from != null ? `<span class="link" data-open="places:${l.from}">${esc(P[l.from].name)}</span>` : '?'} → ${l.to != null ? `<span class="link" data-open="places:${l.to}">${esc(P[l.to].name)}</span>` : '?'}${l.mode && l.mode !== 'unknown' ? ' <span class="muted">' + l.mode + '</span>' : ''}${l.dep ? ' <span class="muted">' + l.dep.slice(11, 16) + '</span>' : ''}`).join(' · ')).join('<br>')}</div>` : ''}
       ${(e.pe || []).length ? `<h3>persons<span class="r">${pfx('lkg:mentionsPerson')}</span></h3><div class="small">${e.pe.map(pi => `<span class="link" data-open="persons:${pi}">${esc(PE[pi].name)}</span>${(e.pr || {})[pi] ? ' <span class="muted">' + esc((e.pr || {})[pi]) + '</span>' : ''}`).join(' · ')}</div>` : ''}
@@ -1473,7 +1482,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
       ['count', fmtCount(o) + (o.st === 'absent' ? ' · <span class="pill w">absent</span>' : '')], ['place', o.p != null ? `<span class="link" data-open="places:${o.p}">${esc(P[o.p].name)}</span>${o.own ? ' <span class="muted">· own locality</span>' : ' <span class="muted">· entry place</span>'}` : ''],
       ['sex · stage', [o.sex, o.ls].filter(Boolean).join(' · ')], ['breeding', o.br], ['movement', [o.mv, o.dir].filter(Boolean).join(' ')], ['vitality', o.vit],
       ['evidence', [...new Set((o.ev || []).map(x => x[0]))].join(', ')], ['vocalisation', (o.voc || []).map(v => (v[0] || 'unknown') + (v[1] ? ' „' + esc(v[1]) + '“' : '')).join(', ')], ['behaviour', (o.beh || []).map(esc).join(', ')],
-      ['habitat', o.h != null ? esc(H[o.h].name) : ''], ['hedge', o.iq ? esc(o.iq) : ''], ['date · time', [o.d, o.tm].filter(Boolean).join(' ')],
+      ['habitat', o.h != null ? esc(H[o.h].name) : ''], ['microhabitat', o.mh ? esc(o.mh) : ''], ['relative elevation', o.re ? esc(o.re) : ''],
+      ['spatial context', o.sc ? esc(o.sc) : ''], ['hedge', o.iq ? esc(o.iq) : ''],
+      ['date · time', [o.d, o.tod, o.dl, o.tm].filter(Boolean).join(' · ')],
+      ['protocol · radius', [o.sp, o.rad != null ? o.rad + ' m' : null, o.sconf, o.dur != null ? o.dur + ' min' : null].filter(Boolean).join(' · ')],
       ['record', (o.rt || 'field-observation') + (o.by != null ? ` · <span class="link" data-open="persons:${o.by}">${esc(PE[o.by].name)}</span>` : '') + (o.cit ? ' · ' + esc(o.cit) : '')]].filter(r => r[1]);
     const no = o.ei != null ? (E[o.ei].obs || []).indexOf(oi) + 1 : '';
     card.innerHTML = `<div class="card"><b>${no ? no + ' · ' : ''}${esc(obsLabel(o))}</b> <span class="muted">${pfx('lkg:Observation')}</span><div class="muted small" style="margin:2px 0 6px">${esc(o.v || '')}</div><dl class="kv">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></div>`;
