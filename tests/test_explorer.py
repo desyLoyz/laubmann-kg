@@ -16,6 +16,9 @@ def test_graph_from_result_matches_explorer_v7_schema(sample_config) -> None:
     first = by_id["L02-e0001"]
     assert first["text"]
     assert first["obs"]
+    assert first["pid"] == "pageid-0004"
+    assert first["scan"] == "4"
+    assert first["drive"].endswith("1YaN8bRdnp99dIJzTaMQdF1jxL_WsIVS_")
     obs = graph["obs"][first["obs"][0]]
     assert obs["v"]
     assert "t" in obs
@@ -54,6 +57,17 @@ def test_graph_json_and_shell_expose_ziel1_fields() -> None:
     for term in ("lkg:spatialContext", "lkg:timeOfDay", "lkg:observationRadiusMeters",
                  "dwc:samplingProtocol", "lkg:microhabitat"):
         assert term in html
+    assert "drive.google.com/file/d/" in html
+    assert "function scanHref" in html
+    vol1 = DiaryEntry(
+        entry_uid="e_drv", entry_id="L01-e0001", volume=1, page_uid="p",
+        page_id="900847d2-aabe-4b16-b0e6-203b103bd1e1_0004_L",
+        region_uid=None, scan="4", entry_date="1917-05-01",
+        verbatim_event_date="1. Mai 1917", location_raw="München",
+        text_clean="x",
+    )
+    rec = graph_from_result(ExtractionResult(entries=[vol1]))["entries"][0]
+    assert rec["drive"] == "https://drive.google.com/file/d/1r_wEp_PAJ2naD-JlBiiZgq0aJ-HptcMj/view"
 
 
 def test_write_explorer_copies_shell_and_graph(sample_config, tmp_path: Path) -> None:

@@ -14,6 +14,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - **`.env` wird geladen.** CLI und `run_pipeline` setzen `GOOGLE_API_KEY` / `GEMINI_API_KEY` aus einer `.env` im Arbeitsverzeichnis oder Projektroot (bestehende Umgebungsvariablen bleiben unangetastet). Zuvor las der Client nur den Prozess.
 - **Ontologie 0.5.0 (Ziel 1: Zeit- und Raumqualifikation).** Beobachtungen tragen optional `lkg:spatialContext`, `lkg:microhabitat`, `lkg:relativeElevation`, `lkg:timeOfDay`, `lkg:daylightPhase`, `dwc:samplingProtocol`, `lkg:observationRadiusMeters` (gespiegelt als `dwc:coordinateUncertaintyInMeters`), `lkg:spatialConfidence`. Der LLM-Prompt trennt Ortsname (`locality`) vom Beobachterstandpunkt; ein eigener `lkg:Place` entsteht weiter über `lkg:hasLocality`, wenn er vom Eintragsort abweicht. DwC-A-Occurrence erhält `samplingProtocol` und `coordinateUncertaintyInMeters`.
 - **Explorer zeigt Ziel-1-Felder.** Beobachtungsliste, Karteikarte und RDF-Statements-Tabelle rendern `timeOfDay`, `spatialContext`, Radius/`samplingProtocol` u. a.; sie sitzen auf der Observation, nicht auf dem DiaryEntry.
+- **Explorer-Link zum Seitenscan.** Jeder Eintrag öffnet die PNG `{page_id}.png` direkt auf Google Drive (`/file/d/…/view`; Mapping `configs/drive_scan_files.json`). Fehlt die Datei-ID, fällt der Link auf den Ordner `Laubmann_NN_gemini/pages` zurück.
 
 ### Changed
 

@@ -11,6 +11,7 @@ import json
 import logging
 import shutil
 from collections import Counter, defaultdict
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Optional
 
@@ -27,6 +28,84 @@ from laubmann_kg.kg.model import (
 logger = logging.getLogger(__name__)
 
 TEMPLATE = Path(__file__).resolve().parents[3] / "tools" / "explorer" / "index.html"
+DRIVE_FILES_JSON = Path(__file__).resolve().parents[3] / "configs" / "drive_scan_files.json"
+DRIVE_FILES_JS = Path(__file__).resolve().parents[3] / "tools" / "explorer" / "drive_scan_files.js"
+
+# Google Drive folder IDs of HistOrniGraph_output/Laubmann_NN_gemini/pages.
+# Root: https://drive.google.com/drive/folders/1CQx4pnXU3uTEHGYVCRXeDFs8_1CGwEF4
+# Shared-with-me files are not in Drive search; open the pages folder instead.
+DRIVE_OUTPUT_FOLDER = "1CQx4pnXU3uTEHGYVCRXeDFs8_1CGwEF4"
+DRIVE_PAGES_FOLDERS: dict[str, str] = {
+    "1": "1vmfYvJAE9umyyobwXHvqjkjm8sy_uHcV",
+    "2": "1YaN8bRdnp99dIJzTaMQdF1jxL_WsIVS_",
+    "3": "1sEf8K-CncD6Cd9_nYy-YMtLcl5uimpGU",
+    "4": "1SAC_U7fsYxhTk_C0mTRELb9Y4L1Wlq9g",
+    "5": "1xA0SZGk5Pdl-0krr-flzWPazaMu8IFhH",
+    "6": "1wZWR8K3OfCrGNRLPoYy1WBn-ls2rU0RN",
+    "7": "1dnI8KDa01LW0_hVuAcIog-q9LTMeE6rH",
+    "8": "1ci6qnH03TFEqzdbUr402LHWDLStTOQR-",
+    "9": "1ccefPiQthQeIx1FazX__dXoMKs_b7YOG",
+    "10": "1XUabN7spjmEaWJY2c3BSAEE6d1At41qA",
+    "11": "1fGDNzqztPMZy56BHNsp-yzPKiNMlamWh",
+    "12": "1Lop6FcYoK64ERnUGAb53jpnMfiUOyrol",
+    "13": "1rFKT6a7y_5fBhzNMgUi9ioAIul--zomS",
+    "14": "1tviypsJcUciSDutv3e99onEUxlnLMVsq",
+    "15": "1PhWe1PjwOQcXNze4i4B_IQstnr-4sp6q",
+    "16": "1ym8ivU_-s0j0C2SR89G4wilgvm2Ajshq",
+    "17": "1OWDJTRSBZ1ohmhgwhGfxWv6uxaQikTa4",
+    "18": "14TfsQngdvxMfyI7oNuhZ6L-GnpOg6-mZ",
+    "19": "1QztfHZ68y9ENVxYAoRsysIap1oRFiSCp",
+    "20": "1VN73rqmUqA8P1BCn-FTQai1zWWancchd",
+    "21": "1qcC6v77fN__7be0Nlj68TEYLgFma3C9n",
+    "22": "1DUlFJkCCFQ8Xm2M-mIwh7f45ocRiRnK1",
+    "23": "1Ah981kju47tswvNIQFTt9zZDdMFqMtOx",
+    "24": "1BanvqEQvRGooNp8fo9DA3c9X1Fn-wbIh",
+    "25": "1nDUBBrb2ZaP3joGql-zU6WciH-Av0Jlq",
+    "26": "1FF_0MWuG0V77xAeZ2x4sgfjpWRnbfBwG",
+    "27": "121b1hRODd4UBmnd5OyGx4lwTs8SQVVc1",
+    "28": "1zVnQaB6jliAXcuM03LVPIE-pJroBV_Ee",
+    "29": "1hUD5drDVmWcYkdjN3L1Da5BSU34WJ-sI",
+    "30": "1iWVUn8-ziEMAOp3LYI-4SKhNQvWgyZZa",
+    "31": "1YVbZyoKkMylUccKduODZ0_-PmFx1tjUR",
+    "32": "1-RgD8xTGccGJFCXkqf219MAk-FS5mdsk",
+    "33": "1vn1haNk-XK4cCI0RoZnZdf3s2bap9AOU",
+    "34": "1OIizFN1Mfwm4xU05LSdqlM9fU0bupZRK",
+    "35": "1sF4Pveh9ec-BgP5UUJTODubCktuNLWOE",
+}
+DRIVE_DOC_FOLDERS: dict[str, str] = {
+    "900847d2-aabe-4b16-b0e6-203b103bd1e1": "1vmfYvJAE9umyyobwXHvqjkjm8sy_uHcV",
+}
+
+
+@lru_cache(maxsize=1)
+def _drive_files() -> dict[str, str]:
+    """page_id → Google Drive file id for ``{page_id}.png`` in the pages folders."""
+    if not DRIVE_FILES_JSON.exists():
+        return {}
+    data = json.loads(DRIVE_FILES_JSON.read_text(encoding="utf-8"))
+    return {str(k): str(v) for k, v in data.items()}
+
+
+def _drive_href(entry: DiaryEntry) -> Optional[str]:
+    """Direct PNG view URL, or the volume ``pages`` folder if the file id is unknown."""
+    pid = entry.page_id or ""
+    files = _drive_files()
+    file_id = files.get(pid) or (files.get(pid[:-4]) if pid.endswith(".png") else None)
+    if file_id:
+        return f"https://drive.google.com/file/d/{file_id}/view"
+    folder = _drive_pages_id(entry)
+    if folder:
+        return f"https://drive.google.com/drive/folders/{folder}"
+    return None
+
+
+def _drive_pages_id(entry: DiaryEntry) -> Optional[str]:
+    """Return the Drive folder id of the volume's ``pages`` directory, if known."""
+    pid = entry.page_id or ""
+    doc = pid.split("_")[0] if pid else ""
+    if doc in DRIVE_DOC_FOLDERS:
+        return DRIVE_DOC_FOLDERS[doc]
+    return DRIVE_PAGES_FOLDERS.get(str(entry.volume)) or DRIVE_OUTPUT_FOLDER
 
 
 def _obs_uid(obs: Observation) -> str:
@@ -143,6 +222,13 @@ def graph_from_result(result, meta: Optional[dict] = None) -> dict[str, Any]:
             "text": entry.text_clean or "",
             "kind": entry.entry_kind,
         }
+        if entry.page_id:
+            e_rec["pid"] = entry.page_id
+        if entry.scan:
+            e_rec["scan"] = str(entry.scan)
+        href = _drive_href(entry)
+        if href:
+            e_rec["drive"] = href
         if entry.entry_date_end:
             e_rec["end"] = entry.entry_date_end
         if entry.date_note:
@@ -354,6 +440,13 @@ def write_explorer(result, output_dir: Path, meta: Optional[dict] = None,
     if src.exists():
         html_dir.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(src, html_path)
+        if DRIVE_FILES_JSON.exists():
+            DRIVE_FILES_JS.write_text(
+                "window.DRIVE_FILES=" + json.dumps(_drive_files(), separators=(",", ":")) + ";\n",
+                encoding="utf-8",
+            )
+        if DRIVE_FILES_JS.exists():
+            shutil.copyfile(DRIVE_FILES_JS, html_dir / "drive_scan_files.js")
     else:
         logger.warning("explorer template missing at %s — graph.json only", src)
     return {"graph": str(json_path), "html": str(html_path) if src.exists() else None,
