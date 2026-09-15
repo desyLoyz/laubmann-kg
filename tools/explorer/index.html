@@ -32,8 +32,8 @@ select, input[type=number] { font-size: .82rem; padding: 4px 6px; border: 1px so
 .modes { display: inline-flex; gap: 4px; }
 .modes button { font-size: .76rem; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); cursor: pointer; }
 .modes button[aria-pressed=true] { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); font-weight: 600; }
-main { flex: 1; display: grid; grid-template-columns: 330px 1fr 440px; min-height: 0; }
-@media (max-width: 1180px) { main { grid-template-columns: 290px 1fr; } #detail { grid-column: 1 / -1; max-height: 44vh; border-left: 0; border-top: 1px solid var(--line); } }
+main { flex: 1; display: grid; grid-template-columns: 330px 1fr 6px var(--detail-w, 640px); min-height: 0; }
+@media (max-width: 1180px) { main { grid-template-columns: 290px 1fr; } #splitR { display: none; } #detail { grid-column: 1 / -1; max-height: 44vh; border-left: 0; border-top: 1px solid var(--line); } }
 aside, section { min-height: 0; overflow: auto; }
 #side { border-right: 1px solid var(--line); background: var(--surface); display: flex; flex-direction: column; }
 .tabs { display: flex; border-bottom: 1px solid var(--line); }
@@ -60,7 +60,12 @@ aside, section { min-height: 0; overflow: auto; }
 #legend .grp { display: flex; flex-wrap: wrap; gap: 3px 12px; align-items: center; }
 #legend .grp b { font-weight: 600; margin-right: 2px; letter-spacing: .05em; text-transform: uppercase; font-size: .64rem; }
 #legend svg { width: 26px; height: 12px; vertical-align: -2px; margin-right: 3px; }
-#detail { border-left: 1px solid var(--line); background: var(--surface); padding: 12px 14px 30px; }
+#detail { border-left: 0; background: var(--surface); padding: 12px 14px 30px; }
+#splitR { width: 6px; padding: 0; margin: 0; border: 0; background: var(--line); cursor: col-resize; position: relative; z-index: 4; }
+#splitR::after { content: ""; position: absolute; inset: 0 -5px; }
+#splitR:hover, #splitR:focus-visible, body.resizing #splitR { background: var(--accent); }
+body.resizing { cursor: col-resize; user-select: none; }
+body.resizing #graph, body.resizing #detail { pointer-events: none; }
 #detail h2 { font: 500 1.08rem/1.25 Georgia, "Iowan Old Style", "Palatino Linotype", serif; margin: 0 0 3px; }
 #detail .sub { color: var(--muted); font-size: .78rem; margin-bottom: 10px; }
 h3 { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; margin: 16px 0 6px; display: flex; align-items: center; gap: 8px; }
@@ -89,7 +94,8 @@ h3 .r { margin-left: auto; font-weight: 400; text-transform: none; letter-spacin
 .obslist .no { display: inline-block; min-width: 1.6em; color: var(--muted); font-variant-numeric: tabular-nums; }
 .stm { width: 100%; border-collapse: collapse; font-size: .76rem; font-family: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace; }
 .stm td { padding: 2px 6px 2px 0; vertical-align: top; border-bottom: 1px solid var(--line2); }
-.stm td:first-child { white-space: nowrap; color: var(--muted); }
+.stm td:first-child { white-space: nowrap; color: var(--muted); width: 1%; }
+.stm td:last-child { overflow-wrap: anywhere; word-break: break-word; }
 .pfx-lkg { color: var(--accent); } .pfx-dwc, .pfx-dwciri, .pfx-geo { color: var(--ext); } .pfx-prov, .pfx-dcterms, .pfx-schema, .pfx-skos, .pfx-owl, .pfx-rdfs, .pfx-rdf { color: var(--warn); }
 .stm .lit { color: var(--ink); } .stm .dt { color: var(--muted); }
 .iri { font-family: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace; font-size: .72rem; color: var(--muted); word-break: break-all; }
@@ -839,6 +845,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
       <div id="mapoffline">basemap tiles could not be loaded (offline?) — the places are still plotted</div>
     </div>
   </section>
+  <button type="button" id="splitR" role="separator" aria-orientation="vertical" aria-label="Resize detail pane" title="Drag to resize the detail pane"></button>
   <section id="detail"><div class="muted small">select an entry, taxon, place, person or weather report</div></section>
 </main>
 <div id="tip" role="status"></div>
@@ -1696,6 +1703,46 @@ svg.leaflet-image-layer.leaflet-interactive path {
   document.querySelectorAll('#runMode [data-run]').forEach(b => b.addEventListener('click', () => {
     if (!b.disabled) setActiveRun(b.dataset.run);
   }));
+  (function wireDetailSplitter() {
+    const main = document.querySelector('main');
+    const split = document.getElementById('splitR');
+    if (!main || !split) return;
+    const KEY = 'lkg-explorer-detail-w';
+    const MIN = 360, MIN_GRAPH = 240, MIN_SIDE = 200;
+    const apply = w => {
+      const max = Math.max(MIN, window.innerWidth - MIN_SIDE - MIN_GRAPH);
+      w = Math.round(Math.min(max, Math.max(MIN, w)));
+      main.style.setProperty('--detail-w', w + 'px');
+      return w;
+    };
+    const current = () => parseInt(getComputedStyle(main).getPropertyValue('--detail-w'), 10);
+    const stored = parseInt(localStorage.getItem(KEY) || '', 10);
+    apply(Number.isFinite(stored) ? stored : Math.min(720, Math.max(640, Math.round(window.innerWidth * 0.38))));
+    split.addEventListener('pointerdown', ev => {
+      if (ev.button !== 0) return;
+      ev.preventDefault();
+      split.setPointerCapture(ev.pointerId);
+      document.body.classList.add('resizing');
+      const move = e => apply(main.getBoundingClientRect().right - e.clientX);
+      const up = e => {
+        document.body.classList.remove('resizing');
+        try { split.releasePointerCapture(e.pointerId); } catch (_) { /* already released */ }
+        localStorage.setItem(KEY, String(current()));
+        split.removeEventListener('pointermove', move);
+        split.removeEventListener('pointerup', up);
+        split.removeEventListener('pointercancel', up);
+      };
+      split.addEventListener('pointermove', move);
+      split.addEventListener('pointerup', up);
+      split.addEventListener('pointercancel', up);
+    });
+    split.addEventListener('keydown', ev => {
+      const step = ev.shiftKey ? 48 : 24;
+      if (ev.key === 'ArrowLeft') { ev.preventDefault(); localStorage.setItem(KEY, String(apply(current() + step))); }
+      if (ev.key === 'ArrowRight') { ev.preventDefault(); localStorage.setItem(KEY, String(apply(current() - step))); }
+    });
+    window.addEventListener('resize', () => { const w = current(); if (Number.isFinite(w)) apply(w); });
+  })();
   fetch('graph.json').then(r => r.ok ? r.json() : Promise.reject()).then(G => {
     GA = G; runNames.A = (G.meta && (G.meta.model || G.meta.backend || G.meta.source)) || 'graph.json';
     updateRunLabels(); ingest(G); startView();
