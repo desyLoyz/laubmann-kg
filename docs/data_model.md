@@ -1,6 +1,6 @@
 # Data Model
 
-The knowledge graph conforms to `ontologies/laubmann.ttl` (v0.4.1, namespace
+The knowledge graph conforms to `ontologies/laubmann.ttl` (v0.5.0, namespace
 `https://w3id.org/laubmann-kg/ontology#`, prefix `lkg:`). Instances live under
 `https://w3id.org/laubmann-kg/data/` (prefix `data:`). The Python contract is
 `src/laubmann_kg/kg/model.py`; `kg/rdf.py` maps it onto triples and
@@ -21,7 +21,7 @@ Diagrams (Mermaid, render with any Mermaid tool or paste into Mermaid Chart):
 and `docs/pipeline.mmd` (stages and where each decision is made).
 Human-readable ontology docs: `docs/ontology/index.html` (pyLODE).
 
-## Design principles (0.4.0)
+## Design principles (0.4.0, extended in 0.5.0)
 
 - **Darwin-Core-first.** Wherever a `dwc:`/`dwciri:`, DCTERMS, PROV-O, SKOS,
   GeoSPARQL or schema.org term exists, the graph uses that term alone;
@@ -41,6 +41,16 @@ Human-readable ontology docs: `docs/ontology/index.html` (pyLODE).
 - **Flat where a node adds nothing.** Behaviour = `dwc:behavior` literals;
   evidence kinds = `lkg:evidenceKind` concept links on the observation;
   only vocalisations, weather reports and travel legs stay nodes.
+- **Ziel 1 (0.5.0) — time and space on the observation.** The named site stays
+  a `lkg:Place` (`lkg:hasLocality` when it differs from `lkg:entryPlace`);
+  vantage wording, microhabitat and relative height are literals
+  (`lkg:spatialContext`, `lkg:microhabitat`, `lkg:relativeElevation`). Clock
+  time is `dwc:eventTime` (`HH:MM`); the qualitative slot is `lkg:timeOfDay`
+  / `lkg:daylightPhase`. An estimated viewing radius
+  (`lkg:observationRadiusMeters`) is mirrored as
+  `dwc:coordinateUncertaintyInMeters` on the occurrence, with
+  `dwc:samplingProtocol` and `lkg:spatialConfidence`. Nothing is inferred in
+  the emitter — values appear only when the extractor set them.
 - **One node per real-world entity.** The entity-resolution stage
   (`resolution/`, after linking) merges spellings that denote the same taxon
   (same accepted GBIF key at species level, or same scientific name), person

@@ -66,7 +66,8 @@ def test_column_contract_and_headers(sample_config, tmp_path: Path) -> None:
         "individualCount", "organismQuantity", "organismQuantityType",
         "occurrenceStatus", "sex", "lifeStage", "reproductiveCondition", "vitality",
         "behavior", "identificationQualifier", "identificationRemarks", "verbatimIdentification",
-        "locality", "locationID", "verbatimLocality", "eventDate", "eventTime", "habitat",
+        "locality", "locationID", "verbatimLocality", "coordinateUncertaintyInMeters",
+        "eventDate", "eventTime", "habitat", "samplingProtocol",
         "occurrenceRemarks", "recordedBy", "associatedMedia", "associatedReferences",
         "dynamicProperties"]
     assert MOF_FIELDS == [

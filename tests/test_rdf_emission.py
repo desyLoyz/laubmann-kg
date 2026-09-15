@@ -74,6 +74,16 @@ def _full_entry() -> DiaryEntry:
         sex="mixed", life_stage="adult", breeding_evidence="probable",
         vitality="alive", movement_kind="departing", flight_direction="NO→SW",
         identification_qualifier="wohl", count_min=3, count_max=4,
+        spatial_context="vom Ufer des Weihers",
+        microhabitat="Teichufer",
+        relative_elevation="in mäßiger Höhe",
+        altitude_m=280.0,
+        time_of_day="morning",
+        daylight_phase="day",
+        sampling_protocol="Ansitz",
+        estimated_radius_m=300,
+        spatial_confidence="medium",
+        observation_duration_minutes=45,
         evidence=[Evidence("auditory", "Lautäußerung", is_call=True, call_type="call"),
                   Evidence("visual", "Sichtbeobachtung")],
         behaviour=[Behaviour("balzend")],
@@ -139,6 +149,17 @@ def test_observation_detail_predicates() -> None:
     # own date/time vs. inherited entry date
     assert graph.value(node, DWC.eventDate) == Literal("1919-04-13", datatype=XSD.date)
     assert graph.value(node, DWC.eventTime) == Literal("07:30")
+    assert graph.value(node, LKG.timeOfDay) == Literal("morning")
+    assert graph.value(node, LKG.daylightPhase) == Literal("day")
+    assert graph.value(node, LKG.spatialContext) == Literal("vom Ufer des Weihers", lang="de")
+    assert graph.value(node, LKG.microhabitat) == Literal("Teichufer", lang="de")
+    assert graph.value(node, LKG.relativeElevation) == Literal("in mäßiger Höhe", lang="de")
+    assert graph.value(node, LKG.altitudeM).toPython() == Decimal("280.0")
+    assert graph.value(node, LKG.observationRadiusMeters) == Literal(300, datatype=XSD.integer)
+    assert graph.value(node, DWC.coordinateUncertaintyInMeters) == Literal(300, datatype=XSD.integer)
+    assert graph.value(node, LKG.spatialConfidence) == Literal("medium")
+    assert graph.value(node, DWC.samplingProtocol) == Literal("Ansitz", lang="de")
+    assert graph.value(node, LKG.observationDurationMinutes) == Literal(45, datatype=XSD.integer)
     assert graph.value(DATA[plain.uid], DWC.eventDate) == Literal("1919-04-12", datatype=XSD.date)
     assert graph.value(DATA[plain.uid], DWC.eventTime) is None
 
@@ -406,7 +427,7 @@ def test_hand_written_fixture_conforms() -> None:
 def test_ontology_axioms_and_vocabularies_parse() -> None:
     onto = Graph().parse(str(ONTOLOGY), format="turtle")
     onto_iri = URIRef("https://w3id.org/laubmann-kg/ontology")
-    assert onto.value(onto_iri, OWL.versionInfo) == Literal("0.4.3")
+    assert onto.value(onto_iri, OWL.versionInfo) == Literal("0.5.0")
     # grouping hierarchy
     RICO = URIRef("https://www.ica.org/standards/RiC/ontology#Record")
     assert (LKG.ArchivalUnit, RDFS.subClassOf, RICO) in onto
@@ -442,7 +463,9 @@ def test_ontology_axioms_and_vocabularies_parse() -> None:
                  "individualCountMin", "individualCountMax", "breedingEvidence", "movementKind",
                  "flightDirection", "evidenceKind", "hasVocalisation", "callType", "callTranscription",
                  "matchMethod", "matchConfidence", "gbifMatchType", "isBird", "placeKind",
-                 "recordType", "backend"):
+                 "recordType", "backend", "spatialContext", "microhabitat", "relativeElevation",
+                 "observationRadiusMeters", "spatialConfidence", "timeOfDay", "daylightPhase",
+                 "observationDurationMinutes", "altitudeM"):
         assert (LKG[prop], RDFS.label, None) in onto, prop
 
     from laubmann_kg.normalization import vocabularies as vocab
@@ -471,7 +494,7 @@ def test_shapes_encode_relaxed_constraints() -> None:
     # the load-bearing shape changes on the shapes graph itself.
     from rdflib.namespace import SH
     shapes = Graph().parse(str(SHAPES), format="turtle")
-    assert shapes.value(URIRef("https://w3id.org/laubmann-kg/shapes"), OWL.versionInfo) == Literal("0.4.3")
+    assert shapes.value(URIRef("https://w3id.org/laubmann-kg/shapes"), OWL.versionInfo) == Literal("0.5.0")
     call = next(shapes.subjects(SH.path, LKG.callTranscription))
     assert shapes.value(call, SH.minCount) is None                # optional transcription
     assert shapes.value(call, SH.maxCount).toPython() == 1
@@ -487,7 +510,10 @@ def test_shapes_encode_relaxed_constraints() -> None:
     assert {DWC.occurrenceStatus, DWC.sex, DWC.lifeStage, DWC.vitality, LKG.breedingEvidence,
             LKG.movementKind, LKG.hasLocality, LKG.individualCountMin, DWC.eventDate,
             DWC.eventTime, LKG.countQualifier, DWCIRI.habitat, DWCIRI.recordedBy,
-            LKG.hasVocalisation, DWC.behavior} <= obs_paths
+            LKG.hasVocalisation, DWC.behavior, LKG.spatialContext, LKG.microhabitat,
+            LKG.relativeElevation, LKG.timeOfDay, LKG.daylightPhase,
+            LKG.observationRadiusMeters, LKG.spatialConfidence,
+            LKG.observationDurationMinutes, LKG.altitudeM} <= obs_paths
     # weather: several reports per entry allowed (no maxCount on hasWeather)
     weather = next(shapes.subjects(SH.path, LKG.hasWeather))
     assert shapes.value(weather, SH.maxCount) is None

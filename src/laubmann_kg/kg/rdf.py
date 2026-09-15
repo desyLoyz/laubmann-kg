@@ -1,4 +1,4 @@
-"""Build and serialize the knowledge graph as RDF, conforming to laubmann.ttl 0.4.1.
+"""Build and serialize the knowledge graph as RDF, conforming to laubmann.ttl 0.5.0.
 
 Design notes
 - The data contract is ``kg/model.py``; this module only maps it onto triples.
@@ -381,6 +381,31 @@ def _add_observation(graph: Graph, obs: Observation, entry_node: URIRef,
         graph.add((node, DWC.eventDate, Literal(event_date, datatype=XSD.date)))
     if obs.event_time:
         graph.add((node, DWC.eventTime, Literal(obs.event_time)))
+    if obs.time_of_day:
+        graph.add((node, LKG.timeOfDay, Literal(obs.time_of_day)))
+    if obs.daylight_phase:
+        graph.add((node, LKG.daylightPhase, Literal(obs.daylight_phase)))
+
+    # --- Ziel 1: vantage, microhabitat, radius / uncertainty ---------------
+    if obs.spatial_context:
+        graph.add((node, LKG.spatialContext, Literal(obs.spatial_context, lang=DE)))
+    if obs.microhabitat:
+        graph.add((node, LKG.microhabitat, Literal(obs.microhabitat, lang=DE)))
+    if obs.relative_elevation:
+        graph.add((node, LKG.relativeElevation, Literal(obs.relative_elevation, lang=DE)))
+    if obs.altitude_m is not None:
+        graph.add((node, LKG.altitudeM, _decimal(obs.altitude_m)))
+    if obs.estimated_radius_m is not None:
+        radius = Literal(int(obs.estimated_radius_m), datatype=XSD.integer)
+        graph.add((node, LKG.observationRadiusMeters, radius))
+        graph.add((node, DWC.coordinateUncertaintyInMeters, radius))
+    if obs.spatial_confidence:
+        graph.add((node, LKG.spatialConfidence, Literal(obs.spatial_confidence)))
+    if obs.sampling_protocol:
+        graph.add((node, DWC.samplingProtocol, Literal(obs.sampling_protocol, lang=DE)))
+    if obs.observation_duration_minutes is not None:
+        graph.add((node, LKG.observationDurationMinutes,
+                   Literal(int(obs.observation_duration_minutes), datatype=XSD.integer)))
 
     # --- what: status, counts, demography ---------------------------------
     graph.add((node, DWC.occurrenceStatus, Literal(obs.occurrence_status)))

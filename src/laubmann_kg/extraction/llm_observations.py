@@ -119,6 +119,15 @@ def _sanitize_bool(value) -> Optional[bool]:
     return None
 
 
+def _sanitize_float(value) -> Optional[float]:
+    if isinstance(value, bool) or value is None:
+        return None
+    try:
+        return float(str(value).strip().replace(",", "."))
+    except (TypeError, ValueError):
+        return None
+
+
 def _sanitize_confidence(value) -> Optional[float]:
     if isinstance(value, bool) or value is None:
         return None
@@ -382,6 +391,18 @@ def map_items(entry: DiaryEntry, items: list, resolver: TaxonResolver,
             identification_qualifier=_text(item.get("identification_qualifier")),
             event_date=_iso_date(item.get("event_date")),
             event_time=_clock_time(item.get("event_time")),
+            spatial_context=_text(item.get("spatial_context")),
+            microhabitat=_text(item.get("microhabitat")),
+            relative_elevation=_text(item.get("relative_elevation")),
+            altitude_m=_sanitize_float(item.get("altitude_m")),
+            time_of_day=vocab.normalize_enum(item.get("time_of_day"), vocab.TIME_OF_DAY),
+            daylight_phase=vocab.normalize_enum(item.get("daylight_phase"), vocab.DAYLIGHT_PHASE),
+            sampling_protocol=_text(item.get("sampling_protocol")),
+            estimated_radius_m=_sanitize_int(item.get("estimated_radius_m"), minimum=1),
+            spatial_confidence=vocab.normalize_enum(
+                item.get("spatial_confidence"), vocab.SPATIAL_CONFIDENCE),
+            observation_duration_minutes=_sanitize_int(
+                item.get("observation_duration_minutes"), minimum=1),
             flags=tuple(flags),
         ))
     return observations

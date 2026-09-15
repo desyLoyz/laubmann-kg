@@ -3,6 +3,11 @@
 # Project Ontology  /  ontologies/laubmann.ttl
 # Namespace: https://w3id.org/laubmann-kg/ontology#   (w3id folder prepared in w3id/laubmann-kg/, PR pending)
 #
+# v0.5.0 (2026-09-15) — Ziel 1 (spatial & temporal qualification):
+#     lkg:spatialContext, lkg:microhabitat, lkg:relativeElevation, lkg:altitudeM,
+#     lkg:observationRadiusMeters, lkg:spatialConfidence, lkg:timeOfDay,
+#     lkg:daylightPhase, lkg:observationDurationMinutes; DwC hooks
+#     dwc:samplingProtocol and dwc:coordinateUncertaintyInMeters on Observation.
 # v0.4.3 (2026-08-19) — external linking of habitats and places: a habitat
 #     concept carries at most one skos:exactMatch/closeMatch/broadMatch to a
 #     EUNIS habitat class (Eionet vocabulary http://eunis.eea.europa.eu/eunishabitats/<code>,
@@ -68,11 +73,11 @@
     a owl:Ontology ;
     dcterms:title "Laubmann Knowledge Graph Ontology"@en , "Laubmann-Wissensgraph-Ontologie"@de ;
     rdfs:label "Laubmann Knowledge Graph Ontology"@en , "Laubmann-Wissensgraph-Ontologie"@de ;
-    dcterms:description "Project ontology for the HistOrniGraph knowledge graph built from the ornithological field diaries of Alfred Laubmann (Bavaria, 1917–1965, 34 volumes). Three grouping classes structure the model: archival units (volume, page, entry, layout region), entry records (what the extraction model reads out of one entry: observations as Darwin Core occurrences, travel events, weather reports) and record details (vocalisations, travel legs); the partonomy between them is explicit (dcterms:isPartOf / hasPart). Taxa, places and persons are shared referents; habitats are NOT a class of this ontology but shared skos:Concepts of lkg:habitatScheme (see the controlled vocabularies), reached from an Observation via dwciri:habitat and mapped to the EUNIS habitat classification (2012) with skos:exactMatch / closeMatch / broadMatch (ontology 0.4.3); places carry owl:sameAs to their GeoNames feature and Wikidata item. The ontology is Darwin-Core-first: wherever a dwc/dwciri, DCTERMS, PROV-O, SKOS, GeoSPARQL or schema.org term exists, the data graph uses that term alone; lkg: terms carry only project-specific meaning (record type, count qualifier, breeding evidence, movement, evidence kind, entry kind, weather, travel, mention roles). Controlled values are SKOS concept schemes in the same namespace; the data graph is validated with SHACL."@en ;
+    dcterms:description "Project ontology for the HistOrniGraph knowledge graph built from the ornithological field diaries of Alfred Laubmann (Bavaria, 1917–1965, 34 volumes). Three grouping classes structure the model: archival units (volume, page, entry, layout region), entry records (what the extraction model reads out of one entry: observations as Darwin Core occurrences, travel events, weather reports) and record details (vocalisations, travel legs); the partonomy between them is explicit (dcterms:isPartOf / hasPart). Taxa, places and persons are shared referents; habitats are NOT a class of this ontology but shared skos:Concepts of lkg:habitatScheme (see the controlled vocabularies), reached from an Observation via dwciri:habitat and mapped to the EUNIS habitat classification (2012) with skos:exactMatch / closeMatch / broadMatch (ontology 0.4.3); places carry owl:sameAs to their GeoNames feature and Wikidata item. Version 0.5.0 adds fine-grained spatial and temporal qualifications on Observation (Ziel 1: vantage-point context, microhabitat, relative elevation, qualitative time of day / daylight phase, estimated observation radius mirrored as dwc:coordinateUncertaintyInMeters, dwc:samplingProtocol) for GBIF-grade Darwin Core archives. The ontology is Darwin-Core-first: wherever a dwc/dwciri, DCTERMS, PROV-O, SKOS, GeoSPARQL or schema.org term exists, the data graph uses that term alone; lkg: terms carry only project-specific meaning (record type, count qualifier, breeding evidence, movement, evidence kind, entry kind, weather, travel, mention roles, spatial/temporal qualification). Controlled values are SKOS concept schemes in the same namespace; the data graph is validated with SHACL."@en ;
     rdfs:comment "Project ontology for the HistOrniGraph KG (diary entries, ornithological observations, travel, weather, persons, sources from Alfred Laubmann's field journals). Darwin-Core-first: standard terms are used wherever they exist; lkg: adds only project-specific terms. Grouping classes ArchivalUnit / EntryRecord / RecordDetail plus an explicit dcterms partonomy. Habitats are skos:Concepts in lkg:habitatScheme (dwciri:habitat), each mapped to a EUNIS habitat class (skos:exactMatch / closeMatch / broadMatch); places link to GeoNames and Wikidata (owl:sameAs)."@en ;
-    owl:versionInfo "0.4.3" ;
-    owl:versionIRI <https://w3id.org/laubmann-kg/ontology/0.4.3> ;
-    owl:priorVersion <https://w3id.org/laubmann-kg/ontology/0.4.2> ;
+    owl:versionInfo "0.5.0" ;
+    owl:versionIRI <https://w3id.org/laubmann-kg/ontology/0.5.0> ;
+    owl:priorVersion <https://w3id.org/laubmann-kg/ontology/0.4.3> ;
     vann:preferredNamespacePrefix "lkg" ;
     vann:preferredNamespaceUri "https://w3id.org/laubmann-kg/ontology#" ;
     dcterms:creator [ a foaf:Agent ; foaf:name "Laubmann KG Project" ; foaf:homepage <https://github.com/Maelkolb/laubmann-kg_TP> ] ;   # TODO: replace with the author's name/ORCID before publication
@@ -80,7 +85,7 @@
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:rights "Creative Commons Attribution 4.0 International (CC BY 4.0)"@en ;
     dcterms:issued "2026-07-22"^^xsd:date ;
-    dcterms:modified "2026-08-19"^^xsd:date ;
+    dcterms:modified "2026-09-15"^^xsd:date ;
     dcterms:source <https://github.com/Maelkolb/laubmann-kg_TP> ;
     rdfs:seeAlso <https://github.com/Maelkolb/laubmann-kg_TP> , <https://w3id.org/laubmann-kg/vocabularies> , <https://w3id.org/laubmann-kg/shapes> ;
     dcterms:subject "ornithology"@en , "field diaries"@en , "biodiversity data"@en , "Darwin Core"@en ;
@@ -398,6 +403,71 @@ lkg:flightDirection
     rdfs:comment "Flight direction as written by the diarist (\"NO→SW\"); free German text, not normalised."@en ;
     rdfs:domain lkg:Observation ;
     rdfs:range rdf:langString .
+
+# --- Ziel 1 (v0.5.0): spatial, temporal and methodological qualification ---
+
+lkg:spatialContext
+    a owl:DatatypeProperty ;
+    rdfs:label "spatial context description"@en , "räumlicher Beobachtungskontext"@de ;
+    rdfs:comment "Verbatim description of the observer's vantage point or immediate context (e.g. 'aus dem Fenster meiner Wohnung', 'am Wegrand')."@en ;
+    rdfs:domain lkg:Observation ;
+    rdfs:range rdf:langString .
+
+lkg:microhabitat
+    a owl:DatatypeProperty ;
+    rdfs:label "microhabitat"@en , "Mikrohabitat"@de ;
+    rdfs:comment "Specific fine-grained microhabitat structure (e.g. 'Baumkrone', 'Teichufer', 'Fenstersims'). Distinct from the habitat type on dwc:habitat / dwciri:habitat."@en ;
+    rdfs:domain lkg:Observation ;
+    rdfs:range rdf:langString .
+
+lkg:relativeElevation
+    a owl:DatatypeProperty ;
+    rdfs:label "relative elevation"@en , "relative Höhe / Flughöhe"@de ;
+    rdfs:comment "Verbatim or normalised relative height above ground (e.g. 'in mäßiger Höhe', 'hoch kreisend')."@en ;
+    rdfs:domain lkg:Observation ;
+    rdfs:range rdf:langString .
+
+lkg:altitudeM
+    a owl:DatatypeProperty ;
+    rdfs:label "altitude in meters"@en , "Höhe ü. NN (m)"@de ;
+    rdfs:comment "Absolute elevation in meters above sea level, when the diary states one."@en ;
+    rdfs:domain [ owl:unionOf ( lkg:Observation lkg:Place ) ] ;
+    rdfs:range xsd:decimal .
+
+lkg:observationRadiusMeters
+    a owl:DatatypeProperty ;
+    rdfs:label "observation radius in meters"@en , "Beobachtungsradius (m)"@de ;
+    rdfs:comment "Estimated maximum viewing distance/radius from the observation point (e.g. 100 for a window watch). Mirrored as dwc:coordinateUncertaintyInMeters on the Observation."@en ;
+    rdfs:domain lkg:Observation ;
+    rdfs:range xsd:integer .
+
+lkg:spatialConfidence
+    a owl:DatatypeProperty ;
+    rdfs:label "spatial confidence"@en , "Zuverlässigkeit der Georeferenzierung"@de ;
+    rdfs:comment "Confidence of the spatial localisation: high, medium, low, inferred."@en ;
+    rdfs:domain lkg:Observation ;
+    rdfs:range xsd:string .
+
+lkg:observationDurationMinutes
+    a owl:DatatypeProperty ;
+    rdfs:label "observation duration in minutes"@en , "Beobachtungsdauer (Min.)"@de ;
+    rdfs:comment "Stated or clearly implied duration of the watch, in minutes."@en ;
+    rdfs:domain lkg:Observation ;
+    rdfs:range xsd:integer .
+
+lkg:timeOfDay
+    a owl:DatatypeProperty ;
+    rdfs:label "time of day"@en , "Tageszeit"@de ;
+    rdfs:comment "Qualitative time of day: morning, forenoon, noon, afternoon, evening, night."@en ;
+    rdfs:domain [ owl:unionOf ( lkg:Observation lkg:DiaryEntry lkg:WeatherReport ) ] ;
+    rdfs:range xsd:string .
+
+lkg:daylightPhase
+    a owl:DatatypeProperty ;
+    rdfs:label "daylight phase"@en , "Lichtphase"@de ;
+    rdfs:comment "Daylight phase: dawn, day, dusk, night."@en ;
+    rdfs:domain lkg:Observation ;
+    rdfs:range xsd:string .
 
 lkg:verbatimNotes
     a owl:DatatypeProperty ;

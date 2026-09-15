@@ -1,8 +1,12 @@
 # =============================================================
 # HistOrniGraph / Laubmann Knowledge Graph
 # SHACL Validation Shapes  –  ontologies/shacl_shapes.ttl
-# Validates instance data against ontologies/laubmann.ttl (v0.4.3)
+# Validates instance data against ontologies/laubmann.ttl (v0.5.0)
 #
+# v0.5.0 (2026-09-15) — Ziel 1 (Zeit & Raum): timeOfDay, daylightPhase,
+#        spatialContext, microhabitat, relativeElevation, altitudeM,
+#        observationRadiusMeters, dwc:coordinateUncertaintyInMeters,
+#        spatialConfidence, dwc:samplingProtocol, observationDurationMinutes.
 # v0.4 – Ontologie 0.4.0: ObservationEvent -> lkg:Observation, BirdCall ->
 #        lkg:Vocalisation; ObservationEvidence-, BehaviourNote-, Habitat-,
 #        Route- und TimeEstimate-Shapes entfallen (Evidenz = lkg:evidenceKind-
@@ -51,10 +55,10 @@
 <https://w3id.org/laubmann-kg/shapes>
     a owl:Ontology , sh:ShapesGraph ;
     dcterms:title "Laubmann Knowledge Graph — SHACL shapes"@en ;
-    dcterms:description "Validation shapes for the Laubmann KG data graph (https://w3id.org/laubmann-kg/ontology 0.4.3). Run with inference=none: shapes target the concrete classes only (grouping superclasses are not materialised in the data). Every child node must carry dcterms:isPartOf (partonomy). Vocabulary/completeness checks are sh:Warning, datatype and cardinality checks sh:Violation."@en ;
+    dcterms:description "Validation shapes for the Laubmann KG data graph (https://w3id.org/laubmann-kg/ontology 0.5.0). Run with inference=none: shapes target the concrete classes only (grouping superclasses are not materialised in the data). Every child node must carry dcterms:isPartOf (partonomy). Vocabulary/completeness checks are sh:Warning, datatype and cardinality checks sh:Violation."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
-    dcterms:modified "2026-08-19"^^xsd:date ;
-    owl:versionInfo "0.4.3" ;
+    dcterms:modified "2026-09-15"^^xsd:date ;
+    owl:versionInfo "0.5.0" ;
     rdfs:seeAlso <https://w3id.org/laubmann-kg/ontology> .
 
 
@@ -534,6 +538,79 @@ lkg:ObservationShape
         sh:maxCount 1 ;
         sh:message "Höchstens ein dwc:associatedReferences (Literaturzitat) pro Observation." ;
         sh:severity sh:Warning ;
+    ] ;
+
+    # --- Ziel 1 (v0.5.0): Zeit-, Raum- und Methodik-Qualifikation ---
+    sh:property [
+        sh:path lkg:timeOfDay ;
+        sh:maxCount 1 ;
+        sh:in ( "morning" "forenoon" "noon" "afternoon" "evening" "night" ) ;
+        sh:message "lkg:timeOfDay muss morning, forenoon, noon, afternoon, evening oder night sein." ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path lkg:daylightPhase ;
+        sh:maxCount 1 ;
+        sh:in ( "dawn" "day" "dusk" "night" ) ;
+        sh:message "lkg:daylightPhase muss dawn, day, dusk oder night sein." ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path lkg:spatialContext ;
+        sh:maxCount 1 ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path lkg:microhabitat ;
+        sh:maxCount 1 ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path lkg:relativeElevation ;
+        sh:maxCount 1 ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path lkg:altitudeM ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:severity sh:Violation ;
+    ] ;
+    sh:property [
+        sh:path lkg:observationRadiusMeters ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:severity sh:Violation ;
+    ] ;
+    sh:property [
+        sh:path dwc:coordinateUncertaintyInMeters ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:severity sh:Violation ;
+    ] ;
+    sh:property [
+        sh:path lkg:spatialConfidence ;
+        sh:maxCount 1 ;
+        sh:in ( "high" "medium" "low" "inferred" ) ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path dwc:samplingProtocol ;
+        sh:maxCount 1 ;
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        sh:severity sh:Warning ;
+    ] ;
+    sh:property [
+        sh:path lkg:observationDurationMinutes ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:severity sh:Violation ;
     ] .
 
 # =============================================================

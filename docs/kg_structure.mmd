@@ -40,7 +40,10 @@ classDiagram
         movementKind · flightDirection
         dwc:behavior · dwc:habitat
         dwc:identificationQualifier
-        dwc:eventDate · dwc:eventTime
+        dwc:eventDate · dwc:eventTime · timeOfDay · daylightPhase
+        spatialContext · microhabitat · relativeElevation
+        observationRadiusMeters · dwc:coordinateUncertaintyInMeters
+        spatialConfidence · dwc:samplingProtocol
         dwc:basisOfRecord
     }
     class Vocalisation {

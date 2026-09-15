@@ -22,6 +22,9 @@ MOVEMENT_KINDS = ("migrating", "passing-over", "arriving", "departing", "resting
 TAXON_RANKS = ("species", "subspecies", "genus", "family", "group", "unknown")
 PLACE_KINDS = ("settlement", "locality", "region", "route", "unknown")
 ENTRY_KINDS = ("field-day", "species-digest", "retrospective", "correspondence", "other")
+TIME_OF_DAY = ("morning", "forenoon", "noon", "afternoon", "evening", "night")
+DAYLIGHT_PHASE = ("dawn", "day", "dusk", "night")
+SPATIAL_CONFIDENCE = ("high", "medium", "low", "inferred")
 
 
 def normalize_enum(raw: object, vocabulary: tuple[str, ...]) -> Optional[str]:

@@ -1,4 +1,4 @@
-# Diary Entry Extraction
+# Diary Entry Extraction (observation_extraction v2 / ontology 0.5.0)
 
 You are given one complete entry from the field diaries of the ornithologist
 Alfred Laubmann (Bavaria and his travels, 1917–1965), in German. You are the
@@ -114,11 +114,48 @@ else copied in), or `other`.
   displaying male seen once, a bird in suitable breeding habitat in season).
   Omit for old or empty nests, nest boxes, or when nothing suggests breeding.
 - `habitat`: the biotope TYPE only ("Schilf", "Auwald", "Moor", "Garten",
-  "Kiesbank"); never a proper place name — that belongs in `locality`.
-- `locality`: `{name, verbatim}` — the place of THIS record when the text names
-  one that differs from `entry_place` ("in Ismaning", "am Kleinhesseloher
-  See", "auf der Käseralpe"); `name` in modern standard spelling, `verbatim` as
-  written. Omit when the record simply happens at the entry place.
+  "Kiesbank"); never a proper place name — that belongs in `locality`. Never
+  put vantage-point phrasing here ("vom Fenster") — that is `spatial_context`.
+- `locality`: `{ "name": "...", "verbatim": "..." }` — the **place name** of
+  THIS record when the text names a site that differs from `entry_place`
+  ("Äußere Prinzregentenstraße 14", "Maximiliananlagen, Teich", "Käseralpe").
+  `name` in modern standard spelling, `verbatim` as written. Omit when the
+  record simply happens at the entry place. Do **not** put the observation
+  situation into `name` — split it:
+  1. `locality` = the named site only.
+  2. `spatial_context` = the vantage / situation as written ("vom Fenster
+     meiner Wohnung an der äußeren Prinzregentenstraße 14", "am Wegrand").
+  3. `microhabitat` = fine structure of the biotope ("Teichufer",
+     "Baumkrone", "Wohngebäude/Fenster", "Parkanlage") — not a place name.
+  4. `relative_elevation` = relative height as written ("in mäßiger Höhe",
+     "hoch fliegend") when stated; `altitude_m` only for metres above sea
+     level ("843 m ü. NN").
+- `spatial_context`: exact German wording of the observer's standpoint or
+  observation situation. Omit when the text only names a place, not a vantage.
+- `time_of_day`: qualitative slot — `morning` (früh/morgens), `forenoon`
+  (vormittags, including "½ 12" / "1/2 12 h"), `noon` (mittags), `afternoon`
+  (nachmittags), `evening` (abends), `night` (nachts). Omit if unstated.
+- `daylight_phase`: `dawn`, `day`, `dusk`, or `night` when the light phase is
+  stated or clearly implied by `time_of_day` (`night` → `night`; Vormittag →
+  `day`). Omit if you cannot tell.
+- `event_time`: 24h `"HH:MM"` when the record states a clock time; else omit.
+  German fractions of the hour: "1/2 12 h" / "½ 12 Uhr" → `"11:30"` and
+  `time_of_day: "forenoon"`; "8¼ Uhr" → `"08:15"`; "3/4 8" → `"07:45"`.
+- `sampling_protocol` and `estimated_radius_m`: when the text implies how /
+  from where the bird was recorded, give a short protocol and a plausible
+  **maximum viewing radius in metres** (integer ≥ 1). Typical anchors — use
+  them only when the standpoint is actually in the text, do not invent a
+  radius for a bare place-name:
+  - window / apartment / Ansitz in town → protocol
+    `"Ansitz/Fensterbeobachtung"`, radius `100`;
+  - lakeshore / Teichufer watch → `"Ansitz"`, radius `300`;
+  - walk / Geländebegehung / Exkursion → `"Geländebegehung"`, radius `500`;
+  - incidental mention with no method → `"Zufallsbeobachtung"`, omit radius.
+- `spatial_confidence`: `high` (street + house number or a precisely named
+  site), `medium` (named locality), `low` (vague), `inferred` (place or radius
+  taken from context rather than stated). Omit if you did not localise.
+- `observation_duration_minutes`: integer minutes only when the text states a
+  duration.
 - `sex`: `male`, `female`, or `mixed` (♂/♀, Männchen/Weibchen, "2 ♂♂ 1 ♀").
 - `life_stage`: `adult`, `juvenile`, `pullus` (Dunenjunge, Nestlinge),
   `immature`, `egg`, or `mixed` (ad., juv., pull., flügge Junge, Altvogel).
@@ -136,7 +173,6 @@ else copied in), or `other`.
 - `event_date`: `"YYYY-MM-DD"` only when THIS record carries its own date that
   differs from the entry date (digest lines like "Heckenbraunelle: 19. III. 49
   Feldmoos (Kiefer)"); else omit.
-- `event_time`: 24h `"HH:MM"` when the record states a clock time; else omit.
 - `record_type`: how this record reached the diary — `field-observation` (the
   diarist saw or heard the bird himself; the default when nothing suggests
   otherwise), `third-party-report` (someone else observed it and told or wrote

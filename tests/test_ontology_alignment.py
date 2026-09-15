@@ -1,4 +1,4 @@
-"""Ontology <-> emitter <-> SHACL <-> JSON-LD alignment guard (ontology 0.4.0).
+"""Ontology <-> emitter <-> SHACL <-> JSON-LD alignment guard (ontology 0.5.0).
 
 The ontology TTL is the single source of truth for the project vocabulary.
 This module enforces, in both directions, that
@@ -127,7 +127,7 @@ def test_versions_agree() -> None:
     onto = Graph().parse(str(ONTOLOGY), format="turtle")
     shapes = Graph().parse(str(SHAPES), format="turtle")
     version = str(onto.value(ONTO_IRI, OWL.versionInfo))
-    assert version == "0.4.3"
+    assert version == "0.5.0"
     assert str(shapes.value(SHAPES_IRI, OWL.versionInfo)) == version
     assert onto.value(ONTO_IRI, OWL.versionIRI) == URIRef(f"https://w3id.org/laubmann-kg/ontology/{version}")
     changelog = (REPO_ROOT / "CHANGELOG.md").read_text(encoding="utf-8")

@@ -1,4 +1,4 @@
-"""Knowledge graph domain model mirroring ontologies/laubmann.ttl (0.4.0).
+"""Knowledge graph domain model mirroring ontologies/laubmann.ttl (0.5.0).
 
 The dataclasses are the contract between extraction and emission. Not every
 dataclass is a node in the graph: ``Evidence``, ``Behaviour`` and ``Habitat``
@@ -11,10 +11,14 @@ from __future__ import annotations
 
 import hashlib
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Literal, Optional
 
 DATA_NS = "https://w3id.org/laubmann-kg/data/"
 ONTO_NS = "https://w3id.org/laubmann-kg/ontology#"
+
+TimeOfDay = Literal["morning", "forenoon", "noon", "afternoon", "evening", "night"]
+DaylightPhase = Literal["dawn", "day", "dusk", "night"]
+SpatialConfidence = Literal["high", "medium", "low", "inferred"]
 
 # GBIF backbone ranks carried on a linked Taxon (dwc:kingdom … dwc:genus), in
 # hierarchy order. Mirrors the field names of the GBIF species/match response.
@@ -231,6 +235,17 @@ class Observation:
     identification_qualifier: Optional[str] = None  # the diarist's own hedge as written ("?", "wohl", "cf.")
     event_date: Optional[str] = None          # ISO date of THIS record when it differs from the entry date
     event_time: Optional[str] = None          # "HH:MM" when the record states a clock time
+    # --- Ziel 1 (ontology 0.5.0): spatial / temporal / method qualification ---
+    spatial_context: Optional[str] = None     # observer vantage / situation as written
+    microhabitat: Optional[str] = None        # fine structure ("Teichufer", "Baumkrone")
+    relative_elevation: Optional[str] = None  # "in mäßiger Höhe", "hoch fliegend"
+    altitude_m: Optional[float] = None        # metres above sea level when stated
+    time_of_day: Optional[TimeOfDay] = None
+    daylight_phase: Optional[DaylightPhase] = None
+    sampling_protocol: Optional[str] = None   # dwc:samplingProtocol
+    estimated_radius_m: Optional[int] = None  # viewing radius; mirrored as dwc:coordinateUncertaintyInMeters
+    spatial_confidence: Optional[SpatialConfidence] = None
+    observation_duration_minutes: Optional[int] = None
     flags: tuple[str, ...] = ()               # mapper notes for QA (e.g. "record_type_conflict")
     taxon_verbatim: Optional[str] = None      # the taxon name as written, when resolution merged it
                                               # into a canonical taxon (-> dwc:verbatimIdentification)

@@ -52,6 +52,25 @@
     "event_time": {"type": ["string", "null"]},
     "record_type": {"type": ["string", "null"]},
     "observer": {"type": ["string", "object", "array", "null"]},
-    "literature_citation": {"type": ["string", "null"]}
+    "literature_citation": {"type": ["string", "null"]},
+    "spatial_context": {"type": ["string", "null"]},
+    "microhabitat": {"type": ["string", "null"]},
+    "relative_elevation": {"type": ["string", "null"]},
+    "altitude_m": {"type": ["number", "string", "null"]},
+    "time_of_day": {
+      "type": ["string", "null"],
+      "enum": ["morning", "forenoon", "noon", "afternoon", "evening", "night", null]
+    },
+    "daylight_phase": {
+      "type": ["string", "null"],
+      "enum": ["dawn", "day", "dusk", "night", null]
+    },
+    "sampling_protocol": {"type": ["string", "null"]},
+    "estimated_radius_m": {"type": ["integer", "string", "null"]},
+    "spatial_confidence": {
+      "type": ["string", "null"],
+      "enum": ["high", "medium", "low", "inferred", null]
+    },
+    "observation_duration_minutes": {"type": ["integer", "string", "null"]}
   }
 }

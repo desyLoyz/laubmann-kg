@@ -16,7 +16,8 @@ FIELDS = [
     "individualCount", "organismQuantity", "organismQuantityType",
     "occurrenceStatus", "sex", "lifeStage", "reproductiveCondition", "vitality",
     "behavior", "identificationQualifier", "identificationRemarks", "verbatimIdentification",
-    "locality", "locationID", "verbatimLocality", "eventDate", "eventTime", "habitat",
+    "locality", "locationID", "verbatimLocality", "coordinateUncertaintyInMeters",
+    "eventDate", "eventTime", "habitat", "samplingProtocol",
     "occurrenceRemarks", "recordedBy", "associatedMedia", "associatedReferences",
     "dynamicProperties",
 ]
@@ -80,7 +81,21 @@ def _dynamic_properties(obs) -> str:
         "countMax": obs.count_max,
         "breedingEvidence": obs.breeding_evidence,
         "recordType": obs.record_type,
+        "timeOfDay": obs.time_of_day,
+        "daylightPhase": obs.daylight_phase,
+        "spatialContext": obs.spatial_context,
+        "microhabitat": obs.microhabitat,
+        "relativeElevation": obs.relative_elevation,
+        "spatialConfidence": obs.spatial_confidence,
+        "observationRadiusMeters": obs.estimated_radius_m,
+        "observationDurationMinutes": obs.observation_duration_minutes,
     })
+
+
+def _coordinate_uncertainty(obs) -> str:
+    if obs.estimated_radius_m is not None:
+        return str(obs.estimated_radius_m)
+    return ""
 
 
 def _taxon_id(taxon) -> str:
@@ -129,11 +144,13 @@ def build_occurrences(result: "ExtractionResult", media_by_entry: dict | None = 
                 "locality": obs.place.name if obs.place is not None else "",
                 "locationID": f"https://sws.geonames.org/{obs.place.geonames_id}/" if obs.place is not None and getattr(obs.place, "geonames_id", None) else "",
                 "verbatimLocality": obs.locality.verbatim if obs.locality is not None else "",
+                "coordinateUncertaintyInMeters": _coordinate_uncertainty(obs),
                 # a record without its own date inherits the event's date (or
                 # multi-day interval)
                 "eventDate": obs.event_date or entry_date,
                 "eventTime": obs.event_time or "",
                 "habitat": obs.habitat.label if obs.habitat is not None else "",
+                "samplingProtocol": obs.sampling_protocol or "",
                 "occurrenceRemarks": obs.verbatim_notes,
                 "recordedBy": _recorded_by(obs),
                 "associatedMedia": media,
