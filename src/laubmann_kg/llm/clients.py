@@ -35,6 +35,30 @@ class TruncatedOutput(RuntimeError):
         self.text = text or ""
 
 
+class CacheMiss(RuntimeError):
+    """No on-disk cache entry. Cache-only clients refuse to call a provider."""
+
+
+class CacheOnlyClient:
+    """Serve completions exclusively from ``LLMCache``. A miss raises
+    ``CacheMiss`` instead of constructing a provider client or touching the
+    network — used to replay a frozen Gemini cache (old prompt) without
+    accidental live calls."""
+
+    def __init__(self, cache: LLMCache, model: str) -> None:
+        self.cache = cache
+        self.model = model
+
+    def complete(self, prompt: str) -> str:
+        key = cache_key(self.model, prompt)
+        hit = self.cache.get(key)
+        if hit is None:
+            raise CacheMiss(
+                f"llm cache miss {key} (cache-only; no provider call)")
+        logger.debug("llm cache hit %s", key)
+        return hit
+
+
 class OfflineClient:
     """Deterministic, network-free client. Returns a canned response per prompt
     (looked up by content hash); unknown prompts return an empty JSON array,
@@ -98,10 +122,15 @@ class CachedClient:
 def build_client(config: Optional[dict] = None, cache: Optional[LLMCache] = None) -> LLMClient:
     """Build a cached client from config. Defaults to offline/rule-based.
 
-    ``config`` keys: ``backend`` (offline|google|openai|anthropic), ``model``.
+    ``config`` keys: ``backend`` (offline|google|openai|anthropic), ``model``,
+    ``cache_only`` (serve from ``cache`` only; never construct a provider).
     Provider backends lazy-import their SDK and require credentials.
     """
     config = config or {}
+    if config.get("cache_only"):
+        if cache is None:
+            raise ValueError("cache_only requires an LLMCache (set extraction.cache_dir)")
+        return CacheOnlyClient(cache, model=config.get("model") or "gemini-3.5-flash")
     backend = (config.get("backend") or "offline").lower()
     if backend == "offline":
         return OfflineClient(model=config.get("model", "offline"))

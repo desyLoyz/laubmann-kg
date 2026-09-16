@@ -159,6 +159,7 @@ def _build_extractor(config: dict) -> tuple:
         "thinking_level": extraction.get("thinking_level"),
         "retry_attempts": extraction.get("retry_attempts", 3),
         "retry_backoff": extraction.get("retry_backoff", 2.0),
+        "cache_only": bool(extraction.get("cache_only")),
     })
     prompt_dir = Path(extraction.get("prompt_dir", "prompts"))
     prompts = PromptLibrary(prompt_dir)

@@ -9,6 +9,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ### Added
 
+- **Cache-only Replay der August-Extraktion.** `CacheOnlyClient` (`extraction.cache_only`) bedient Completions nur aus dem Disk-Cache und ruft keinen Provider auf; ein Miss überspringt den Eintrag. Config `configs/full_replay.yaml` plus eingefrorener Prompt `prompts/replay/observation_extraction.md` (Ontologie 0.4.x, byteidentisch zum Gemini-Cache) erzeugen `output/html/graph.json` ohne Live-Aufruf (`linking.offline: true`). **Achtung `data/cache/llm`:** dort liegt der eingefrorene August-Cache (Prompt 0.4.x). Ein Live-Lauf mit Ontologie 0.5.0 ohne eigenes `extraction.cache_dir` schreibt dorthin (`LLMCache`-Default); der 0.5.0-Prompt ist ein Cache-Miss und ruft Gemini, vermischt aber neue Records mit dem August-Stand. 0.5.0-Volläufe brauchen ein neues Cache-Verzeichnis (wie früher `llm_cache/` vs. `llm_cache_v2/`) und `configs/full_llm.yaml`, nicht `full_replay.yaml`. Sample-Läufe bleiben auf `data/cache/llm_sample`.
 - **Sample-Range für Ontologie-Reviews.** `entries.csv` liegt unter `data/corpus/` (nicht in `data/review/`, das bleibt den Link-/Merge-Tabellen). Config `sample.entry_id_from` / `entry_id_to` / `entry_ids` / `offset` wählen eine Teilmenge. Standard-Extraktor in `configs/sample_range.yaml` ist Gemini (`prompts/observation_extraction.md`, Cache `data/cache/llm_sample`); regelbasiert bleibt `configs/sample_range_offline.yaml`. Fehlende `entry_uid`s im Dump werden aus `entry_id` synthetisiert.
 - **Explorer für Laufvergleiche.** Export schreibt `html/graph.json` plus die Explorer-Schale. `tools/Laubmann-KG_Explorer.html` lädt zwei `graph.json`-Dateien (A/B) und zeigt eine Compare-Ansicht je Eintrag. Snapshot mit eingebettetem 34-Bände-Graph bleibt lokal als `tools/explorer/*.full.html`.
 - **`.env` wird geladen.** CLI und `run_pipeline` setzen `GOOGLE_API_KEY` / `GEMINI_API_KEY` aus einer `.env` im Arbeitsverzeichnis oder Projektroot (bestehende Umgebungsvariablen bleiben unangetastet). Zuvor las der Client nur den Prozess.
@@ -18,6 +19,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ### Changed
 
+- **`.gitignore`.** `output/` (JSON-LD, TTL, DwC-A, Explorer) und `*:Zone.Identifier` (Windows-ADS von Drive-Kopien) landen nicht auf Remote; `data/corpus/` und `data/cache/` waren bereits ignoriert.
 - **Explorer-Detailspalte.** Die rechte Leiste ist breiter (Standard 640px, per Ziehgriff an der Trennlinie verstellbar; Breite bleibt in `localStorage`). Statement-Literale umbrechen statt abgeschnitten zu werden.
 
 ### Added (2026-08-19 — Bandabdeckung/Datumskorrektur, Entity-Resolution, externe Verlinkung von Habitaten und Orten; Ontologie 0.4.1/0.4.2/0.4.3)

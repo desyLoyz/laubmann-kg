@@ -5,6 +5,8 @@ import pytest
 
 from laubmann_kg.llm.cache import LLMCache, cache_key
 from laubmann_kg.llm.clients import (
+    CacheMiss,
+    CacheOnlyClient,
     CachedClient,
     OfflineClient,
     TruncatedOutput,
@@ -47,6 +49,30 @@ def test_offline_client_is_default_and_network_free() -> None:
     client = build_client({"backend": "offline"})
     assert isinstance(client, OfflineClient)
     assert client.complete("anything") == "[]"
+
+
+def test_cache_only_client_serves_hits_and_raises_on_miss(tmp_path, monkeypatch) -> None:
+    cache = LLMCache(tmp_path)
+    key = cache_key("gemini-3.5-flash", "hello")
+    cache.set(key, {"prompt": "hello"}, '[{"vernacular_de": "Buchfink"}]')
+
+    def boom(*_a, **_k):
+        raise AssertionError("provider must not be constructed in cache-only mode")
+
+    monkeypatch.setattr("laubmann_kg.llm.clients.GeminiClient", boom)
+    client = build_client(
+        {"backend": "google", "model": "gemini-3.5-flash", "cache_only": True},
+        cache=cache,
+    )
+    assert isinstance(client, CacheOnlyClient)
+    assert client.complete("hello") == '[{"vernacular_de": "Buchfink"}]'
+    with pytest.raises(CacheMiss, match="cache-only"):
+        client.complete("uncached prompt")
+
+
+def test_cache_only_requires_a_cache() -> None:
+    with pytest.raises(ValueError, match="cache_dir"):
+        build_client({"cache_only": True, "model": "gemini-3.5-flash"})
 
 
 def test_retry_call_succeeds_after_failures() -> None:

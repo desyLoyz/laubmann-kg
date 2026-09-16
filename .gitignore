@@ -13,7 +13,9 @@ venv/
 # Jupyter
 .ipynb_checkpoints/
 
-# Data and cache (keep structure via .gitkeep)
+# Data and cache (keep structure via .gitkeep). Full-run dumps stay local:
+# data/corpus/ (entries.csv, dedup/), data/cache/ (llm, linking, geonames),
+# data/corpus_dedup/ (legacy path in configs/full_llm.yaml).
 data/raw/**/*
 !data/raw/**/.gitkeep
 data/processed/**/*
@@ -26,7 +28,14 @@ data/cache/**/*
 !data/cache/**/.gitkeep
 data/corpus/**/*
 !data/corpus/**/.gitkeep
+data/corpus_dedup/
 data/review/entries.csv
+
+# Pipeline dumps (JSON-LD, TTL, DwC-A, explorer html/graph.json) — never push
+output/
+
+# Windows NTFS ADS sidecars copied from Drive
+*:Zone.Identifier
 
 # Explorer publication snapshot (34-volume payload; the shell is tools/explorer/index.html)
 tools/explorer/*.full.html

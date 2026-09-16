@@ -1,0 +1,116 @@
+# Cache-only replay of the 34-volume run against the DEDUPLICATED corpus.
+# Uses the frozen 0.4.x extraction prompt (prompts/replay/) so keys hit
+# data/cache/llm from the August Gemini run. extraction.cache_only never
+# constructs a provider; linking.offline answers only from on-disk caches.
+# No GOOGLE_API_KEY required. CLI:
+#   laubmann-kg export-all --config configs/full_replay.yaml \
+#     --input-dir data/corpus/dedup --output-dir output
+corpus:
+  entries: data/corpus/dedup/entries.csv
+
+# null = all volumes. Set to a number to restrict to one volume.
+sample:
+  volume: null
+
+extraction:
+  backend: llm
+  provider: google
+  model: gemini-3.5-flash
+  cache_only: true
+  cache_dir: data/cache/llm
+  prompt_dir: prompts/replay          # pre-0.5.0 observation_extraction.md (byte-identical to the cache)
+  temperature: 0.0
+  max_output_tokens: 32768
+  timeout: 120
+  thinking_level: low
+  concurrency: 8
+  retry_backoff: 2.0
+
+taxa:
+  links_long_path: null
+
+qa:
+  enabled: true
+  exclude: true
+  coverage:
+    enabled: true
+    path: configs/volume_coverage.yaml
+    tolerance_months: 1
+    neighbours: 2
+    max_digit_changes: 2
+
+resolution:
+  enabled: true
+  taxa:     {enabled: true, merge_on_scientific_name: true, reviewed_csv: data/review/taxon_merges.csv}
+  persons:  {enabled: true, merge_bare_surname: true, reviewed_csv: data/review/person_merges.csv}
+  places:   {enabled: true, similarity: 0.9, reviewed_csv: data/review/place_merges.csv}
+  habitats: {enabled: true, similarity: 0.85, reviewed_csv: data/review/habitat_merges.csv}
+
+linking:
+  enabled: true
+  offline: true
+  cache_dir: data/cache/linking
+  review_dir: data/review
+  limit: 0
+  taxa:
+    enabled: true
+    reviewed_csv: null
+    sleep: 0.2
+    gbif:
+      min_confidence: 90
+      fuzzy_min_confidence: 95
+    llm:
+      enabled: true
+      provider: google
+      model: gemini-3.5-flash
+      cache_dir: data/cache/linking/llm
+      prompt_dir: prompts
+      min_confidence: 0.7
+      thinking_level: low
+      max_output_tokens: 1024
+  persons:
+    enabled: true
+    reviewed_csv: null
+    sleep: 0.5
+    language: de
+  places:
+    enabled: true
+    reviewed_csv: data/review/place_link_review.csv
+    min_uses: 1
+    max_km: 10
+    keep_gazetteer_coordinates: true
+    nominatim:
+      cache: data/cache/linking/nominatim_cache.json
+      live: false
+      email: ""
+    geonames:
+      dir: data/cache/linking/geonames
+      download: false
+  habitats:
+    enabled: true
+    reviewed_csv: data/review/habitat_link_review.csv
+    vocabulary: data/eunis_habitats.csv
+    min_confidence: 0.7
+    review_confidence: 0.4
+    batch_size: 40
+    llm:
+      enabled: true
+      provider: google
+      model: gemini-3.5-flash
+      cache_dir: data/cache/linking/llm_habitats
+      prompt_dir: prompts
+      thinking_level: low
+      max_output_tokens: 8192
+
+paths:
+  ontology: ontologies/laubmann.ttl
+  shapes: ontologies/shacl_shapes.ttl
+  jsonld_context: schemas/jsonld_context.json
+
+dwca:
+  publisher: Laubmann KG Project
+  license: CC-BY-4.0
+  title: "Laubmann ornithological field diaries 1917–1965 — observations"
+  package_id: laubmann-kg-full
+
+validate: true

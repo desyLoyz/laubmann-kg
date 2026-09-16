@@ -100,7 +100,12 @@ corpus: build → detect → decisions → apply → `export-jsonld` (SHACL: 0/0
 Remaining human step: adjudicate `review.html` for the full corpus and export
 `dedup_decisions.json` (see `notebooks/07_full_workflow_colab.ipynb`, stage B).
 
-## Current state (2026-08-19)
+## Current state (2026-09-16)
+
+- **Cache-only replay** (`configs/full_replay.yaml`, `extraction.cache_only`, frozen prompt `prompts/replay/observation_extraction.md`): local `export-all` against `data/corpus/dedup` + `data/cache/llm` with `linking.offline: true`, no Gemini. Writes `output/html/graph.json` (9,523 entries, 74,567 observations, 0 Ziel-1 / ontology-0.5.0 fields; SHACL 0 violations). Live 0.5.0 extraction is unchanged if you keep `--config configs/full_llm.yaml` (or `sample_range.yaml`).
+- **Caveat — do not mix `data/cache/llm`.** That directory is the frozen August 0.4.x Gemini cache (key = `sha256(model, rendered prompt)`). A live 0.5.0 run with unset `extraction.cache_dir` defaults to the same folder: the new prompt misses every key and Gemini is called, but new JSON is written next to the August files and the snapshot is no longer a clean 0.4.x replay source. Point a 0.5.0 full run at a **new** `cache_dir` (same split as `llm_cache/` vs `llm_cache_v2/`). Sample-range already isolates to `data/cache/llm_sample`.
+
+## Previous state (2026-08-19)
 
 - **Volume coverage + date repair** (`configs/volume_coverage.yaml` from the
   34 title pages, `normalization/coverage.py`, config `qa.coverage`): misfiled
