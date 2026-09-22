@@ -1,0 +1,80 @@
+# First 13 pages of the transcription-validation subcorpus
+# (HistOrniGraph_sample_subcorpus_validation_GUI_99.html, GUI order).
+# 17 corpus entries. Two GUI sides are the continuation of an entry stored on
+# the facing page (L01-e0152 on 0046_L, L02-e0031 on 0017_R). Band-15 copies
+# of the same scans are not included.
+# Gemini, cache data/cache/llm_sample (isolated from data/cache/llm).
+#
+#   laubmann-kg export-all \
+#     --config configs/sample_validation_pages.yaml \
+#     --input-dir data/corpus \
+#     --output-dir data/exports/sample_runs/llm-validation-pages-01-13
+
+corpus:
+  entries: data/corpus/entries.csv
+
+sample:
+  volume: null
+  entry_ids:
+    - L01-e0152
+    - L01-e0153
+    - L01-e0174
+    - L02-e0031
+    - L02-e0065
+    - L02-e0066
+    - L02-e0100
+    - L03-e0022
+    - L03-e0026
+    - L03-e0399
+    - L04-e0065
+    - L04-e0066
+    - L04-e0067
+    - L04-e0247
+    - L04-e0254
+    - L04-e0255
+    - L05-e0025
+
+extraction:
+  backend: llm
+  provider: google
+  model: gemini-3.5-flash
+  api_key_env: GOOGLE_API_KEY
+  temperature: 0.0
+  max_output_tokens: 16384
+  timeout: 120
+  cache_dir: data/cache/llm_sample
+  prompt_dir: prompts
+  concurrency: 4
+
+taxa:
+  links_long_path: null
+
+qa:
+  enabled: true
+  exclude: true
+  coverage:
+    enabled: true
+    path: configs/volume_coverage.yaml
+
+linking:
+  enabled: false
+  offline: false
+  cache_dir: data/cache/linking
+  review_dir: data/review
+  taxa:
+    enabled: true
+  persons:
+    enabled: true
+
+paths:
+  ontology: ontologies/laubmann.ttl
+  shapes: ontologies/shacl_shapes.ttl
+  jsonld_context: schemas/jsonld_context.json
+
+dwca:
+  publisher: Laubmann KG Project
+  license: CC-BY-4.0
+  title: "Laubmann KG — validation pages 1–13 (LLM)"
+  package_id: laubmann-kg-validation-pages-01-13
+
+validate: true

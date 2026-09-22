@@ -9,6 +9,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ### Added
 
+- **Sample der ersten 13 Validierungsseiten.** `configs/sample_validation_pages.yaml` extrahiert die 17 Korpus-Einträge der ersten 13 Seiten aus `HistOrniGraph_sample_subcorpus_validation_GUI_99.html` (Gemini, Cache `data/cache/llm_sample`). Der Standardbereich in `configs/sample_range.yaml` bleibt unverändert.
 - **Sample-Range für Ontologie-Reviews.** `entries.csv` liegt unter `data/corpus/` (nicht in `data/review/`, das bleibt den Link-/Merge-Tabellen). Config `sample.entry_id_from` / `entry_id_to` / `entry_ids` / `offset` wählen eine Teilmenge. Standard-Extraktor in `configs/sample_range.yaml` ist Gemini (`prompts/observation_extraction.md`, Cache `data/cache/llm_sample`); regelbasiert bleibt `configs/sample_range_offline.yaml`. Fehlende `entry_uid`s im Dump werden aus `entry_id` synthetisiert.
 - **Explorer für Laufvergleiche.** Export schreibt `html/graph.json` plus die Explorer-Schale. `tools/Laubmann-KG_Explorer.html` lädt zwei `graph.json`-Dateien (A/B) und zeigt eine Compare-Ansicht je Eintrag. Snapshot mit eingebettetem 34-Bände-Graph bleibt lokal als `tools/explorer/*.full.html`.
 - **`.env` wird geladen.** CLI und `run_pipeline` setzen `GOOGLE_API_KEY` / `GEMINI_API_KEY` aus einer `.env` im Arbeitsverzeichnis oder Projektroot (bestehende Umgebungsvariablen bleiben unangetastet). Zuvor las der Client nur den Prozess.
