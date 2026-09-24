@@ -23,6 +23,7 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ### Changed
 
+- **GBIF-Gold, Wortlaut der Bestimmung.** `verbatimIdentification` in `evaluation/gold/gbif_gold.csv` trägt den Namen, wie Laubmann ihn notiert (deutsch, und lateinisch, wenn beides im Satz steht). Beim Bläßhuhn (`obs_6a555d0527da`) steht `eventDate` als `Herbst 1909`, die Jahreszeit aus dem Text, kein ISO-Tag.
 - **Explorer-Detailspalte.** Die rechte Leiste ist breiter (Standard 640px, per Ziehgriff an der Trennlinie verstellbar; Breite bleibt in `localStorage`). Statement-Literale umbrechen statt abgeschnitten zu werden.
 
 ### Added (2026-08-19 — Bandabdeckung/Datumskorrektur, Entity-Resolution, externe Verlinkung von Habitaten und Orten; Ontologie 0.4.1/0.4.2/0.4.3)
