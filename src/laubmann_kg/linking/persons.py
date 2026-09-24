@@ -21,8 +21,16 @@ logger = logging.getLogger(__name__)
 
 WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
 WIKIDATA_ENTITY_NS = "http://www.wikidata.org/entity/"   # http, not https
+GND_NS = "https://d-nb.info/gnd/"
 PERSON_REVIEW_FIELDS = ["person_name", "person_uid", "n_entries", "qid",
-    "wd_label", "wd_description", "rule", "decision"]
+    "wd_label", "wd_description", "rule", "gnd", "decision"]
+_GND_RE = re.compile(r"(?:d-nb\.info/gnd/)?([0-9]+-[0-9X]|[0-9]{1,10}[0-9X])\b")
+
+
+def gnd_id(value: str) -> Optional[str]:
+    """GND identifier from an id or a d-nb.info URI ("118540238", "https://d-nb.info/gnd/1012345-6")."""
+    m = _GND_RE.search((value or "").strip())
+    return m.group(1) if m else None
 _TITLE_RE = re.compile(
     r"^(dr|prof|frl|frau|herr|forstmeister|oberförster|förster|oberlehrer|"
     r"lehrer|pfarrer|freiherr|graf)\.?\s+", re.IGNORECASE)
@@ -147,13 +155,18 @@ def link_persons(result, cfg: dict, cache: JsonCache, offline: bool) -> tuple[in
                             sleep_s=float(cfg.get("sleep", 0.5)),
                             language=cfg.get("language", "de"))
 
+    # accepted review rows: a Wikidata item and/or a GND identifier researched by the reviewer
     reviewed: dict[str, str] = {}
+    gnd: dict[str, str] = {}
     if cfg.get("reviewed_csv"):
         for row in review.load_reviewed(cfg["reviewed_csv"]):
             name = (row.get("person_name") or "").strip()
             qid = (row.get("qid") or "").strip()
+            g = gnd_id(row.get("gnd") or "")
             if name and qid:
                 reviewed[name.lower()] = qid
+            if name and g:
+                gnd[name.lower()] = GND_NS + g
 
     rows: list[dict] = []
     # name.lower() -> wikidata IRI: same identity as Person.uid (casefold
@@ -164,11 +177,16 @@ def link_persons(result, cfg: dict, cache: JsonCache, offline: bool) -> tuple[in
         try:
             base = {"person_name": item["name"], "person_uid": item["uid"],
                     "n_entries": item["n_entries"], "qid": "", "wd_label": "",
-                    "wd_description": "", "rule": "", "decision": ""}
+                    "wd_description": "", "rule": "", "gnd": "", "decision": ""}
             low = item["name"].lower()
+            if low in gnd:
+                base["gnd"] = gnd[low][len(GND_NS):]
             if low in reviewed:
                 links[low] = WIKIDATA_ENTITY_NS + reviewed[low]
                 rows.append({**base, "qid": reviewed[low], "rule": "reviewed"})
+                continue
+            if low in gnd:
+                rows.append({**base, "rule": "reviewed"})
                 continue
             query = strip_titles(item["name"])
             if len(query.split()) < 2:
@@ -226,12 +244,14 @@ def link_persons(result, cfg: dict, cache: JsonCache, offline: bool) -> tuple[in
     # a partial replacement would diverge at the idempotency-guarded emitter.
     for entry in result.entries:
         entry.persons = [
-            replace(p, wikidata_iri=links.get(p.name.lower(), p.wikidata_iri))
+            replace(p, wikidata_iri=links.get(p.name.lower(), p.wikidata_iri),
+                    gnd_iri=gnd.get(p.name.lower(), p.gnd_iri))
             for p in entry.persons]
         for obs in entry.observations:
             if obs.observer is not None:
                 obs.observer = replace(
                     obs.observer,
                     wikidata_iri=links.get(obs.observer.name.lower(),
-                                           obs.observer.wikidata_iri))
+                                           obs.observer.wikidata_iri),
+                    gnd_iri=gnd.get(obs.observer.name.lower(), obs.observer.gnd_iri))
     return len(links), rows

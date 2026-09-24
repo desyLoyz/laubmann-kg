@@ -17,7 +17,9 @@ from laubmann_kg.linking import run_linking
 from laubmann_kg.linking.cache import JsonCache
 from laubmann_kg.linking.persons import (
     PERSON_REVIEW_FIELDS,
+    GND_NS,
     WIKIDATA_ENTITY_NS,
+    gnd_id,
     link_persons,
     strip_titles,
 )
@@ -566,6 +568,28 @@ def _person_result(*names: str) -> ExtractionResult:
     entry = _entry()
     entry.persons = [Person(name=name, role="source") for name in names]
     return ExtractionResult(entries=[entry])
+
+
+def test_reviewed_gnd_and_wikidata_are_applied(tmp_path, monkeypatch) -> None:
+    _patch_wikidata(monkeypatch, {}, {})
+    reviewed = tmp_path / "person_link_review.csv"
+    with reviewed.open("w", newline="", encoding="utf-8") as h:
+        w = csv.DictWriter(h, fieldnames=PERSON_REVIEW_FIELDS); w.writeheader()
+        w.writerow({"person_name": "Walter Wüst", "qid": "Q2546836", "gnd": "https://d-nb.info/gnd/117351938", "decision": "y"})
+        w.writerow({"person_name": "Anton Fischer", "qid": "", "gnd": "1012345-6", "decision": "y"})
+        w.writerow({"person_name": "Hans Bauer", "qid": "", "gnd": "118540238", "decision": ""})   # not accepted
+    result = _person_result("Walter Wüst", "Anton Fischer", "Hans Bauer")
+    linked, rows = link_persons(result, {"sleep": 0, "reviewed_csv": str(reviewed)},
+                                JsonCache(tmp_path / "wd.json"), offline=True)
+    by = {p.name: p for p in result.entries[0].persons}
+    assert by["Walter Wüst"].wikidata_iri == WIKIDATA_ENTITY_NS + "Q2546836"
+    assert by["Walter Wüst"].gnd_iri == GND_NS + "117351938"
+    assert by["Anton Fischer"].gnd_iri == GND_NS + "1012345-6" and by["Anton Fischer"].wikidata_iri is None
+    assert by["Hans Bauer"].gnd_iri is None
+    assert {r["person_name"]: r["gnd"] for r in rows if r["rule"] == "reviewed"} == {"Walter Wüst": "117351938", "Anton Fischer": "1012345-6"}
+    g = build_graph(result)
+    assert (None, OWL.sameAs, URIRef(GND_NS + "117351938")) in g
+    assert gnd_id("GND 11854023X") == "11854023X" and gnd_id("n/a") is None
 
 
 def test_wikidata_error_body_is_failure_not_cached(tmp_path, monkeypatch) -> None:

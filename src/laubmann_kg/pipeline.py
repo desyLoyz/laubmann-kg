@@ -237,6 +237,14 @@ def run_pipeline(config: dict, input_dir: Optional[Path] = None) -> ExtractionRe
             logger.info("[%d/%d] %s -> %d observations", i, total, entry.entry_id,
                         len(entry.observations))
 
+    # Reviewer corrections of misread species/place names (review/value_corrections.csv):
+    # applied before coverage and QA so a corrected "non-bird" or place-less entry is judged anew.
+    correction_flags: list = []
+    corr_cfg = config.get("corrections") or {}
+    if corr_cfg.get("enabled", True) and corr_cfg.get("csv"):
+        from laubmann_kg.normalization.corrections import apply_corrections, load_corrections
+        _, correction_flags = apply_corrections(result.entries, load_corrections(corr_cfg["csv"]))
+
     qa_cfg = dict(config.get("qa", {}) or {})
     # Volume coverage: misfiled scans -> home volume, OCR years repaired against
     # the sequence neighbours, off-span entries flagged/excluded (needs the
@@ -262,11 +270,11 @@ def run_pipeline(config: dict, input_dir: Optional[Path] = None) -> ExtractionRe
         before = len(result.entries)
         kept, qa_flags = run_qa(result.entries, qa_cfg)
         result.entries = kept
-        result.qa_flags = coverage_flags + qa_flags
+        result.qa_flags = correction_flags + coverage_flags + qa_flags
         logger.info("QA: %d flags, %d/%d entries excluded", len(qa_flags),
                     before - len(kept), before)
     else:
-        result.qa_flags = coverage_flags
+        result.qa_flags = correction_flags + coverage_flags
 
     # Places actually referenced by the surviving entries (entry places and
     # per-record localities); travel places are added by the RDF emitter.

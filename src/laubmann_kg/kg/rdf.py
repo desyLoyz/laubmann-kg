@@ -213,6 +213,8 @@ def _add_person(graph: Graph, person: Person) -> URIRef:
     # a property of the shared person node — it sits on the mention edge.
     if person.wikidata_iri:
         graph.add((node, OWL.sameAs, URIRef(person.wikidata_iri)))
+    if person.gnd_iri:
+        graph.add((node, OWL.sameAs, URIRef(person.gnd_iri)))
     return node
 
 

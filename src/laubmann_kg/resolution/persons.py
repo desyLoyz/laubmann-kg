@@ -94,16 +94,21 @@ def merge_persons(result, cfg: dict, decisions: Decisions) -> tuple[int, list[Me
     # collect names with usage counts (mentions + observer attributions)
     usage: Counter = Counter()
     wikidata: dict[str, str] = {}
+    gnd: dict[str, str] = {}
     for entry in result.entries:
         for p in entry.persons:
             usage[p.name] += 1
             if p.wikidata_iri:
                 wikidata[p.name] = p.wikidata_iri
+            if p.gnd_iri:
+                gnd[p.name] = p.gnd_iri
         for obs in entry.observations:
             if obs.observer is not None:
                 usage[obs.observer.name] += 1
                 if obs.observer.wikidata_iri:
                     wikidata[obs.observer.name] = obs.observer.wikidata_iri
+                if obs.observer.gnd_iri:
+                    gnd[obs.observer.name] = obs.observer.gnd_iri
     names = sorted(usage)                # the diarist stays in the pool as a forced canonical
     if not names:
         return 0, []
@@ -265,7 +270,8 @@ def merge_persons(result, cfg: dict, decisions: Decisions) -> tuple[int, list[Me
             qid = wikidata.get(c) or next((wikidata[v] for v in alts.get(c, []) if v in wikidata), None)
             if c == DIARIST.name:
                 qid = qid or DIARIST.wikidata_iri
-            canon_person[c] = Person(name=c, role=None, wikidata_iri=qid, alt_names=tuple(sorted(set(alts.get(c, [])))))
+            g = gnd.get(c) or next((gnd[v] for v in alts.get(c, []) if v in gnd), None)
+            canon_person[c] = Person(name=c, role=None, wikidata_iri=qid, alt_names=tuple(sorted(set(alts.get(c, [])))), gnd_iri=g)
         base = canon_person[c]
         return replace(base, role=template.role) if template.role else base
 

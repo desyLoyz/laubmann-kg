@@ -30,6 +30,9 @@ extraction:
 taxa:
   links_long_path: null       # set to the index linker's long table when available
 
+corrections:                  # reviewer fixes of misread species/place names (validation UI export), applied before QA
+  csv: data/review/value_corrections.csv   # absent file = no corrections
+
 qa:
   enabled: true
   exclude: true               # drop misdated entries + garbage taxa; recorded to review/qa_flags.csv

@@ -139,6 +139,7 @@ class Person:
     role: Optional[str] = None  # companion | source | collector | cited-author | other
     wikidata_iri: Optional[str] = None  # http://www.wikidata.org/entity/Q... (verified)
     alt_names: tuple[str, ...] = ()     # merged name variants (entity resolution) -> skos:altLabel
+    gnd_iri: Optional[str] = None       # https://d-nb.info/gnd/<id> (reviewer-added, person_link_review.csv gnd)
 
     @property
     def uid(self) -> str:
