@@ -7,6 +7,22 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Added (2026-10-20 — Vorbereitung der Einreichung bei BiodivPortal)
+
+- **`LICENSE`**: Volltext der Creative Commons Attribution 4.0 International (CC-BY-4.0), passend zu `dcterms:license` der Ontologie und zum Darwin Core Archive.
+- **ORCID-iDs** der Autoren in `ontologies/laubmann.ttl` (`schema:identifier`, `schema:sameAs`): Tobias Perschl 0009-0008-7070-8705, Alois Wieshuber 0009-0001-7010-7968.
+- **`tools/run_competency_questions.py`**: führt die Kompetenzfragen CQ1–CQ11 auf einem Export aus (Zeilenzahl, erste Zeilen, Laufzeit) und prüft mit `--check-terms`, ob alle in den Abfragen genutzten `lkg:`-Terme in der Ontologie deklariert sind. Anleitung in `docs/competency_questions.md` („Testing the questions“).
+- **Tests** (`tests/test_ontology_alignment.py`): Abfragen der Kompetenzfragen nutzen nur deklarierte Terme; Autoren mit ORCID, Kontakte, Förderer und Lizenz der Ontologie.
+- **`pyproject.toml`**: Extra `docs` (`pylode>=3.6`, `kurra>=3.0,<3.1`; kurra 3.1 ist mit pyLODE 3.6 inkompatibel) für `tools/build_ontology_docs.py`.
+- **`docs/biodivportal/submission_metadata.md`**: Zusammenstellung der Einreichung der Projektontologie bei BiodivPortal (NFDI4Biodiversity, OntoPortal): einzureichende Dateien, Metadatenfelder mit Werten (Version 0.7.1, CC-BY-4.0, Kontakte, Förderung), Kompetenzfragen CQ1–CQ11 aus `docs/competency_questions.md` und offene Punkte. Noch nicht eingereicht; Platzhalter (ORCID, Dokumentations-URL, Publikation, Rechteinhaber) stehen bewusst.
+- **Ontologie-Metadaten** (`ontologies/laubmann.ttl`, Version bleibt 0.7.1): Autoren und Kontakte Tobias Perschl (Universität Passau, Lehrstuhl für Computational Humanities) und Alois Wieshuber (Generaldirektion der Staatlichen Archive Bayerns) als `dcterms:creator` und `dcat:contactPoint`; Förderung durch NFDI4Biodiversity (`foaf:fundedBy`, Hinweis in der Beschreibung).
+
+### Changed (2026-10-20 — Ontologie-Metadaten)
+
+- **Dokumentation neu erzeugt** (`docs/ontology/index.html`, `vocabularies.html`, `shapes.html`, `data.html`, pyLODE 3.6): neue Autoren-, Kontakt- und Förder-Metadaten, Version 0.7.1 (die Seiten zeigten noch 0.7.0 und kannten `lkg:regionCompleteness` nicht); Beschreibung in `ontologies/shacl_shapes.ttl` nennt 0.7.1.
+- **Kompetenzfragen** (`docs/competency_questions.md`, `kg/sparql.py`): gegen den vollständigen Export der Ontologie 0.7.1 (1.990.526 Tripel) geprüft, alle elf Abfragen liefern Ergebnisse; Dokumentation vom Stand 0.4.0 auf 0.7.1 aktualisiert. CQ11 (`CQ11_persons_by_role`) ohne ungebundenes Prädikat umgeschrieben: gleiches Ergebnis (4.359 Zeilen), Laufzeit statt rund 9 Minuten unter einer Sekunde.
+- **`ontologies/laubmann.ttl`**: Beschreibung und Kommentar nennen den Ornithologen **Alfred Louis Laubmann** mit GND-Link (<https://d-nb.info/gnd/1012394506>), `dcterms:subject` verweist auf die GND; der Platzhalter-Autor „Laubmann KG Project“ entfällt; `dcterms:modified` auf 2026-10-06 (Stand von 0.7.1).
+
 ### Changed (2026-10-06 — Graph-Explorer als englische Lesefassung für Außenstehende)
 
 - **Graph-Explorer** (`--mode explorer`; `gc_outreach.js`, `gc_outreach.css`, Anpassungen in `gc_explorer.js`, `gc_views.js`, `gc_cards.js`, `gc_i18n.js` u. a.): nur Englisch, ohne Sprachschalter. Übersicht für Außenstehende (Quelle, der Graph in Zahlen, Datensätze je Jahr, die vier Stufen der Verlässlichkeit mit erwartetem Fehleranteil, Inhaltsverzeichnis der 34 Bände) statt der Prüfstatistik; alle Einträge in Tagebuchfolge statt der Warteschlangen; der Reiter „Text“ ist Standard und Mittelpunkt: der Eintragstext wie eine Edition, Änderungen der Maschine getönt bzw. punktiert unterstrichen (Tooltip: Transkription → Bildlesung → Scanprüfung), Vogelnamen in der Farbe der Verlässlichkeit ihres Datensatzes (Tooltip: wissenschaftlicher Name, Anzahl, Ort, Datum, Beobachter, Datensatztyp, Fehlerrisiko, Feldmarken), darunter die Datensätze mit Fehlerrisiko und die Bilder und Einlagen; Schalter „corrected / original“. Die Befunde der Prüfungen nur im kleinen Reiter „Notes“, im Graphen erst auf Wunsch. Der Scan steht über dem Graphen neben dem Text; der Graph passt sich lesbar ein und zeigt bei großen Einträgen den Eintrag in der Mitte. Kein „·“ in der Oberfläche; Kontrast der Knoten im dunklen Modus ≥ 4,5 : 1. Die Graph-Prüfung bleibt deutsch und unverändert. Tests: `tests/smoke.py` (574), `interaction_export.py` (161), `reload.py` (23).

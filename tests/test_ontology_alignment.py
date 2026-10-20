@@ -21,7 +21,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from rdflib import Graph, URIRef
+from rdflib import Graph, Namespace, URIRef
 from rdflib.namespace import OWL, RDF, SH
 
 from laubmann_kg.kg.rdf import LKG, build_graph
@@ -145,3 +145,35 @@ def test_versions_agree() -> None:
     assert onto.value(ONTO_IRI, OWL.versionIRI) == URIRef(f"https://w3id.org/laubmann-kg/ontology/{version}")
     changelog = (REPO_ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
     assert version in changelog
+
+
+def test_competency_queries_use_declared_terms() -> None:
+    """Every lkg: term in the competency-question queries is declared (queries not stale)."""
+    import re
+
+    from laubmann_kg.kg.sparql import QUERIES
+
+    declared = {str(s) for g in (Graph().parse(str(ONTOLOGY), format="turtle"),
+                                 Graph().parse(str(VOCABS), format="turtle"))
+                for s in g.subjects() if str(s).startswith(LKG_NS)}
+    for key, query in QUERIES.items():
+        used = {LKG_NS + m for m in re.findall(r"lkg:([A-Za-z0-9_]+)", query)}
+        assert used <= declared, f"{key}: undeclared {sorted(used - declared)}"
+
+
+def test_ontology_authors_contact_funding_licence() -> None:
+    """Submission metadata (BiodivPortal): authors with ORCID, contacts, funder, licence."""
+    from rdflib.namespace import DCTERMS, FOAF
+
+    SCHEMA = Namespace("https://schema.org/")
+    DCAT = Namespace("http://www.w3.org/ns/dcat#")
+    onto = Graph().parse(str(ONTOLOGY), format="turtle")
+    creators = {str(onto.value(c, FOAF.name)): str(onto.value(c, SCHEMA.identifier))
+                for c in onto.objects(ONTO_IRI, DCTERMS.creator)}
+    assert creators == {"Tobias Perschl": "https://orcid.org/0009-0008-7070-8705",
+                        "Alois Wieshuber": "https://orcid.org/0009-0001-7010-7968"}
+    assert len(list(onto.objects(ONTO_IRI, DCAT.contactPoint))) == 2
+    assert [str(onto.value(f, FOAF.name)) for f in onto.objects(ONTO_IRI, FOAF.fundedBy)] == ["NFDI4Biodiversity"]
+    assert onto.value(ONTO_IRI, DCTERMS.license) == URIRef("https://creativecommons.org/licenses/by/4.0/")
+    text = " ".join(str(o) for o in onto.objects(ONTO_IRI, DCTERMS.description))
+    assert "Alfred Louis Laubmann" in text and "Adolf" not in text

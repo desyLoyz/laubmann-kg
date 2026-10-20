@@ -1,4 +1,4 @@
-"""Competency-question SPARQL queries over the graph (ontology 0.4.0).
+"""Competency-question SPARQL queries over the graph (checked against ontology 0.7.1).
 
 The queries use the Darwin-Core-first vocabulary of the emitted graph:
 ``dwc:vernacularName`` / ``dwc:scientificName`` on taxa, ``dwc:eventDate`` on
@@ -119,10 +119,12 @@ QUERIES: dict[str, str] = {
     # Persons by role on the mention edge (companion, source, collector, ...).
     "CQ11_persons_by_role": PREFIXES + """
         SELECT ?person ?role (COUNT(DISTINCT ?entry) AS ?entries) WHERE {
-            ?entry a lkg:DiaryEntry ; ?role ?p .
+            { ?entry lkg:mentionsCompanion ?p . BIND(lkg:mentionsCompanion AS ?role) }
+            UNION { ?entry lkg:mentionsSource ?p . BIND(lkg:mentionsSource AS ?role) }
+            UNION { ?entry lkg:mentionsCollector ?p . BIND(lkg:mentionsCollector AS ?role) }
+            UNION { ?entry lkg:mentionsCitedAuthor ?p . BIND(lkg:mentionsCitedAuthor AS ?role) }
+            UNION { ?entry lkg:mentionsOther ?p . BIND(lkg:mentionsOther AS ?role) }
             ?p a lkg:Person ; rdfs:label ?person .
-            FILTER(?role IN (lkg:mentionsCompanion, lkg:mentionsSource, lkg:mentionsCollector,
-                             lkg:mentionsCitedAuthor, lkg:mentionsOther))
         } GROUP BY ?person ?role ORDER BY DESC(?entries)
     """,
 }

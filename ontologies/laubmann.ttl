@@ -137,6 +137,8 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix vann:    <http://purl.org/vocab/vann/> .
 @prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix dcat:    <http://www.w3.org/ns/dcat#> .
+@prefix vcard:   <http://www.w3.org/2006/vcard/ns#> .
 
 # -------------------------------------------------------------
 # Ontology Declaration
@@ -145,23 +147,50 @@
     a owl:Ontology ;
     dcterms:title "Laubmann Knowledge Graph Ontology"@en , "Laubmann-Wissensgraph-Ontologie"@de ;
     rdfs:label "Laubmann Knowledge Graph Ontology"@en , "Laubmann-Wissensgraph-Ontologie"@de ;
-    dcterms:description "Project ontology for the HistOrniGraph knowledge graph built from the ornithological field diaries of Alfred Laubmann (Bavaria, 1917–1965, 34 volumes). Two grouping classes structure the model: archival units (volume, page, entry, layout region — body-text regions and multimodal regions such as drawings, photographs, mounted objects and inserted texts) and entry records (what the extraction model reads out of one entry: observations as Darwin Core occurrences, travel events and their legs, weather reports); the partonomy between them is explicit (dcterms:isPartOf / hasPart). Taxa, places and persons are shared referents; habitats are NOT a class of this ontology but shared skos:Concepts of lkg:habitatScheme (see the controlled vocabularies), reached from an Observation via dwciri:habitat. Every link to an external authority — GBIF (taxa), EUNIS (habitats), GeoNames and Wikidata (places), Wikidata and GND (persons) — uses the same pattern (ontology 0.6.0): skos:exactMatch / skos:closeMatch / skos:broadMatch to the authority's IRI, which is described as a skos:Concept with skos:inScheme lkg:authority_<name>, skos:notation and skos:prefLabel. Observations carry the spatial and temporal detail the text states (vantage point, microhabitat, flight height, own elevation, qualitative time of day, clock time, own date or date range). The ontology is Darwin-Core-first: wherever a dwc/dwciri, DCTERMS, PROV-O, SKOS, GeoSPARQL or schema.org term exists, the data graph uses that term alone; lkg: terms carry only project-specific meaning (record type, count qualifier, breeding evidence, movement, evidence kind, call type, entry kind, weather, travel, mention roles, spatial/temporal qualification, region kind). Controlled values are literals: each is the skos:notation of a concept in a SKOS concept scheme of the same namespace (the property's rdfs:seeAlso); the data graph is validated with SHACL."@en ;
-    rdfs:comment "Project ontology for the HistOrniGraph KG (diary entries, ornithological observations, travel, weather, persons, sources from Alfred Laubmann's field journals). Darwin-Core-first: standard terms are used wherever they exist; lkg: adds only project-specific terms. Grouping classes ArchivalUnit / EntryRecord plus an explicit dcterms partonomy. Habitats are skos:Concepts in lkg:habitatScheme (dwciri:habitat). External links (GBIF, EUNIS, GeoNames, Wikidata, GND) all use skos:exactMatch / closeMatch / broadMatch to an authority record in one of the lkg:authority_* schemes."@en ;
+    dcterms:description "Project ontology for the HistOrniGraph knowledge graph built from the ornithological field diaries of the ornithologist Alfred Louis Laubmann (1886–1965; GND https://d-nb.info/gnd/1012394506; Bavaria, 1917–1965, 34 volumes). The HistOrniGraph project was funded by NFDI4Biodiversity. Two grouping classes structure the model: archival units (volume, page, entry, layout region — body-text regions and multimodal regions such as drawings, photographs, mounted objects and inserted texts) and entry records (what the extraction model reads out of one entry: observations as Darwin Core occurrences, travel events and their legs, weather reports); the partonomy between them is explicit (dcterms:isPartOf / hasPart). Taxa, places and persons are shared referents; habitats are NOT a class of this ontology but shared skos:Concepts of lkg:habitatScheme (see the controlled vocabularies), reached from an Observation via dwciri:habitat. Every link to an external authority — GBIF (taxa), EUNIS (habitats), GeoNames and Wikidata (places), Wikidata and GND (persons) — uses the same pattern (ontology 0.6.0): skos:exactMatch / skos:closeMatch / skos:broadMatch to the authority's IRI, which is described as a skos:Concept with skos:inScheme lkg:authority_<name>, skos:notation and skos:prefLabel. Observations carry the spatial and temporal detail the text states (vantage point, microhabitat, flight height, own elevation, qualitative time of day, clock time, own date or date range). The ontology is Darwin-Core-first: wherever a dwc/dwciri, DCTERMS, PROV-O, SKOS, GeoSPARQL or schema.org term exists, the data graph uses that term alone; lkg: terms carry only project-specific meaning (record type, count qualifier, breeding evidence, movement, evidence kind, call type, entry kind, weather, travel, mention roles, spatial/temporal qualification, region kind). Controlled values are literals: each is the skos:notation of a concept in a SKOS concept scheme of the same namespace (the property's rdfs:seeAlso); the data graph is validated with SHACL."@en ;
+    rdfs:comment "Project ontology for the HistOrniGraph KG (diary entries, ornithological observations, travel, weather, persons, sources from the field journals of the ornithologist Alfred Louis Laubmann, GND https://d-nb.info/gnd/1012394506). Darwin-Core-first: standard terms are used wherever they exist; lkg: adds only project-specific terms. Grouping classes ArchivalUnit / EntryRecord plus an explicit dcterms partonomy. Habitats are skos:Concepts in lkg:habitatScheme (dwciri:habitat). External links (GBIF, EUNIS, GeoNames, Wikidata, GND) all use skos:exactMatch / closeMatch / broadMatch to an authority record in one of the lkg:authority_* schemes."@en ;
     owl:versionInfo "0.7.1" ;
     owl:versionIRI <https://w3id.org/laubmann-kg/ontology/0.7.1> ;
     owl:priorVersion <https://w3id.org/laubmann-kg/ontology/0.7.0> ;
     vann:preferredNamespacePrefix "lkg" ;
     vann:preferredNamespaceUri "https://w3id.org/laubmann-kg/ontology#" ;
-    dcterms:creator [ a foaf:Agent ; foaf:name "Laubmann KG Project" ; foaf:homepage <https://github.com/Maelkolb/laubmann-kg_TP> ] ;   # TODO: replace with the author's name/ORCID before publication
+    dcterms:creator _:perschl , _:wieshuber ;
+    dcat:contactPoint _:perschl_contact , _:wieshuber_contact ;
+    foaf:fundedBy [ a foaf:Organization ; foaf:name "NFDI4Biodiversity" ; foaf:homepage <https://www.nfdi4biodiversity.org/> ] ;   # HistOrniGraph was funded by NFDI4Biodiversity
     dcterms:publisher "HistOrniGraph / Laubmann KG Project" ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:rights "Creative Commons Attribution 4.0 International (CC BY 4.0)"@en ;
     dcterms:issued "2026-07-22"^^xsd:date ;
-    dcterms:modified "2026-09-30"^^xsd:date ;
+    dcterms:modified "2026-10-06"^^xsd:date ;
     dcterms:source <https://github.com/Maelkolb/laubmann-kg_TP> ;
     rdfs:seeAlso <https://github.com/Maelkolb/laubmann-kg_TP> , <https://w3id.org/laubmann-kg/vocabularies> , <https://w3id.org/laubmann-kg/shapes> ;
-    dcterms:subject "ornithology"@en , "field diaries"@en , "biodiversity data"@en , "Darwin Core"@en ;
+    dcterms:subject "ornithology"@en , "field diaries"@en , "biodiversity data"@en , "Darwin Core"@en ,
+                    <https://d-nb.info/gnd/1012394506> ;   # Alfred Louis Laubmann (GND)
     dcterms:language "en" , "de" .
+
+# Authors and contact persons of the ontology (blank nodes; named here so that the
+# same person is both dcterms:creator and dcat:contactPoint).
+_:perschl a foaf:Person ;
+    foaf:name "Tobias Perschl" ;
+    foaf:mbox <mailto:Tobias.Perschl@uni-passau.de> ;
+    schema:sameAs <https://orcid.org/0009-0008-7070-8705> ;
+    schema:identifier <https://orcid.org/0009-0008-7070-8705> ;
+    schema:affiliation [ a foaf:Organization ; foaf:name "Lehrstuhl für Computational Humanities, Universität Passau"@de , "Chair of Computational Humanities, University of Passau"@en ] .
+
+_:wieshuber a foaf:Person ;
+    foaf:name "Alois Wieshuber" ;
+    foaf:mbox <mailto:alois.wieshuber@gda.bayern.de> ;
+    schema:sameAs <https://orcid.org/0009-0001-7010-7968> ;
+    schema:identifier <https://orcid.org/0009-0001-7010-7968> ;
+    schema:affiliation [ a foaf:Organization ; foaf:name "Generaldirektion der Staatlichen Archive Bayerns"@de , "General Directorate of the State Archives of Bavaria"@en ] .
+
+_:perschl_contact a vcard:Individual ;
+    vcard:fn "Tobias Perschl" ;
+    vcard:hasEmail <mailto:Tobias.Perschl@uni-passau.de> .
+
+_:wieshuber_contact a vcard:Individual ;
+    vcard:fn "Alois Wieshuber" ;
+    vcard:hasEmail <mailto:alois.wieshuber@gda.bayern.de> .
 
 # =============================================================
 # CLASSES

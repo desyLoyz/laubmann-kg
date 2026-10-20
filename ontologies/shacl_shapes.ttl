@@ -82,7 +82,7 @@
 <https://w3id.org/laubmann-kg/shapes>
     a owl:Ontology , sh:ShapesGraph ;
     dcterms:title "Laubmann Knowledge Graph — SHACL shapes"@en ;
-    dcterms:description "Validation shapes for the Laubmann KG data graph (https://w3id.org/laubmann-kg/ontology 0.7.0). Run with inference=none: shapes target the concrete classes only (grouping superclasses are not materialised in the data). Every child node must carry dcterms:isPartOf (partonomy). Vocabulary/completeness checks are sh:Warning; datatype, cardinality and target-class checks sh:Violation."@en ;
+    dcterms:description "Validation shapes for the Laubmann KG data graph (https://w3id.org/laubmann-kg/ontology 0.7.1). Run with inference=none: shapes target the concrete classes only (grouping superclasses are not materialised in the data). Every child node must carry dcterms:isPartOf (partonomy). Vocabulary/completeness checks are sh:Warning; datatype, cardinality and target-class checks sh:Violation."@en ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:modified "2026-09-30"^^xsd:date ;
     owl:versionInfo "0.7.1" ;

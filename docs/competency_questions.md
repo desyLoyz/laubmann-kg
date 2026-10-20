@@ -2,9 +2,11 @@
 
 The knowledge graph is designed to answer the questions below. Each maps to a
 SPARQL query in `src/laubmann_kg/kg/sparql.py` (`QUERIES[...]`), runnable over the
-exported Turtle graph (ontology 0.4.0 vocabulary: `dwc:vernacularName`,
-`dwc:eventDate`, `dcterms:isPartOf`, `lkg:evidenceKind`, …). Answerability is
-reported against the sample builds in `STATUS.md`.
+exported graph (ontology 0.7.1 vocabulary: `dwc:vernacularName`,
+`dwc:eventDate`, `dcterms:isPartOf`, `lkg:evidenceKind` as a literal, …). All eleven
+queries were run against the full export `output/jsonld/laubmann_kg.jsonld`
+(ontology 0.7.1, 1,990,526 triples) on 2026-10-20: each returns rows, see
+"Testing the questions" below.
 
 | ID | Question | Query key | Status |
 |---|---|---|---|
@@ -39,3 +41,53 @@ graph = load_graph("data/exports/rdf/laubmann_sample.ttl")
 for row in run_query(graph, "CQ1_species_frequency"):
     print(row)
 ```
+
+## Testing the questions against an ontology version
+
+1. **Check the queries against the ontology** (no data needed; fast). Every
+   `lkg:` term used in a query must be declared in `ontologies/laubmann.ttl` or
+   `ontologies/controlled_vocabularies.ttl`:
+
+   ```bash
+   .venv/bin/python tools/run_competency_questions.py --check-terms
+   .venv/bin/python -m pytest tests/test_ontology_alignment.py tests/test_rdf_emission.py -q
+   ```
+
+   `test_competency_queries_use_declared_terms` fails when a query uses a renamed
+   or removed term; `test_rdf_emission.py` runs all queries on a small fixture
+   graph and asserts concrete answers.
+
+2. **Run the queries on a full export** built with that ontology version:
+
+   ```bash
+   .venv/bin/python tools/run_competency_questions.py output/jsonld/laubmann_kg.jsonld
+   .venv/bin/python tools/run_competency_questions.py graph.ttl --only CQ1 CQ4 --limit 10
+   ```
+
+   Output per question: `OK` (rows), `EMPTY` (0 rows: the pattern is missing in the
+   data or the query is out of date with the ontology), `ERROR`. Loading the
+   131 MB JSON-LD takes about 35 s, all eleven queries about 1 min together.
+
+3. **Interpret EMPTY / unexpected results:** compare the predicates in the query
+   with the ontology changelog in the header of `ontologies/laubmann.ttl` (e.g.
+   0.6.0: `lkg:evidenceKind`, `lkg:callType` are literals, `lkg:Vocalisation` is
+   gone; 0.7.0: `observationRadiusMeters`, `spatialConfidence` removed). Adapt the
+   query in `src/laubmann_kg/kg/sparql.py`, then update this document and the
+   ontology version note.
+
+4. **Single query in Python / on another triple store:**
+
+   ```python
+   from laubmann_kg.kg.sparql import QUERIES, load_graph, run_query
+   g = load_graph("data/exports/.../rdf/laubmann_sample.ttl")
+   print(run_query(g, "CQ4_auditory_observations")[:5])
+   print(QUERIES["CQ1_species_frequency"])      # paste into Fuseki / GraphDB / Blazegraph
+   ```
+
+5. **Per release:** after a new ontology version rerun step 1 and step 2 on the
+   new export and record the date and row counts here.
+
+Result of 2026-10-20 (export of ontology 0.7.1; row counts): CQ1 613 species, CQ2 8,483
+dates, CQ3 84,970 place/species pairs, CQ4 18,581 auditory records, CQ5 43 unresolved taxa,
+CQ6 25 (provenance query returns a sample), CQ7 85,896 records, CQ8 1,189 absences, CQ9 80
+families, CQ10 1,879 habitat/taxon groups, CQ11 4,359 person/role pairs.
