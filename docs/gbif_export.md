@@ -77,9 +77,60 @@ Inputs: `output/dwca/` (full archive) and `data/cache/graph_check/quality/record
 `HistOrniGraph_Final_Graph_NoVal/quality/`). `output/gbif/summary.json` records the sha256 of both, the filter
 and the counts; `output/gbif/exclusions.tsv` lists every record left out with its reason.
 
+## GBIF data validator (2026-10-22)
+
+`laubmann_observations_dwca.zip` (export above), report `fcf5580b-5fa2-4a1e-a023-9ee3c8956b91` on
+tools.gbif.org (kept by GBIF for one month): **"The file can be indexed by GBIF"**. `eml.xml`, `meta.xml` and
+`measurementorfact.txt` have no issues; all 40,332 records are indexed. The specimens ZIP is not validated yet.
+
+Issues in `occurrence.txt` (all warnings of the GBIF occurrence interpretation, none blocks indexing):
+
+| Issue | Records | Cause | Proposed handling |
+|---|---|---|---|
+| Taxon ID not found | 40,271 | `taxonID` is a GBIF species URL (`https://www.gbif.org/species/2495455`); GBIF looks the value up as an identifier of its checklist and does not resolve URLs. It falls back to `scientificName` + classification, so the taxa are matched anyway. All records with a `taxonID` (61 have none). | Leave out `taxonID` in the GBIF archives (keep it in the full archive), or write the bare key (`2495455`) and re-validate. |
+| Continent derived from coordinates | 27,972 | No `continent` given; information only. | None, or write `continent` = Europe for records with `countryCode`. |
+| Country derived from coordinates | 4,184 | Georeferenced, but the place is not a GeoNames feature, so no `countryCode` (2,754 place links from the machine review, 1,430 Nominatim matches). GBIF fills in the country; information only. | None, or derive `countryCode` from the Nominatim cache. |
+| Country coordinate mismatch | 9 | `countryCode` AT from a GeoNames river (Loisach 2772288, Tiroler Achen 2783037) that flows through Austria and Bavaria; the coordinates are in Bavaria. | Take no `countryCode` from GeoNames hydrographic features (class H); check the coordinates (see below). |
+| Taxon match higherrank | 9 | Name not in the GBIF backbone at its rank: hybrids, a subspecies, `Lophura imperialis` (now mostly treated as a hybrid). GBIF matched the genus or species. | Check the names (see below); hybrids could go to `verbatimIdentification` with the parent species in `scientificName`. |
+
+### Checklist
+
+- [ ] **`taxonID`**: decide between leaving it out and the bare GBIF key; re-validate (the warning should
+  disappear for all 40,271 records).
+- [ ] **Country coordinate mismatch** (9 records, all with `countryCode` AT and coordinates in Bavaria). Check
+  per entry the place and whether the GeoNames river point is acceptable as georeference:
+  - Loisach, "Loisach bei der ersten Überfahrt, dem Ausfluß aus dem Kochelsee", 47.9333 / 11.4500
+    (GeoNames 2772288): `L02-e0117` (1919-02-16; Zwergtaucher `obs_b87c9271ed4c`, Wasseramsel `obs_2120a2b211ef`,
+    Bläßhuhn `obs_6266f571eb56`), `L05-e0212` (1927-05-08; Berglaubsänger `obs_58a5ead3c67e`), `L30-e0088`
+    (1956-07-21; Zwergrohrdommel `obs_f93397693e12`). The GeoNames point lies about 30 km north of the outflow
+    of the Kochelsee (about 47.66 / 11.34).
+  - Tiroler Achen, "Achen-Einmündung", 47.8500 / 12.5000 (GeoNames 2783037): `L06-e0147` (1928-08-28;
+    Stockente `obs_13685b0ec105`, Zwergtaucher `obs_c3ac6687139a`, Gimpel `obs_c15abb601f6d`, Rotschenkel
+    `obs_90b7cb6d7e3b`). The point is close to the mouth into the Chiemsee; only the
+    country is wrong.
+- [ ] **Taxon match higherrank** (9 records). The validator names five; the other four are the remaining
+  hybrids and the second *armorica* record (no GBIF `taxonID`, same names). Check identification and name:
+  - `L15-e0183` 1938-05-11 Kaiserfasan, *Lophura imperialis* (`obs_4203b5b1b144`) — named sample;
+  - `L15-e0185` 1938-05-12 Provence-Grasmücke, *Sylvia undata armorica* (`obs_10b0f3e2eeaf`) — named sample;
+  - `L15-e0186` 1938-05-12 same name (`obs_a30213bd4dd1`);
+  - `L25-e0151` 1953-03-01 Bastardkrähe, *Corvus corone x Corvus cornix* (`obs_8d4c58479602`) — named sample;
+  - `L32-e0211` 1960-05-23 Grünfink x Zeisig, *Chloris chloris x Spinus spinus* (`obs_b4c907f5d1d3`);
+  - `L32-e0226` 1960-06-23 Zeisig-Grünfink-Bastard, *Spinus spinus x Chloris chloris* (`obs_cd1e9516b982`);
+  - `L32-e0229` 1960-06-30 Stieglitz-Grünfink-Bastard, *Carduelis carduelis x Chloris chloris*
+    (`obs_3e5a0261cd94`) — named sample;
+  - `L32-e0230` 1960-07-02 same name (`obs_52f378cedb0f`) — named sample;
+  - ninth record: the validator does not name it; remaining candidate without a GBIF `taxonID` and with a
+    non-backbone name is `L32-e0209` 1960-05-19 (`obs_d3c9999fe02e`, *Aves*, remarks mention a Bastard).
+- [ ] **Country / continent derived** (4,184 / 27,972): accept as information, or fill `countryCode` and
+  `continent` in the export.
+- [ ] Validate `laubmann_specimens_dwca.zip`.
+
+Record IDs are abbreviated; the full `occurrenceID` is `https://w3id.org/laubmann-kg/data/obs_…`.
+
 ## Before publishing
 
-- Upload both ZIPs to the [GBIF data validator](https://www.gbif.org/tools/data-validator).
+- Upload both ZIPs to the [GBIF data validator](https://www.gbif.org/tools/data-validator) (observations done,
+  see above).
 - Publishing needs a GBIF publisher endorsed by the German node (e.g. via GFBio / NFDI4Biodiversity or an IPT
   of the publishing institution). The specimens dataset documents diary notes; GBIF expects specimens to be
   published by the collection that holds them (`institutionCode`, `catalogNumber`), which the diary does not

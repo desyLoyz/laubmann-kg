@@ -14,6 +14,10 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 - EML nach GBIF-Metadatenprofil 1.3 (EML 2.2.0, gegen das XSD geprüft): Ersteller und Kontakte Tobias Perschl und Alois Wieshuber mit ORCID, Laubmann als `originator` (GND), Projekt HistOrniGraph mit Förderung durch NFDI4Biodiversity, Methoden mit Auswahlregeln und erwarteter Fehlerquote.
 - `output/gbif/exclusions.tsv` (jeder ausgelassene Datensatz mit Grund) und `summary.json` (Zahlen, Filter, sha256 der Eingaben); Doku `docs/gbif_export.md`; Tests `tests/test_gbif_subset.py`.
 
+### Added (2026-10-22 — GBIF-Validator)
+
+- **`docs/gbif_export.md`**, Abschnitt „GBIF data validator (2026-10-22)“: Ergebnis für `laubmann_observations_dwca.zip` (Bericht `fcf5580b-5fa2-4a1e-a023-9ee3c8956b91`; „can be indexed“, EML und eMoF ohne Befund) mit den fünf Hinweisen der Occurrence-Interpretation, ihren Ursachen (`taxonID` als GBIF-URL, `countryCode` AT aus österreichischen GeoNames-Flüssen mit bayerischen Koordinaten) und einer Prüfliste der 9 Land-Mismatches und 9 Higher-Rank-Taxa.
+
 ### Changed (2026-10-22 — DwC-A)
 
 - **`dwca/meta_xml.py`**: `license`, `rightsHolder` und `language` werden als DCMI-Terme (`dcterms:`) deklariert.
