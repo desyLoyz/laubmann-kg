@@ -1,0 +1,72 @@
+# GBIF export of Alfred Louis Laubmann's own records (tools/export_gbif_subset.py).
+#
+# Filters the full Darwin Core Archive (Event core) with the estimated error of
+# every record (record_quality.csv, docs/record_quality.md) and writes one
+# Occurrence-core archive per dataset. The full archive is not changed.
+source_dwca: output/dwca                       # export kg_exports_2026-10-06_regions
+quality: data/cache/graph_check/quality/record_quality.csv
+geonames_dir: data/cache/linking/geonames      # countryCode from the GeoNames country dumps
+output_dir: output/gbif
+
+filter:
+  observer: Alfred Laubmann        # recordedBy must name him (alone or with companions)
+  error_measure: p_any             # estimated error of any field of the record
+  max_error: 0.5                   # keep p_any < 0.5
+  year_from: 1917                  # diary period; start and end of eventDate must lie in it
+  year_to: 1965
+  include_literature: false        # MaterialCitation / associatedReferences never go to GBIF
+  record_types: [field-observation]   # his own records, not reports of others he passes on
+
+datasets:
+  observations:
+    basis_of_record: [HumanObservation]
+    package_id: laubmann-kg-gbif-observations
+    zip_name: laubmann_observations_dwca.zip
+    title: "Alfred Laubmann's ornithological field observations in his diaries, 1917–1965"
+    abstract: >-
+      Bird observations made by the ornithologist Alfred Louis Laubmann (1886–1965), alone or with
+      companions, as recorded in his 34 handwritten field diaries (Bavaria and beyond, 1917–1965).
+      The records were read from the page scans by a documented machine pipeline (transcription,
+      LLM extraction, taxon and place linking) and checked twice by independent models; only records
+      whose estimated probability of an error in any field is below 50 % are included. The estimate
+      of every record is published with it (MeasurementOrFact and dynamicProperties), so users can
+      apply a stricter threshold. Reports by other people, published literature and specimens are
+      not part of this dataset.
+  specimens:
+    basis_of_record: [PreservedSpecimen]
+    package_id: laubmann-kg-gbif-specimens
+    zip_name: laubmann_specimens_dwca.zip
+    title: "Bird specimens noted by Alfred Laubmann in his field diaries, 1917–1965"
+    abstract: >-
+      Bird specimens (shot, found dead or prepared) that the ornithologist Alfred Louis Laubmann
+      (1886–1965) collected or recorded himself, as noted in his handwritten field diaries
+      (1917–1965). The diary does not give the collection that holds a specimen or its catalogue
+      number; the records document the diary note, not a curated collection object. Records were
+      read by the same machine pipeline as the observation dataset and filtered to an estimated
+      error below 50 %; the estimate of every record is published with it.
+
+metadata:
+  license: CC-BY-4.0
+  rights_holder: HistOrniGraph / Laubmann KG Project
+  language: en
+  data_language: de
+  creators:
+    - given_name: Tobias
+      sur_name: Perschl
+      email: Tobias.Perschl@uni-passau.de
+      orcid: 0009-0008-7070-8705
+      organization: Lehrstuhl für Computational Humanities, Universität Passau
+    - given_name: Alois
+      sur_name: Wieshuber
+      email: alois.wieshuber@gda.bayern.de
+      orcid: 0009-0001-7010-7968
+      organization: Generaldirektion der Staatlichen Archive Bayerns
+  originator:
+    given_name: Alfred Louis
+    sur_name: Laubmann
+    gnd: "1012394506"
+  project:
+    title: HistOrniGraph
+    funding: The HistOrniGraph project was funded by NFDI4Biodiversity (https://www.nfdi4biodiversity.org/).
+  keywords: [ornithology, birds, field diaries, historical observations, Bavaria, Alfred Louis Laubmann, NFDI4Biodiversity]
+  homepage: https://github.com/Maelkolb/laubmann-kg_TP

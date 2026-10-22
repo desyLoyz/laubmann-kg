@@ -7,6 +7,18 @@ und dieses Projekt folgt [Semantic Versioning](https://semver.org/lang/de/).
 
 ## [Unreleased]
 
+### Added (2026-10-22 — GBIF-Export: Laubmanns eigene Datensätze mit geschätztem Fehler unter 50 %)
+
+- **`src/laubmann_kg/dwca/gbif.py`, `tools/export_gbif_subset.py`, `configs/gbif_laubmann.yaml`**: Auswahl aus dem vollständigen DwC-A (Event-Kern) für GBIF, je Datensatz ein Archiv mit Occurrence-Kern (GBIF-Typ „Occurrence“). Ausgewählt werden Datensätze, deren `recordedBy` Alfred Laubmann nennt (allein oder mit Begleitern), vom Typ `field-observation`, mit geschätztem Fehler `p_any` < 0,5 (`record_quality.csv`) und Datum 1917–1965; veröffentlichte Literatur ist ausgeschlossen. Zwei Datensätze: Beobachtungen (HumanObservation, 40.332 Datensätze aus 6.756 Einträgen, erwartet 18,9 % mit einem falschen Feld) und Präparate (PreservedSpecimen, 81 Datensätze).
+- Ergänzt je Datensatz: `license`, `rightsHolder`, `datasetName`, `language`, `recordedByID` (GND Laubmanns), `countryCode` (aus den GeoNames-Länderdateien), `verbatimEventDate`, `fieldNumber`, `samplingProtocol` und die Fehlerschätzung (eMoF-Zeilen und `dynamicProperties`). Werte des vollständigen Archivs bleiben unverändert; der vollständige Export wird nicht verändert.
+- EML nach GBIF-Metadatenprofil 1.3 (EML 2.2.0, gegen das XSD geprüft): Ersteller und Kontakte Tobias Perschl und Alois Wieshuber mit ORCID, Laubmann als `originator` (GND), Projekt HistOrniGraph mit Förderung durch NFDI4Biodiversity, Methoden mit Auswahlregeln und erwarteter Fehlerquote.
+- `output/gbif/exclusions.tsv` (jeder ausgelassene Datensatz mit Grund) und `summary.json` (Zahlen, Filter, sha256 der Eingaben); Doku `docs/gbif_export.md`; Tests `tests/test_gbif_subset.py`.
+
+### Changed (2026-10-22 — DwC-A)
+
+- **`dwca/meta_xml.py`**: `license`, `rightsHolder` und `language` werden als DCMI-Terme (`dcterms:`) deklariert.
+- **`pyproject.toml`**: `pydantic>=2.0` als Abhängigkeit (Konfigurationsmodell des GBIF-Exports).
+
 ### Added (2026-10-20 — Vorbereitung der Einreichung bei BiodivPortal)
 
 - **`LICENSE`**: Volltext der Creative Commons Attribution 4.0 International (CC-BY-4.0), passend zu `dcterms:license` der Ontologie und zum Darwin Core Archive.
