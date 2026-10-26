@@ -74,6 +74,8 @@ review:                       # validation UI decisions (tools/validation_ui, "A
   machine:                    # machine review (tools/validation_ui/machine_review, Claude Sonnet 5.5 subagents, 2026-09-30):
     enabled: true             #   fills the name forms and entity links nobody has reviewed; a row of identities.csv always wins
     identities: data/review/machine/identities_machine.csv
+    georef: data/review/machine/georef_machine.csv   # place links of the georeference check (2026-10-26): places far from the
+                                             #   rest of their entries, judged twice against the diary text; wins over identities_machine
     min_confidence: 0.9       #   machine rows need this confidence ...
     min_agreement: 2          #   ... and this many independent sources (text agent, scan agent, Gemini, Opus) agreeing
     value_corrections: data/review/machine/value_corrections_machine.csv   # single mentions the scan agent read differently

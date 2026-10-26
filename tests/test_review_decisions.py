@@ -275,3 +275,19 @@ def test_machine_corrections_filtered_by_confidence(tmp_path: Path) -> None:
     rows = load_corrections(path, min_confidence=0.9)
     assert [(c.old, c.action) for c in rows] == [("Tirol", "replace"), ("Rauchschwalben", "drop")]
     assert len(load_corrections(path)) == 3
+
+
+def test_earlier_machine_layer_wins_over_later(tmp_path: Path) -> None:
+    """The georeference check is listed before identities_machine.csv and wins for the same place."""
+    cols = IDENTITY_FIELDS + ["confidence", "agreement"]
+    georef = _write(tmp_path / "georef_machine.csv", cols, [
+        {"section": "places", "name_form": "Kalamos", "decision": "link", "authority": "gn:261565", "lat": "38.628",
+         "lon": "20.909", "confidence": "0.9", "agreement": "2"},
+        {"section": "places", "name_form": "Tietzing", "decision": "nolink", "confidence": "0.9", "agreement": "2"}])
+    machine = _write(tmp_path / "identities_machine.csv", cols, [
+        {"section": "places", "name_form": "Kalamos", "decision": "link", "authority": "gn:261571", "lat": "38.284",
+         "lon": "23.863", "confidence": "0.95", "agreement": "2"}])
+    ids = Identities.load_layers(None, [georef, machine])
+    assert ids.link("places", "Kalamos").geonames_id == 261565
+    assert ids.link("places", "Tietzing").decision == "nolink"
+    assert Identities.load_layers(None, [None, machine]).link("places", "Kalamos").geonames_id == 261571

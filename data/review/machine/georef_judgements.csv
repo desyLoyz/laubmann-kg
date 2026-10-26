@@ -1,0 +1,900 @@
+id,place,records,gbif_records,judge1,judge2,result
+0,Tafelberg,391,193,relocate_parent,relocate_parent,relocated
+1,Freiburg im Breisgau,178,69,correct,,unchanged
+2,Obersee,174,60,unsure,unsure,open
+3,Keilberg,129,2,relocate_parent,relocate_parent,coordinates removed
+4,Oberbecken,120,1,relocate_parent,relocate_parent,relocated
+5,Mairing,92,1,drop,drop,coordinates removed
+6,Aitrang,82,66,correct,,unchanged
+7,Augsburg,80,0,correct,,unchanged
+8,Mering,69,35,correct,correct,confirmed
+9,Hagnau,64,61,correct,,unchanged
+10,Eching,64,2,unsure,unsure,open
+11,Schwarzenfeld,57,0,correct,,unchanged
+12,Schlossberg,54,47,relocate_gn,unsure,open
+13,Lech,52,1,relocate_gn,relocate_gn,coordinates removed
+14,Verbindungskanal,48,6,relocate_parent,relocate_parent,coordinates removed
+15,Bodensee,47,18,correct,,unchanged
+16,Hütte,45,0,relocate_parent,relocate_parent,coordinates removed
+17,Mühltal,44,39,drop,drop,coordinates removed
+18,Finning,35,29,correct,,unchanged
+19,Stadtbergen,33,0,correct,,unchanged
+20,Hinterbrühl,33,31,relocate_parent,relocate_parent,relocated
+21,Chiemsee,32,6,correct,,unchanged
+22,Memmingen,29,0,correct,,unchanged
+23,Bad Hindelang,26,3,correct,,unchanged
+24,Karpfenwinkel,26,21,relocate_parent,relocate_parent,coordinates removed
+25,Murnauer Moos,25,0,correct,,unchanged
+26,Kitzing,25,21,relocate_parent,relocate_parent,relocated
+27,Hintersee,24,19,unsure,unsure,open
+28,Gossenzügen,23,18,correct,,unchanged
+29,Seemoos,22,19,relocate_parent,relocate_parent,relocated
+30,Nürnberg,22,0,correct,correct,confirmed
+31,Auweiher,21,20,relocate_gn,relocate_gn,relocated
+32,Bernried,21,12,relocate_gn,relocate_gn,relocated
+33,Salzburg,20,0,correct,unsure,open
+34,Füssenberg,20,0,unsure,unsure,open
+35,Schweinfurt,19,0,correct,,unchanged
+36,Preveza,19,14,correct,,unchanged
+37,Garmisch,19,5,correct,,unchanged
+38,Eichstätt,18,1,correct,,unchanged
+39,Innsbruck,18,3,correct,,unchanged
+40,Allgäu,17,0,correct,correct,confirmed
+41,Luegsteinwand,17,6,correct,correct,confirmed
+42,Rotwand,16,0,correct,,unchanged
+43,Breitenthal,16,1,correct,,unchanged
+44,Schwarzmoos,15,13,relocate_parent,relocate_parent,relocated
+45,Herrsching,15,0,correct,,unchanged
+46,Lünersee,14,3,correct,,unchanged
+47,Feldwieser Bucht,14,0,correct,,unchanged
+48,Germaringen,13,1,correct,,unchanged
+49,Gersthofen,13,0,correct,correct,confirmed
+50,Bernau am Chiemsee,13,0,correct,,unchanged
+51,Hohe Tauern,13,0,correct,,unchanged
+52,Kleiner See,12,9,drop,unsure,open
+53,Zubringer,12,6,correct,,unchanged
+54,Mühlbach,11,9,relocate_parent,unsure,open
+55,Immenstadt im Allgäu,11,1,correct,,unchanged
+56,Würzburg,11,0,correct,,unchanged
+57,Neu-See,11,11,correct,,unchanged
+58,Regensburg,11,0,correct,,unchanged
+59,Schrecksee,11,0,correct,,unchanged
+60,Neuweiher,11,9,correct,,unchanged
+61,Kapf,10,10,relocate_parent,relocate_parent,relocated
+62,Viechtach,10,0,correct,,unchanged
+63,Bonn,10,2,correct,,unchanged
+64,Weiden in der Oberpfalz,10,0,correct,,unchanged
+65,Landshut,10,0,correct,,unchanged
+66,London,10,2,correct,,unchanged
+67,Prien,10,0,correct,,unchanged
+68,Affaltern,9,0,correct,,unchanged
+69,Ulm,9,7,correct,,unchanged
+70,Gottlieben,9,8,correct,,unchanged
+71,Bad Windsheim,9,0,correct,,unchanged
+72,Fall,9,1,correct,,unchanged
+73,Kapellberg,9,2,relocate_parent,relocate_parent,relocated
+74,Kranzberg,9,0,relocate_parent,unsure,open
+75,Genderkingen,9,0,correct,,unchanged
+76,Simmering,9,7,unsure,drop,open
+77,Immenstadt,8,1,correct,,unchanged
+78,Krumbach,8,0,correct,,unchanged
+79,Campos,8,5,relocate_parent,relocate_parent,relocated
+80,Burghausen,8,0,correct,,unchanged
+81,Breitachklamm,8,0,correct,,unchanged
+82,Waging am See,8,0,correct,,unchanged
+83,Mamming,8,0,correct,,unchanged
+84,Jochberg,8,0,drop,drop,coordinates removed
+85,Klause,8,7,relocate_parent,relocate_parent,relocated
+86,Schafberg,8,6,unsure,unsure,open
+87,Altdorf,7,2,relocate_gn,relocate_gn,relocated
+88,Stockheim,7,2,relocate_gn,relocate_gn,relocated
+89,Bayern,7,0,correct,,unchanged
+90,Seeholz,7,6,drop,drop,coordinates removed
+91,Rhein,7,5,drop,unsure,open
+92,Korfu,7,4,correct,,unchanged
+93,Kapruner Tal,7,0,correct,,unchanged
+94,Lohr am Main,7,0,correct,,unchanged
+95,Schneizlreuth,7,0,correct,,unchanged
+96,Waginger See,7,0,correct,,unchanged
+97,Murnau,7,0,correct,correct,confirmed
+98,Marienbrücke,7,6,unsure,unsure,open
+99,Hengstberg,7,0,drop,drop,coordinates removed
+100,Hammerschmiede,6,5,relocate_gn,relocate_gn,relocated
+101,Kempten,6,1,correct,,unchanged
+102,Adelsried,6,4,unsure,unsure,open
+103,Freiberg,6,6,relocate_parent,relocate_parent,relocated
+104,Bauernwald,6,6,relocate_parent,relocate_parent,relocated
+105,Schwanden,6,5,unsure,unsure,open
+106,Kitzbühel,6,0,correct,correct,confirmed
+107,Straubing,6,1,correct,correct,confirmed
+108,Fischbach,6,0,drop,unsure,open
+109,Grüneck,6,2,relocate_gn,relocate_gn,relocated
+110,Untergriesbach,6,0,relocate_gn,relocate_gn,relocated
+111,Kulmbach,6,0,correct,,unchanged
+112,Fichtelgebirge,6,0,correct,,unchanged
+113,Weiherhammer,6,0,correct,,unchanged
+114,Zeller Bach,6,6,relocate_parent,relocate_parent,coordinates removed
+115,Schergenweiher,6,6,correct,,unchanged
+116,Lechtaler Alpen,6,0,correct,,unchanged
+117,Main,6,1,correct,,unchanged
+118,Petting,6,0,correct,correct,confirmed
+119,Wien,6,0,correct,,unchanged
+120,Mittelberg,6,0,unsure,unsure,open
+121,Leipzig,6,0,correct,,unchanged
+122,Großer Belt,6,6,correct,,unchanged
+123,Lechmündung,6,0,correct,,unchanged
+124,Loretto,5,4,relocate_parent,relocate_parent,relocated
+125,Achmühle,5,2,unsure,unsure,open
+126,Lourdesgrotte,5,4,relocate_parent,relocate_parent,relocated
+127,Staufenberg,5,5,relocate_parent,relocate_parent,relocated
+128,Brombach,5,5,drop,drop,coordinates removed
+129,Bayreuth,5,0,correct,,unchanged
+130,Schwarzenberg,5,3,drop,relocate_gn,coordinates removed
+131,Stockholm,5,4,correct,,unchanged
+132,Königssee,5,0,correct,,unchanged
+133,Seebach,5,3,drop,unsure,open
+134,Brandnertal,5,0,correct,,unchanged
+135,Vlissingen,5,5,correct,,unchanged
+136,Burgstall,5,0,relocate_gn,relocate_gn,relocated
+137,Erlach,5,0,unsure,unsure,open
+138,Keilstein,5,0,drop,drop,coordinates removed
+139,Gerolzhofen,5,0,correct,,unchanged
+140,Kampenwand,5,0,correct,,unchanged
+141,Ambach,5,2,correct,,unchanged
+142,Hagenau,5,3,drop,drop,coordinates removed
+143,Steinernes Meer,5,0,correct,,unchanged
+144,Öresund,5,5,correct,correct,confirmed
+145,Riedwald,4,4,relocate_parent,relocate_parent,relocated
+146,Horn,4,2,drop,unsure,open
+147,Klosterwald,4,3,relocate_parent,relocate_parent,relocated
+148,Seekopf,4,2,drop,unsure,open
+149,Donau,4,2,drop,drop,coordinates removed
+150,Vilstal,4,1,correct,,unchanged
+151,Bayerischer Wald,4,0,correct,,unchanged
+152,Rhön,4,0,correct,,unchanged
+153,Iller,4,1,correct,,unchanged
+154,Stein am Rhein,4,1,correct,,unchanged
+155,Gunzenhausen,4,1,correct,,unchanged
+156,Breitenbrunn,4,0,drop,unsure,open
+157,Linkerskopf,4,0,correct,,unchanged
+158,Eremitage,4,2,drop,drop,coordinates removed
+159,Blindheim,4,0,correct,,unchanged
+160,Lechauen,4,0,correct,,unchanged
+161,Mariengrotte,4,1,relocate_parent,relocate_parent,relocated
+162,Zugspitze,4,0,correct,,unchanged
+163,Uffenheim,4,1,correct,,unchanged
+164,Berchtesgadener Land,4,0,correct,,unchanged
+165,Friedau,4,4,relocate_parent,relocate_parent,relocated
+166,Berchtesgaden,4,0,correct,,unchanged
+167,Hanfeld,4,4,correct,,unchanged
+168,Schellenberg,4,0,drop,drop,coordinates removed
+169,Rain,4,0,correct,correct,confirmed
+170,Wank,4,0,relocate_gn,relocate_gn,relocated
+171,Geigelstein,4,0,correct,correct,confirmed
+172,Marktleuthen,4,0,correct,,unchanged
+173,Matting,4,0,correct,correct,confirmed
+174,Tirschenreuth,4,0,correct,,unchanged
+175,Freilassing,4,1,correct,,unchanged
+176,Rappenseehütte,4,0,correct,,unchanged
+177,Fürholzen,4,0,correct,,unchanged
+178,Ruhpolding,4,0,correct,correct,confirmed
+179,Vorarlberg,4,0,correct,,unchanged
+180,Hegau,4,0,correct,,unchanged
+181,Felden,4,0,correct,correct,confirmed
+182,Mayrhofen,4,0,correct,,unchanged
+183,Fischamend,4,0,correct,,unchanged
+184,Bernrieder Park,4,4,correct,,unchanged
+185,Giebelhaus,4,0,correct,,unchanged
+186,Langenwang,4,0,correct,,unchanged
+187,Pfatter,4,0,correct,,unchanged
+188,Sülzberg,4,0,relocate_gn,relocate_gn,relocated
+189,Bayerisch Gmain,4,0,correct,,unchanged
+190,Thumsee,4,0,correct,,unchanged
+191,Ammerfeld,4,0,correct,,unchanged
+192,Bischofswiesen,4,0,correct,,unchanged
+193,Stolp,4,0,drop,drop,coordinates removed
+194,Oberer See,4,0,drop,drop,coordinates removed
+195,Oberndorf,3,0,drop,unsure,open
+196,Stetten,3,1,correct,unsure,open
+197,Nördlingen,3,0,correct,,unchanged
+198,Aschaffenburg,3,0,correct,,unchanged
+199,Balderschwang,3,0,correct,,unchanged
+200,Kelheim,3,0,correct,,unchanged
+201,Donauwörth,3,0,correct,,unchanged
+202,Hallein,3,0,correct,,unchanged
+203,Flachen,3,3,relocate_parent,relocate_parent,relocated
+204,Emmerberg,3,3,drop,drop,coordinates removed
+205,Feuchtental,3,3,drop,relocate_parent,coordinates removed
+206,Isarau,3,1,drop,drop,coordinates removed
+207,Martinswand,3,1,correct,,unchanged
+208,Aach,3,3,drop,drop,coordinates removed
+209,Sagwald,3,1,drop,drop,coordinates removed
+210,Bad Oberdorf,3,0,correct,,unchanged
+211,Neuoffingen,3,1,correct,,unchanged
+212,Breitenberg,3,0,relocate_gn,unsure,open
+213,Donauried,3,0,correct,,unchanged
+214,Krottensee,3,3,relocate_gn,drop,coordinates removed
+215,Kühlenthal,3,0,correct,,unchanged
+216,Karlstein,3,0,relocate_gn,relocate_gn,relocated
+217,Burgbernheim,3,0,correct,,unchanged
+218,Adelsdorf,3,0,correct,,unchanged
+219,Ebrach,3,0,correct,,unchanged
+220,Tannheim,3,0,correct,,unchanged
+221,Ettlishofen,3,0,correct,,unchanged
+222,Münster,3,0,correct,,unchanged
+223,Ingelheim am Rhein,3,1,correct,,unchanged
+224,Traithen,3,0,correct,,unchanged
+225,Altötting,3,0,correct,,unchanged
+226,Sankt Wolfgang,3,0,unsure,unsure,open
+227,Naturschutzgebiet,3,2,relocate_parent,relocate_parent,relocated
+228,Unterfranken,3,0,correct,,unchanged
+229,Stein,3,2,drop,unsure,open
+230,Bamberg,3,0,correct,,unchanged
+231,Marquartstein,3,0,correct,,unchanged
+232,Heckenberg,3,1,relocate_parent,relocate_parent,relocated
+233,Graswang,3,0,correct,,unchanged
+234,Steinbach,3,0,drop,unsure,open
+235,Pulling,3,1,correct,,unchanged
+236,Rauhen,3,0,drop,drop,coordinates removed
+237,Tauern,3,0,drop,drop,coordinates removed
+238,Weihersmühle,3,0,drop,drop,coordinates removed
+239,Schloss Elmau,3,1,correct,correct,confirmed
+240,Breitach,3,0,correct,,unchanged
+241,Lahm,3,0,correct,,unchanged
+242,Schorndorf,3,0,drop,drop,coordinates removed
+243,Grünenbach,3,0,correct,,unchanged
+244,Königsbrunn,3,0,correct,,unchanged
+245,Tiefenbach bei Oberstdorf,3,0,correct,,unchanged
+246,Lauingen,3,3,correct,,unchanged
+247,Bäckermühle,3,3,relocate_parent,relocate_parent,relocated
+248,Sankt Zeno,3,0,correct,,unchanged
+249,Federsee,3,0,correct,,unchanged
+250,Volkmannsdorf,3,0,correct,,unchanged
+251,Mühlheim,3,0,unsure,unsure,open
+252,Silberbach,3,2,correct,unsure,open
+253,Wallenhausen,3,0,correct,,unchanged
+254,Linum,3,0,correct,,unchanged
+255,Pradl,3,0,correct,correct,confirmed
+256,Kleinbeuren,3,0,correct,,unchanged
+257,Dücker,3,0,relocate_parent,relocate_parent,coordinates removed
+258,Vorderried,3,0,relocate_parent,relocate_parent,coordinates removed
+259,Forggensee,3,3,correct,,unchanged
+260,Peterswörth,2,2,correct,,unchanged
+261,Kemnath,2,0,correct,,unchanged
+262,Fischen,2,0,relocate_gn,unsure,open
+263,Petersberg,2,0,unsure,unsure,open
+264,Schönau,2,0,correct,,unchanged
+265,Unterbach,2,0,unsure,drop,open
+266,Lindenau,2,2,relocate_parent,relocate_parent,relocated
+267,Kühberg,2,1,correct,,unchanged
+268,Ach,2,1,correct,,unchanged
+269,Hochwald,2,2,relocate_parent,relocate_parent,relocated
+270,Illertissen,2,1,correct,,unchanged
+271,Friesenried,2,1,correct,,unchanged
+272,Reiteralpe,2,1,correct,,unchanged
+273,Perugia,2,0,correct,,unchanged
+274,Hartwald,2,2,drop,unsure,open
+275,Engedey,2,2,correct,,unchanged
+276,Limmat,2,2,correct,,unchanged
+277,St. Bartholomä,2,0,drop,drop,coordinates removed
+278,Bischberg,2,0,correct,,unchanged
+279,Tautenberg,2,1,drop,unsure,open
+280,Deggendorf,2,0,correct,,unchanged
+281,Zell,2,2,relocate_gn,relocate_gn,relocated
+282,Anhausen,2,1,correct,,unchanged
+283,Karlshöhe,2,2,drop,unsure,open
+284,Leopoldstraße,2,2,correct,,unchanged
+285,Riedle,2,2,relocate_parent,relocate_parent,relocated
+286,Mecklenburg,2,1,correct,,unchanged
+287,Rätikon,2,0,correct,,unchanged
+288,Reintal,2,0,relocate_gn,relocate_gn,relocated
+289,Grünstein,2,0,relocate_gn,relocate_gn,relocated
+290,Herzogstand,2,0,correct,,unchanged
+291,Wertacher Hörnle,2,0,correct,,unchanged
+292,Hirnsberg,2,2,correct,,unchanged
+293,Guttenberger Wald,2,0,correct,correct,confirmed
+294,Karlsburg,2,0,correct,,unchanged
+295,Mehlmeisel,2,0,correct,,unchanged
+296,Fremdingen,2,0,correct,,unchanged
+297,Juist,2,1,correct,,unchanged
+298,Cathkin Peak,2,0,correct,,unchanged
+299,Törring,2,0,correct,,unchanged
+300,Ramsau,2,0,correct,,unchanged
+301,Karlstadt,2,1,correct,,unchanged
+302,Glanzscharte,2,0,correct,,unchanged
+303,Sölden,2,0,correct,,unchanged
+304,Velburg,2,0,correct,,unchanged
+305,Dingolfing,2,0,correct,,unchanged
+306,Langerringen,2,0,correct,correct,confirmed
+307,Burg,2,2,drop,relocate_parent,coordinates removed
+308,Eiberg,2,1,drop,unsure,open
+309,Arnsberg,2,0,relocate_gn,relocate_gn,relocated
+310,Eichwies,2,0,relocate_parent,relocate_parent,coordinates removed
+311,Wolfstein,2,0,relocate_gn,relocate_gn,relocated
+312,Karlskron,2,0,correct,,unchanged
+313,Cham,2,0,correct,,unchanged
+314,Neuhaus,2,0,relocate_gn,relocate_gn,relocated
+315,Stockwald,2,0,relocate_parent,relocate_parent,relocated
+316,München-Nord,2,0,correct,,unchanged
+317,Rottenbuch,2,0,correct,,unchanged
+318,Hinterriß,2,0,correct,,unchanged
+319,Westheim,2,0,drop,unsure,open
+320,Wörling,2,2,relocate_parent,relocate_parent,relocated
+321,Eger,2,0,correct,,unchanged
+322,Stammbach,2,0,correct,,unchanged
+323,Friesener Warte,2,0,correct,,unchanged
+324,Griesbach,2,1,relocate_gn,unsure,open
+325,Maintal,2,0,drop,drop,coordinates removed
+326,Rammerstorf,2,0,unsure,unsure,open
+327,Langmoos,2,0,drop,unsure,open
+328,Bruchsal,2,2,correct,,unchanged
+329,Königshofen,2,0,drop,drop,coordinates removed
+330,Eggendorf,2,0,drop,drop,coordinates removed
+331,Rott,2,0,drop,unsure,open
+332,Aibling,2,2,unsure,drop,open
+333,Buchheim,2,2,drop,drop,coordinates removed
+334,Aare,2,2,correct,correct,confirmed
+335,Ising,2,0,correct,,unchanged
+336,Schwarzwald,2,2,drop,relocate_parent,coordinates removed
+337,Seeberg,2,0,relocate_gn,unsure,open
+338,Frankenwald,2,0,correct,,unchanged
+339,Uehlfeld,2,0,correct,,unchanged
+340,Hollersbachtal,2,0,correct,,unchanged
+341,Sünching,2,0,correct,,unchanged
+342,Stuiben,2,0,correct,,unchanged
+343,Rohrmoos,2,0,correct,correct,confirmed
+344,Schwandorf,2,0,correct,,unchanged
+345,Herreninsel,2,1,correct,,unchanged
+346,Lauf an der Pegnitz,2,0,correct,correct,confirmed
+347,Achenkirch,2,0,correct,,unchanged
+348,Simssee,2,0,correct,correct,confirmed
+349,Hersbruck,2,0,correct,,unchanged
+350,Tirol,2,0,correct,,unchanged
+351,Oberdill,2,2,drop,drop,coordinates removed
+352,Hallbergmoos,2,0,correct,,unchanged
+353,Finstermünz,2,0,correct,,unchanged
+354,Altes Schloß,2,0,correct,,unchanged
+355,Hartmannsberg,2,0,correct,,unchanged
+356,Herbertingen,2,2,correct,,unchanged
+357,Zell am See,2,0,correct,,unchanged
+358,Reutlingen,2,0,correct,,unchanged
+359,Forsthaus Kasten,2,2,correct,,unchanged
+360,Dörfleins,2,0,correct,,unchanged
+361,Arberg,2,0,correct,,unchanged
+362,Laberweinting,2,0,correct,,unchanged
+363,Kreuzspitze,2,0,relocate_gn,relocate_gn,relocated
+364,Riedenburg,2,0,correct,,unchanged
+365,Thüringen,2,0,drop,drop,coordinates removed
+366,Tannheimer Tal,2,0,correct,,unchanged
+367,Schwarzenbach an der Saale,2,0,correct,correct,confirmed
+368,Staufen,2,0,drop,drop,coordinates removed
+369,Föhrenwald,2,0,relocate_gn,relocate_gn,relocated
+370,Freibad,2,2,relocate_parent,relocate_parent,relocated
+371,Wolnzach,2,0,correct,,unchanged
+372,Ansbach,2,0,correct,,unchanged
+373,Höchstädt an der Donau,2,0,correct,,unchanged
+374,Kitzingen,2,0,correct,,unchanged
+375,Sennfeld,2,0,correct,,unchanged
+376,Seligenstadt,2,0,correct,,unchanged
+377,Fürth,2,0,correct,correct,confirmed
+378,Sigishofen,2,0,correct,,unchanged
+379,Linköping,2,2,correct,,unchanged
+380,Padborg,2,2,correct,correct,confirmed
+381,Mörsach,2,0,correct,,unchanged
+382,Seebruck,2,0,correct,,unchanged
+383,Bad Gastein,2,0,correct,,unchanged
+384,Mailing,2,0,unsure,unsure,open
+385,Mündung,2,0,drop,drop,coordinates removed
+386,Ebern,2,0,correct,,unchanged
+387,Mooswald,2,0,correct,,unchanged
+388,Schlierberg,2,0,relocate_parent,relocate_parent,relocated
+389,Hallthurm,2,0,correct,,unchanged
+390,Vfl.,2,0,relocate_parent,relocate_parent,relocated
+391,Raubling,2,0,correct,,unchanged
+392,Sommersdorf,2,0,drop,drop,coordinates removed
+393,Westerried,2,0,drop,drop,coordinates removed
+394,Eurishofen,2,0,correct,,unchanged
+395,Maria Rast,2,2,drop,relocate_parent,coordinates removed
+396,Watzmann,2,0,drop,drop,coordinates removed
+397,Gochsheim,1,0,correct,,unchanged
+398,Bergkirchen,1,0,correct,correct,confirmed
+399,Zug,1,0,drop,drop,coordinates removed
+400,Waldhaus,1,0,drop,drop,coordinates removed
+401,Kammeltal,1,0,correct,,unchanged
+402,Inningen,1,0,correct,,unchanged
+403,Partenkirchen,1,0,correct,correct,confirmed
+404,Kühbach,1,0,unsure,unsure,open
+405,Graseck,1,0,unsure,unsure,open
+406,Dinkelsbühl,1,0,correct,,unchanged
+407,Bannwaldsee,1,0,correct,,unchanged
+408,Sandhofen,1,0,unsure,drop,open
+409,Simbach,1,0,unsure,unsure,open
+410,Dillingen an der Donau,1,0,correct,,unchanged
+411,Holzheim,1,0,correct,,unchanged
+412,Fischen im Allgäu,1,0,correct,,unchanged
+413,Wülfershausen,1,0,correct,,unchanged
+414,Trautskirchen,1,0,correct,,unchanged
+415,Deppenhausen,1,0,drop,drop,coordinates removed
+416,Hamm,1,1,relocate_parent,relocate_parent,relocated
+417,Lustnau,1,1,relocate_parent,relocate_parent,relocated
+418,Riedwies,1,1,relocate_parent,relocate_parent,relocated
+419,Riedmoos,1,1,relocate_parent,relocate_parent,relocated
+420,Rübling,1,1,drop,drop,coordinates removed
+421,Fruttberg,1,1,correct,,unchanged
+422,Entenweiher,1,0,relocate_parent,drop,coordinates removed
+423,Steg,1,0,relocate_parent,drop,coordinates removed
+424,Flüelen,1,1,correct,,unchanged
+425,Oettingen in Bayern,1,0,correct,,unchanged
+426,Kemmern,1,0,correct,,unchanged
+427,Strullendorf,1,0,correct,,unchanged
+428,Rauhhorn,1,0,correct,,unchanged
+429,Unterhausen,1,0,correct,correct,confirmed
+430,Wertingen,1,0,correct,,unchanged
+431,Riedlingen,1,0,correct,,unchanged
+432,Ottilienberg,1,1,relocate_parent,relocate_parent,relocated
+433,Bluntautal,1,0,correct,,unchanged
+434,Birkenfeld,1,0,relocate_gn,relocate_gn,relocated
+435,Lauter,1,0,drop,drop,coordinates removed
+436,Karlshuld,1,0,correct,correct,confirmed
+437,Jenner,1,0,correct,,unchanged
+438,Virgen,1,0,correct,,unchanged
+439,Lalendorf,1,1,correct,,unchanged
+440,Seeland,1,1,correct,,unchanged
+441,Rostock,1,1,correct,,unchanged
+442,Aue,1,1,relocate_parent,relocate_parent,relocated
+443,Sonnenspitze,1,0,correct,,unchanged
+444,Starzlach,1,0,correct,,unchanged
+445,Esterberg,1,0,unsure,drop,open
+446,Achen,1,1,drop,drop,coordinates removed
+447,Weppersdorf,1,0,correct,,unchanged
+448,Unterelchingen,1,0,correct,correct,confirmed
+449,Rohrbach,1,0,drop,drop,coordinates removed
+450,Bludenz,1,1,correct,,unchanged
+451,Rotmoos,1,0,drop,drop,coordinates removed
+452,Helgoland,1,0,correct,,unchanged
+453,Nersingen,1,1,correct,,unchanged
+454,Friedrichsfeld,1,1,correct,,unchanged
+455,Bingerbrück,1,1,correct,,unchanged
+456,Maurach,1,0,unsure,unsure,open
+457,Plansee,1,0,correct,,unchanged
+458,Ramsau bei Berchtesgaden,1,0,correct,,unchanged
+459,Latschenkopf,1,1,relocate_gn,relocate_gn,relocated
+460,Stepperg,1,0,correct,,unchanged
+461,Reichling,1,0,correct,,unchanged
+462,Cadolzburg,1,0,correct,,unchanged
+463,Pfänder,1,0,correct,,unchanged
+464,Schöffau,1,0,correct,correct,confirmed
+465,Teisendorf,1,0,correct,,unchanged
+466,Weltenburg,1,0,correct,,unchanged
+467,Harras,1,0,correct,,unchanged
+468,Watzmann-Mittelspitze,1,0,correct,,unchanged
+469,Jägerkreuz,1,0,correct,,unchanged
+470,Adolf-Pichler-Hütte,1,0,correct,correct,confirmed
+471,Ötztal,1,0,correct,,unchanged
+472,Kehlstein,1,0,correct,correct,confirmed
+473,Hohes Brett,1,0,correct,,unchanged
+474,Alpspitz,1,0,unsure,correct,open
+475,Hintertal,1,0,correct,,unchanged
+476,Potsdam,1,0,correct,,unchanged
+477,Wildenau,1,0,drop,drop,coordinates removed
+478,Bischofsgrün,1,0,correct,,unchanged
+479,Wörth an der Donau,1,0,correct,,unchanged
+480,Oberhausen,1,0,relocate_gn,unsure,open
+481,Sankt Koloman,1,0,drop,drop,coordinates removed
+482,Pettstadt,1,0,correct,,unchanged
+483,Wöhrsee,1,0,correct,,unchanged
+484,Zürs,1,0,correct,,unchanged
+485,Honsolgen,1,0,correct,,unchanged
+486,Hanau,1,0,correct,,unchanged
+487,Lienz,1,0,correct,,unchanged
+488,Obergriesbach,1,0,unsure,unsure,open
+489,Barmsee,1,0,correct,correct,confirmed
+490,Eslarn,1,0,correct,,unchanged
+491,Neustadt an der Aisch,1,0,correct,,unchanged
+492,Mittelfranken,1,0,correct,,unchanged
+493,Pfalz,1,0,drop,drop,coordinates removed
+494,Görlitz,1,0,correct,,unchanged
+495,Völling,1,0,relocate_parent,relocate_parent,relocated
+496,Donaumoos,1,0,drop,drop,coordinates removed
+497,Schussenmündung,1,0,correct,,unchanged
+498,Großer Falkenstein,1,0,correct,correct,confirmed
+499,Frankfurt am Main,1,0,correct,,unchanged
+500,Vohburg an der Donau,1,0,correct,,unchanged
+501,München-Gern,1,0,correct,,unchanged
+502,Oberalting,1,0,correct,correct,confirmed
+503,Salzberg,1,0,correct,,unchanged
+504,Schalldorf,1,0,drop,drop,coordinates removed
+505,Winkelmühle,1,0,drop,drop,coordinates removed
+506,Sulzbach-Rosenberg,1,0,correct,,unchanged
+507,Breitbrunn,1,0,drop,drop,coordinates removed
+508,Gaimersheim,1,0,correct,,unchanged
+509,Ludwigsburg,1,1,correct,,unchanged
+510,Eindhoven,1,1,correct,,unchanged
+511,Moosbach,1,0,unsure,unsure,open
+512,Schnabelwaid,1,0,correct,,unchanged
+513,Wartenberg,1,0,correct,correct,confirmed
+514,Weildorf,1,0,correct,correct,confirmed
+515,Haag,1,0,relocate_gn,relocate_gn,relocated
+516,Kirchseeon,1,0,correct,,unchanged
+517,Kappeln,1,0,correct,,unchanged
+518,Grainet,1,0,correct,,unchanged
+519,Brunst,1,0,correct,correct,confirmed
+520,Kirchdorf,1,1,unsure,unsure,open
+521,Munningen,1,0,correct,,unchanged
+522,Egenhausen,1,0,unsure,unsure,open
+523,Unterammergau,1,0,correct,,unchanged
+524,Alfeld,1,0,correct,,unchanged
+525,Donauinsel,1,0,drop,drop,coordinates removed
+526,Raiding,1,0,drop,drop,coordinates removed
+527,Pocking,1,1,correct,,unchanged
+528,Abensberg,1,0,correct,,unchanged
+529,Teugn,1,0,correct,,unchanged
+530,Sand,1,0,drop,unsure,open
+531,Haslach,1,0,drop,drop,coordinates removed
+532,Addis Abeba,1,0,correct,,unchanged
+533,Zinnkopf,1,0,correct,correct,confirmed
+534,Ortenburg,1,0,correct,,unchanged
+535,Marienberg,1,0,relocate_gn,relocate_gn,relocated
+536,Kreuth,1,0,correct,,unchanged
+537,Hochgern,1,0,correct,,unchanged
+538,Scheuchenberg,1,0,correct,,unchanged
+539,Geisling,1,0,correct,correct,confirmed
+540,Prien am Chiemsee,1,0,correct,,unchanged
+541,Kanzberg,1,0,drop,drop,coordinates removed
+542,Traunstein,1,0,correct,,unchanged
+543,Stephansposching,1,0,correct,,unchanged
+544,Dese,1,0,correct,,unchanged
+545,Warburg,1,0,correct,,unchanged
+546,Neustadt an der Waldnaab,1,0,correct,,unchanged
+547,Třeboň,1,0,correct,,unchanged
+548,Reit im Winkl,1,0,correct,,unchanged
+549,Hühnerberg,1,0,relocate_gn,relocate_gn,relocated
+550,Fulda,1,1,correct,,unchanged
+551,Rethem,1,1,correct,,unchanged
+552,Friedenau,1,0,correct,,unchanged
+553,Lachen,1,1,relocate_parent,drop,coordinates removed
+554,Parseierscharte,1,0,correct,,unchanged
+555,Wertachtal,1,0,correct,drop,open
+556,Waltenbergerhaus,1,0,correct,,unchanged
+557,Steinschartenkopf,1,0,correct,,unchanged
+558,Ebene,1,0,drop,drop,coordinates removed
+559,Fleck,1,0,relocate_gn,relocate_gn,relocated
+560,Funtensee,1,0,correct,,unchanged
+561,Mehring,1,0,correct,,unchanged
+562,Rothenfels,1,0,drop,drop,coordinates removed
+563,Kohlstatt,1,0,drop,drop,coordinates removed
+564,Rabenkopf,1,0,drop,drop,coordinates removed
+565,Berchtesgadener Alpen,1,0,correct,,unchanged
+566,Schmalholz,1,0,correct,correct,confirmed
+567,Wolfertschwenden,1,0,correct,,unchanged
+568,Marne-Rhein-Kanal,1,1,correct,,unchanged
+569,Wieselsberg,1,0,drop,drop,coordinates removed
+570,Valli di Comacchio,1,0,correct,,unchanged
+571,Bärental,1,0,drop,relocate_gn,coordinates removed
+572,Geißkopf,1,0,unsure,unsure,open
+573,Loferer Steinberge,1,0,correct,correct,confirmed
+574,Bromberg,1,1,drop,relocate_parent,coordinates removed
+575,Betzenhausen,1,0,correct,,unchanged
+576,Gera,1,0,correct,,unchanged
+577,Tierpark Hagenbeck,1,0,drop,drop,coordinates removed
+578,Salzachbrücke,1,0,relocate_parent,relocate_parent,relocated
+579,Münnerstadt,1,0,correct,,unchanged
+580,Neustadt an der Saale,1,0,correct,,unchanged
+581,Alpspitze,1,0,correct,correct,confirmed
+582,Stilluptal,1,0,correct,,unchanged
+583,Ahornspitze,1,0,correct,,unchanged
+584,Kellmünz,1,0,correct,,unchanged
+585,Akademie,1,1,correct,,unchanged
+586,Egern,1,0,correct,,unchanged
+587,Bürgle,1,1,unsure,unsure,open
+588,Altenhofen,1,0,drop,drop,coordinates removed
+589,Eisenburg,1,0,correct,,unchanged
+590,Norderoog,1,0,correct,,unchanged
+591,Amrum,1,0,correct,,unchanged
+592,Dümmer,1,0,correct,correct,confirmed
+593,Fehmarn,1,0,correct,,unchanged
+594,Müritz,1,0,drop,drop,coordinates removed
+595,Usedom,1,0,correct,,unchanged
+596,Zempin,1,0,correct,,unchanged
+597,Moosheim,1,0,correct,,unchanged
+598,Bad Saulgau,1,0,correct,,unchanged
+599,Zeil am Main,1,0,correct,correct,confirmed
+600,Schachen,1,0,correct,,unchanged
+601,Oberreintal,1,0,correct,,unchanged
+602,Hinterzarten,1,0,correct,,unchanged
+603,Gmain,1,0,unsure,drop,open
+604,Stubachtal,1,0,correct,,unchanged
+605,Niederrhein,1,0,correct,correct,confirmed
+606,Neuwied,1,0,correct,,unchanged
+607,Moers,1,0,correct,,unchanged
+608,Gamskarkogel,1,0,relocate_gn,relocate_gn,relocated
+609,Kirchaitnach,1,0,correct,,unchanged
+610,Hofmühle,1,0,drop,drop,coordinates removed
+611,Bruck,1,1,relocate_gn,relocate_gn,relocated
+612,Volkmannsdorferau,1,0,correct,,unchanged
+613,Schloss Falkenberg,1,0,unsure,unsure,open
+614,Witznau,1,0,correct,,unchanged
+615,Hochkünzelspitze,1,0,correct,,unchanged
+616,Vogelberg,1,1,relocate_parent,relocate_parent,coordinates removed
+617,Brunnhausen,1,0,drop,drop,coordinates removed
+618,Schmiedefeld,1,0,correct,,unchanged
+619,Birkenau,1,1,relocate_parent,relocate_parent,relocated
+620,Lüneburg,1,0,correct,,unchanged
+621,Usterling,1,0,correct,,unchanged
+622,Himbeerschlag,1,1,relocate_parent,relocate_parent,relocated
+623,Neu-Grünwald,1,1,correct,,unchanged
+624,Mitterstein,1,0,unsure,drop,open
+625,Gamsspitz,1,0,relocate_parent,relocate_parent,relocated
+626,Eben,1,0,drop,drop,coordinates removed
+627,Schwarzenbach,1,0,relocate_gn,relocate_gn,relocated
+628,Kirchholz,1,0,relocate_parent,relocate_parent,relocated
+629,Kornberg,1,0,drop,drop,coordinates removed
+630,Mainbernheim,1,0,correct,,unchanged
+631,Weyhern,1,0,correct,,unchanged
+632,Niederbergkirchen,1,0,correct,,unchanged
+633,Mainberg,1,0,correct,,unchanged
+634,Altenburg,1,0,drop,drop,coordinates removed
+635,Obersalzberg,1,0,correct,correct,confirmed
+636,Bischofshofen,1,0,correct,,unchanged
+637,Gurgltal,1,0,correct,,unchanged
+638,Michelau an der Saale,1,0,correct,,unchanged
+639,Niederwerrn,1,0,correct,,unchanged
+640,Himmelstadt,1,0,correct,,unchanged
+641,Karlburg,1,0,correct,correct,confirmed
+642,Zellingen,1,0,correct,,unchanged
+643,Trennfeld,1,0,correct,,unchanged
+644,Lustenau,1,0,correct,,unchanged
+645,Amriswil,1,0,correct,,unchanged
+646,Bütthard,1,0,correct,,unchanged
+647,Ebersbach,1,0,relocate_gn,relocate_gn,relocated
+648,Altmannstein,1,0,correct,correct,confirmed
+649,Gierling,1,0,correct,,unchanged
+650,Lassing,1,0,unsure,drop,open
+651,Warmisried,1,0,correct,,unchanged
+652,Mannheim,1,0,correct,correct,confirmed
+653,Donaueschingen,1,0,correct,correct,confirmed
+654,Stolberg,1,0,correct,,unchanged
+655,Nußdorf,1,0,drop,relocate_gn,coordinates removed
+656,Erkrath,1,0,correct,correct,confirmed
+657,Ockenheim,1,0,correct,,unchanged
+658,Hamburg,1,0,correct,correct,confirmed
+659,Wies,1,0,drop,drop,coordinates removed
+660,Forlev,1,1,correct,correct,confirmed
+661,Nässjö,1,1,correct,,unchanged
+662,Marktbreit,1,1,correct,,unchanged
+663,Gungolding,1,1,correct,,unchanged
+664,Isny im Allgäu,1,0,correct,,unchanged
+665,Binsdorf,1,0,correct,,unchanged
+666,Allershausen,1,0,correct,,unchanged
+667,Kaiserslautern,1,0,correct,,unchanged
+668,Roggenburg,1,0,correct,,unchanged
+669,Meiningen,1,0,drop,unsure,open
+670,Gundelfingen,1,0,relocate_gn,relocate_gn,relocated
+671,Kaiser,1,1,drop,drop,coordinates removed
+672,Paderborn,1,0,correct,,unchanged
+673,Neubach,1,1,relocate_parent,drop,coordinates removed
+674,Langdorf,1,0,drop,unsure,open
+675,Winterleiten,1,0,relocate_parent,relocate_parent,relocated
+676,Spitzingsee,1,0,correct,,unchanged
+677,Kiesberg,1,0,relocate_parent,relocate_parent,relocated
+678,Asbach-Bäumenheim,1,0,correct,,unchanged
+679,Rödental,1,0,unsure,correct,open
+680,Lorettoberg,1,0,correct,,unchanged
+681,Burtenbach,1,0,correct,,unchanged
+682,Wettingen,1,1,correct,,unchanged
+683,Kreuztal,1,0,drop,drop,coordinates removed
+684,Paring,1,0,unsure,unsure,open
+685,Neuhausen,1,0,relocate_gn,relocate_gn,relocated
+686,Ries,1,0,correct,,unchanged
+687,Aosta,1,0,correct,,unchanged
+688,Hinterwinkel,1,1,drop,drop,coordinates removed
+689,Hirschauer Bucht,1,0,correct,,unchanged
+690,Jägerhaus,1,0,relocate_parent,relocate_parent,relocated
+691,Unterdill,1,0,drop,drop,coordinates removed
+692,Unterwössen,1,1,correct,,unchanged
+693,Heiligkreuz,1,1,drop,drop,coordinates removed
+694,Tiroler Achen,1,0,correct,,unchanged
+695,Hochberg,1,0,drop,drop,coordinates removed
+696,Kranzwald,1,1,relocate_parent,relocate_parent,relocated
+697,Haarmoos,1,0,correct,,unchanged
+698,Azendorf,1,0,correct,,unchanged
+699,Veldensteiner Forst,1,0,correct,,unchanged
+700,Wittlich,1,0,correct,,unchanged
+701,Ettenberg,1,0,correct,,unchanged
+1000,Lovran,158,134,correct,correct,confirmed
+1001,Bodensdorf,104,96,correct,correct,confirmed
+1002,Bad Schandau,89,81,correct,unsure,open
+1003,Hinterstein,83,0,correct,correct,confirmed
+1004,Bad Reichenhall,66,0,correct,correct,confirmed
+1005,Wollmatinger Ried,60,5,correct,correct,confirmed
+1006,Schruns,56,48,correct,correct,confirmed
+1007,Bernrieder Filz,52,51,correct,correct,confirmed
+1008,Ermatingen,36,1,correct,correct,confirmed
+1009,Passau,32,3,correct,correct,confirmed
+1010,Schnifis,32,31,correct,correct,confirmed
+1011,Oytal,23,2,correct,correct,confirmed
+1012,Kopenhagen,23,3,correct,correct,confirmed
+1013,Rouen,23,9,correct,correct,confirmed
+1014,Artlenburg,21,21,correct,correct,confirmed
+1015,Tietzing,21,21,drop,drop,coordinates removed
+1016,Selb,17,0,correct,correct,confirmed
+1017,Rappenalptal,15,0,correct,correct,confirmed
+1018,Schaffhausen,14,2,correct,correct,confirmed
+1019,Giebel,14,0,correct,correct,confirmed
+1020,Reichenau,14,1,correct,correct,confirmed
+1021,Freiburg,14,12,correct,correct,confirmed
+1022,Frickingen,13,0,drop,drop,coordinates removed
+1023,Bad Schmiedeberg,13,3,drop,drop,coordinates removed
+1024,Dittersbach,11,11,drop,drop,coordinates removed
+1025,Untersberg,11,0,correct,correct,confirmed
+1026,Bovenden,11,11,unsure,drop,open
+1027,Kalamos,10,10,relocate_gn,relocate_gn,relocated
+1028,Pfarrkirchen,10,1,correct,correct,confirmed
+1029,Nonner Au,10,1,correct,correct,confirmed
+1030,Weißenhorn,10,8,correct,correct,confirmed
+1031,Leinbach,10,10,drop,unsure,open
+1032,Bad Schwalbach,9,9,correct,drop,open
+1033,Pütting,9,9,unsure,unsure,open
+1034,Günzburg,8,1,correct,correct,confirmed
+1035,Maisach,8,6,correct,correct,confirmed
+1036,Bodman,8,1,correct,unsure,open
+1037,Plattling,8,0,correct,correct,confirmed
+1038,Saalachsee,8,0,correct,correct,confirmed
+1039,Bärensee,7,7,correct,correct,confirmed
+1040,Birgsau,7,0,correct,correct,confirmed
+1041,Kleinwalsertal,7,0,correct,correct,confirmed
+1042,Erlangen,7,0,correct,correct,confirmed
+1043,Naßfeld,6,0,relocate_gn,correct,open
+1044,Fridolfing,6,6,correct,correct,confirmed
+1045,Hintersteiner Tal,6,0,correct,correct,confirmed
+1046,Waldschenke,6,6,relocate_parent,relocate_parent,coordinates removed
+1047,Rubihorn,5,0,correct,correct,confirmed
+1048,Landau an der Isar,5,0,correct,correct,confirmed
+1049,Binnensee,5,0,drop,drop,coordinates removed
+1050,Vido,5,5,correct,correct,confirmed
+1051,Rappensee,5,0,correct,correct,confirmed
+1052,Schwarzwassertal,5,0,unsure,unsure,open
+1053,Amvrakikos Kolpos,5,0,correct,correct,confirmed
+1054,Roggenburger Weiher,5,5,correct,correct,confirmed
+1055,Basel,5,4,correct,correct,confirmed
+1056,Falster,4,4,correct,correct,confirmed
+1057,Seealpsee,4,0,correct,correct,confirmed
+1058,Thyrnau,4,0,correct,correct,confirmed
+1059,Ilz,4,0,correct,correct,confirmed
+1060,Waldkirchen,4,0,correct,correct,confirmed
+1061,Ostrachtal,4,0,correct,correct,confirmed
+1062,Piding,4,0,correct,correct,confirmed
+1063,Zwieselalm,4,0,correct,correct,confirmed
+1064,Saalach,4,1,correct,correct,confirmed
+1065,Egertal,4,0,correct,correct,confirmed
+1066,Breslau,3,1,correct,correct,confirmed
+1067,Karlsruhe,3,2,correct,correct,confirmed
+1068,Karlshöfen,3,3,correct,correct,confirmed
+1069,Reichertshofen,3,3,correct,correct,confirmed
+1070,Rügen,3,0,correct,correct,confirmed
+1071,Riedsee,3,0,relocate_parent,relocate_parent,relocated
+1072,Straßkirchen,3,0,correct,correct,confirmed
+1073,Ochsenkopf,3,0,relocate_parent,relocate_parent,relocated
+1074,Seewände,3,0,correct,correct,confirmed
+1075,Lattengebirge,3,0,correct,correct,confirmed
+1076,Bruderholz,3,3,correct,correct,confirmed
+1077,Bern,3,3,correct,correct,confirmed
+1078,Allgäuer Alpen,2,0,correct,correct,confirmed
+1079,Reutin,2,1,drop,drop,coordinates removed
+1080,Löbau,2,2,correct,correct,confirmed
+1081,Gedser,2,2,correct,correct,confirmed
+1082,Prinz-Ludwig-Palais,2,2,correct,correct,confirmed
+1083,Valepp,2,0,correct,correct,confirmed
+1084,Kalteneck,2,0,correct,correct,confirmed
+1085,Vilshofen,2,0,correct,correct,confirmed
+1086,Seestetten,2,0,correct,correct,confirmed
+1087,Kellberg,2,0,correct,correct,confirmed
+1088,Günding,2,0,correct,correct,confirmed
+1089,Zolling,2,0,correct,correct,confirmed
+1090,Mädelegabel,2,0,correct,correct,confirmed
+1091,Regen,2,1,correct,correct,confirmed
+1092,Barbing,2,0,correct,correct,confirmed
+1093,Nabburg,2,0,correct,correct,confirmed
+1094,Grafenwöhr,2,0,correct,correct,confirmed
+1095,Thundorfer Weiher,2,0,correct,correct,confirmed
+1096,Freibergsee,2,0,correct,correct,confirmed
+1097,Jardin des Plantes,2,2,correct,correct,confirmed
+1098,Seerhein,2,0,correct,correct,confirmed
+1099,Borkum,2,0,correct,correct,confirmed
+1100,Warnemünde,2,2,correct,correct,confirmed
+1101,Warnow,2,2,correct,correct,confirmed
+1102,Amberg,2,0,correct,correct,confirmed
+1103,Radolfzeller Aach,2,0,correct,correct,confirmed
+1104,Breiter Teich,2,0,correct,correct,confirmed
+1105,Leupoldshammer,2,0,correct,correct,confirmed
+1106,Euerdorf,2,0,correct,correct,confirmed
+1107,Maria-Josepha-Straße,2,2,correct,correct,confirmed
+1108,Söllereck,2,0,correct,correct,confirmed
+1109,Luch,2,0,relocate_parent,correct,open
+1110,Malmö,2,2,correct,correct,confirmed
+1111,Neuchâtel,2,2,correct,correct,confirmed
+1112,Mönchsee,2,2,unsure,unsure,open
+1113,Griesweiher,2,2,unsure,unsure,open
+1114,Rietwies,1,1,drop,drop,coordinates removed
+1115,Hüttenwang,1,1,correct,correct,confirmed
+1116,Palsweis,1,1,correct,correct,confirmed
+1117,Steinacker,1,0,unsure,correct,open
+1118,Ebenau,1,0,drop,drop,coordinates removed
+1119,Streitberg,1,0,drop,relocate_gn,coordinates removed
+1120,Grafenburg,1,1,correct,correct,confirmed
+1121,Stockach,1,1,relocate_parent,relocate_parent,relocated
+1122,Verona,1,1,correct,correct,confirmed
+1123,San Zeno,1,1,correct,correct,confirmed
+1124,Alster,1,1,correct,correct,confirmed
+1125,Hals,1,1,correct,correct,confirmed
+1126,Tristkogel,1,0,correct,correct,confirmed
+1127,Hirschberg,1,1,drop,drop,coordinates removed
+1128,Brüssel,1,1,correct,correct,confirmed
+1129,Durlach,1,1,correct,correct,confirmed
+1130,Stuttgart,1,1,correct,correct,confirmed
+1131,Neuhofen,1,0,relocate_gn,relocate_gn,relocated
+1132,Schneibstein,1,0,correct,correct,confirmed
+1133,Hochkönig,1,0,correct,correct,confirmed
+1134,Hofstetten,1,0,correct,correct,confirmed
+1135,Ottenhofen,1,0,correct,correct,confirmed
+1136,Neuburg,1,0,correct,correct,confirmed
+1137,Sandbach,1,0,correct,correct,confirmed
+1138,Gröden,1,1,unsure,unsure,open
+1139,Entschenkopf,1,1,correct,correct,confirmed
+1140,Mickhausen,1,0,correct,correct,confirmed
+1141,Simbach am Inn,1,0,correct,correct,confirmed
+1142,Entengraben,1,0,relocate_parent,relocate_parent,coordinates removed
+1143,Schwarzach,1,0,relocate_gn,relocate_gn,relocated
+1144,Fischhaus,1,0,unsure,unsure,open
+1145,Klingersberg,1,0,unsure,correct,open
+1146,Großer Daumen,1,0,correct,correct,confirmed
+1147,Klardorf,1,0,correct,correct,confirmed
+1148,Walserberg,1,0,correct,correct,confirmed
+1149,Rothenstadt,1,0,correct,correct,confirmed
+1150,Luhe-Wildenau,1,0,correct,correct,confirmed
+1151,Hahnbach,1,0,correct,correct,confirmed
+1152,Mitterteich,1,0,correct,correct,confirmed
+1153,Burgebrach,1,0,correct,correct,confirmed
+1154,Rehau,1,0,correct,correct,confirmed
+1155,Naab,1,0,relocate_gn,relocate_gn,coordinates removed
+1156,Schirmitz,1,0,correct,correct,confirmed
+1157,Stützli,1,1,relocate_parent,relocate_parent,relocated
+1158,Ochsenfurt,1,1,correct,correct,confirmed
+1159,Lindenwirt,1,1,drop,drop,coordinates removed
+1160,Hagberg,1,1,relocate_parent,relocate_parent,coordinates removed
+1161,Hüttenkopf,1,0,relocate_gn,relocate_gn,relocated
+1162,Geishorn,1,0,correct,correct,confirmed
+1163,Sonnenkopf,1,0,correct,correct,confirmed
+1164,Schmalhorn,1,0,correct,correct,confirmed
+1165,Mantes-la-Jolie,1,1,correct,correct,confirmed
+1166,Vernon,1,1,correct,correct,confirmed
+1167,Wiesau,1,1,correct,correct,confirmed
+1168,Hegge,1,1,correct,correct,confirmed
+1169,Baiersdorf,1,0,correct,correct,confirmed
+1170,Bürserberg,1,0,correct,correct,confirmed
+1171,Thierstein,1,0,correct,correct,confirmed
+1172,Wolkersdorf,1,0,correct,correct,confirmed
+1173,Rothmannsthal,1,0,correct,correct,confirmed
+1174,Rostocker Heide,1,1,correct,correct,confirmed
+1175,Erlenboden,1,0,relocate_parent,relocate_parent,relocated
+1176,Großer Widderstein,1,0,correct,correct,confirmed
+1177,Sankt Johannisrain,1,0,correct,correct,confirmed
+1178,Schoren,1,0,relocate_parent,unsure,open
+1179,Stillach,1,0,correct,correct,confirmed
+1180,Predigtstuhl,1,0,correct,correct,confirmed
+1181,Buchwald,1,0,correct,correct,confirmed
+1182,Markgrafenteich,1,0,correct,correct,confirmed
+1183,Grafenrheinfeld,1,0,correct,correct,confirmed
+1184,Schwärzenbach,1,0,correct,correct,confirmed
+1185,Reute,1,0,correct,correct,confirmed
+1186,Attenhofen,1,1,relocate_gn,relocate_gn,relocated
+1187,Fehrbellin,1,0,correct,correct,confirmed
+1188,Rorschach,1,1,correct,correct,confirmed
+1189,Gramschatzer Wald,1,0,correct,correct,confirmed
+1190,Randersacker,1,0,correct,correct,confirmed
+1191,Seckbach,1,0,correct,correct,confirmed
+1192,Flörsheim,1,0,correct,correct,confirmed
+1193,Zoo Basel,1,1,correct,correct,confirmed
+1194,Tümpel,1,0,drop,drop,coordinates removed
+1195,Gundelfingen an der Donau,1,0,correct,correct,confirmed
+1196,Turbigo,1,0,correct,correct,confirmed
