@@ -1,55 +1,54 @@
-# w3id.org/laubmann-kg — permanent identifiers for the Laubmann Knowledge Graph
-# (HistOrniGraph). Prepared 2026-08-18; submit as a PR to
-# https://github.com/perma-id/w3id.org once the ontology is finalized.
+# # /laubmann-kg/
 #
-# Targets (change here, never in the data):
-#   HTML docs   → GitHub Pages of the repo (Settings ▸ Pages ▸ branch main, folder /docs)
-#   RDF files   → raw files on the main branch
+# Permanent identifiers of the Laubmann Knowledge Graph (HistOrniGraph): the
+# ontology, its SKOS vocabularies and SHACL shapes, and the instance IRIs of a
+# knowledge graph built from the ornithological field diaries of Alfred Louis
+# Laubmann (Bavaria, 1917-1965). Source: https://github.com/desyLoyz/laubmann-kg
 #
 # Layout
-#   /laubmann-kg/ontology            OWL ontology (hash namespace …/ontology#)
-#   /laubmann-kg/ontology/<version>  version IRIs (owl:versionIRI)
-#   /laubmann-kg/vocabularies        SKOS concept schemes (same namespace as the ontology)
+#   /laubmann-kg/ontology            OWL ontology (hash namespace .../ontology#):
+#                                    Turtle for RDF clients, documentation for browsers
+#   /laubmann-kg/ontology/<x.y.z>    version IRIs (owl:versionIRI) -> git tag v<x.y.z>
+#   /laubmann-kg/vocabularies        SKOS concept schemes (controlled values)
 #   /laubmann-kg/shapes              SHACL shapes
 #   /laubmann-kg/context.jsonld      JSON-LD context
-#   /laubmann-kg/data/<id>           instance IRIs (entries, observations, taxa, places, persons, …)
+#   /laubmann-kg/data/<id>           instance IRIs (no resolver yet: data documentation page)
+#
+# ## Contact
+# This space is administered by:
+#
+# Tobias Perschl
+# Tobias.Perschl@uni-passau.de
+# GitHub username: Maelkolb
+#
+# Alois Wieshuber
+# alois.wieshuber@gda.bayern.de
+# GitHub username: desyLoyz
 
-Options +FollowSymLinks
 RewriteEngine on
 
-# ---- ontology: content negotiation --------------------------------------
-# RDF serialisations → raw Turtle on GitHub (rdflib/Protégé send these Accept headers)
-RewriteCond %{HTTP_ACCEPT} text/turtle [OR]
-RewriteCond %{HTTP_ACCEPT} application/rdf\+xml [OR]
-RewriteCond %{HTTP_ACCEPT} application/ld\+json [OR]
-RewriteCond %{HTTP_ACCEPT} application/n-triples [OR]
-RewriteCond %{HTTP_ACCEPT} text/n3
-RewriteRule ^ontology/?$ https://raw.githubusercontent.com/Maelkolb/laubmann-kg_TP/main/ontologies/laubmann.ttl [R=303,L]
+# ontology: RDF clients get the Turtle file of the main branch
+RewriteCond %{HTTP_ACCEPT} (text/turtle|application/rdf\+xml|application/ld\+json|application/n-triples|text/n3)
+RewriteRule ^ontology$ https://raw.githubusercontent.com/desyLoyz/laubmann-kg/main/ontologies/laubmann.ttl [R=303,L]
+RewriteRule ^ontology$ https://desyloyz.github.io/laubmann-kg/ontology/ [R=303,L]
+RewriteRule ^ontology\.ttl$ https://raw.githubusercontent.com/desyLoyz/laubmann-kg/main/ontologies/laubmann.ttl [R=302,L]
+RewriteRule ^ontology\.html$ https://desyloyz.github.io/laubmann-kg/ontology/ [R=302,L]
 
-# explicit file extensions
-RewriteRule ^ontology\.ttl$  https://raw.githubusercontent.com/Maelkolb/laubmann-kg_TP/main/ontologies/laubmann.ttl [R=303,L]
-RewriteRule ^ontology\.html$ https://maelkolb.github.io/laubmann-kg_TP/ontology/ [R=303,L]
+# version IRIs: the ontology file of the release tag
+RewriteRule ^ontology/([0-9]+\.[0-9]+\.[0-9]+)$ https://raw.githubusercontent.com/desyLoyz/laubmann-kg/v$1/ontologies/laubmann.ttl [R=303,L]
 
-# versioned IRIs (owl:versionIRI) → the git tag of that release
-RewriteRule ^ontology/([0-9]+\.[0-9]+\.[0-9]+)/?$ https://raw.githubusercontent.com/Maelkolb/laubmann-kg_TP/v$1/ontologies/laubmann.ttl [R=303,L]
+# vocabularies and shapes
+RewriteCond %{HTTP_ACCEPT} (text/turtle|application/rdf\+xml|application/ld\+json)
+RewriteRule ^vocabularies$ https://raw.githubusercontent.com/desyLoyz/laubmann-kg/main/ontologies/controlled_vocabularies.ttl [R=303,L]
+RewriteRule ^vocabularies$ https://desyloyz.github.io/laubmann-kg/ontology/vocabularies.html [R=303,L]
+RewriteCond %{HTTP_ACCEPT} (text/turtle|application/rdf\+xml|application/ld\+json)
+RewriteRule ^shapes$ https://raw.githubusercontent.com/desyLoyz/laubmann-kg/main/ontologies/shacl_shapes.ttl [R=303,L]
+RewriteRule ^shapes$ https://desyloyz.github.io/laubmann-kg/ontology/shapes.html [R=303,L]
+RewriteRule ^context\.jsonld$ https://raw.githubusercontent.com/desyLoyz/laubmann-kg/main/schemas/jsonld_context.json [R=302,L]
 
-# everything else for the ontology (browsers) → human-readable documentation (pyLODE)
-RewriteRule ^ontology/?$ https://maelkolb.github.io/laubmann-kg_TP/ontology/ [R=303,L]
+# instance IRIs: no public SPARQL/describe service yet, so they land on the data
+# documentation page (the IRI's local name as fragment)
+RewriteRule ^data/([A-Za-z0-9_.-]+)$ https://desyloyz.github.io/laubmann-kg/ontology/data.html#$1 [R=302,NE,L]
 
-# ---- vocabularies / shapes / context -------------------------------------
-RewriteCond %{HTTP_ACCEPT} text/turtle [OR]
-RewriteCond %{HTTP_ACCEPT} application/rdf\+xml [OR]
-RewriteCond %{HTTP_ACCEPT} application/ld\+json
-RewriteRule ^vocabularies/?$ https://raw.githubusercontent.com/Maelkolb/laubmann-kg_TP/main/ontologies/controlled_vocabularies.ttl [R=303,L]
-RewriteRule ^vocabularies/?$ https://maelkolb.github.io/laubmann-kg_TP/ontology/vocabularies.html [R=303,L]
-RewriteRule ^shapes/?$       https://raw.githubusercontent.com/Maelkolb/laubmann-kg_TP/main/ontologies/shacl_shapes.ttl [R=303,L]
-RewriteRule ^context\.jsonld$ https://raw.githubusercontent.com/Maelkolb/laubmann-kg_TP/main/schemas/jsonld_context.json [R=303,L]
-
-# ---- data IRIs -------------------------------------------------------------
-# No public SPARQL endpoint yet: instance IRIs land on the data landing page.
-# When a Fuseki/LDF service exists, replace with e.g.
-#   RewriteRule ^data/(.+)$ https://<host>/laubmann/describe?iri=https://w3id.org/laubmann-kg/data/$1 [R=303,L]
-RewriteRule ^data/(.*)$ https://maelkolb.github.io/laubmann-kg_TP/ontology/data.html#$1 [R=303,NE,L]
-
-# ---- root ------------------------------------------------------------------
-RewriteRule ^/?$ https://github.com/Maelkolb/laubmann-kg_TP [R=303,L]
+# root: the project repository
+RewriteRule ^$ https://github.com/desyLoyz/laubmann-kg [R=302,L]

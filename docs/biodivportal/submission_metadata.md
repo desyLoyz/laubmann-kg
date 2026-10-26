@@ -6,7 +6,7 @@ bewusst stehen geblieben.
 - Portal: <https://biodivportal.gfbio.org/> (OntoPortal-Instanz; REST-API <https://data.biodivportal.gfbio.org/>)
 - Registry-Eintrag: <https://kghub.org/kg-registry/resource/biodivportal/biodivportal.html>
 - Metadatenschema: MOD 2.0 / OntoPortal – <https://ontoportal.github.io/documentation/user_guide/metadata_schema/EcoPortal>
-- Quelle des Stands: Repository `laubmann-kg-che`, Branch `main`, Commit `c8d4954` (Ontologie 0.7.1, 2026-10-06)
+- Quelle des Stands: Repository <https://github.com/desyLoyz/laubmann-kg>, Branch `main` (Ontologie 0.7.1; Metadaten 2026-10-20, Kommentare und Links 2026-10-26)
 
 ## 1. Dateien
 
@@ -52,11 +52,11 @@ Pflichtfelder laut API von BiodivPortal: `acronym`, `name`, `administeredBy`, `s
 | fundedBy | NFDI4Biodiversity (<https://www.nfdi4biodiversity.org/>); das Projekt HistOrniGraph wurde von der NFDI4Biodiversity gefördert |
 | publisher | HistOrniGraph / Laubmann KG Project (TODO: ggf. Universität Passau / Generaldirektion der Staatlichen Archive Bayerns) |
 | rights holder | TODO klären (Universität Passau und/oder GDA Bayern) |
-| homepage | <https://github.com/Maelkolb/laubmann-kg_TP> |
-| repository | <https://github.com/Maelkolb/laubmann-kg_TP> |
-| documentation | TODO: feste URL der pyLODE-Seite (`docs/ontology/index.html`, nach Freischaltung von GitHub Pages bzw. w3id) |
+| homepage | <https://github.com/desyLoyz/laubmann-kg> |
+| repository | <https://github.com/desyLoyz/laubmann-kg> |
+| documentation | <https://w3id.org/laubmann-kg/ontology> (leitet Browser auf <https://desyloyz.github.io/laubmann-kg/ontology/> um; beides erst nach Schritt 1–3 in Abschnitt 5 erreichbar) |
 | publication | TODO: keine Publikation vorhanden |
-| bugDatabase | <https://github.com/Maelkolb/laubmann-kg_TP/issues> |
+| bugDatabase | <https://github.com/desyLoyz/laubmann-kg/issues> |
 | naturalLanguage | en, de |
 | versionIRI | `https://w3id.org/laubmann-kg/ontology/0.7.1` |
 | prior version | `https://w3id.org/laubmann-kg/ontology/0.7.0` |
@@ -125,8 +125,17 @@ In `ontologies/laubmann.ttl` ergänzt oder korrigiert:
 
 ## 5. Offene Punkte vor der Einreichung
 
-1. **w3id-Namespace registrieren** (PR bei <https://github.com/perma-id/w3id.org>, Vorlage in `w3id/laubmann-kg/`); `w3id/laubmann-kg/README.md` nennt noch `Maelkolb` als Kontakt und `0.4.0` als aktuelle Version.
-2. **Dokumentations-URL** festlegen (GitHub Pages für `docs/` oder w3id); die Seite selbst ist aktuell (`docs/ontology/index.html`, 0.7.1).
+1. **w3id-Namespace registrieren.** Stand 2026-10-26: `w3id/laubmann-kg/` zeigt auf `desyLoyz/laubmann-kg`
+   (vorher auf den nicht mehr gepflegten Fork), README mit beiden Maintainern und Version 0.7.1. Reihenfolge:
+   1. GitHub Pages für `desyLoyz/laubmann-kg` einschalten (Settings ▸ Pages ▸ Branch `main`, Ordner `/docs`;
+      nur Repo-Admin): dann liegt die Dokumentation unter <https://desyloyz.github.io/laubmann-kg/ontology/>.
+   2. Git-Tag `v0.7.1` auf den Commit setzen, der die einzureichende Ontologie enthält (die versionIRI
+      `…/ontology/0.7.1` löst auf `raw.githubusercontent.com/desyLoyz/laubmann-kg/v0.7.1/ontologies/laubmann.ttl` auf).
+   3. Ordner `w3id/laubmann-kg/` (`.htaccess`, `README.md`) als `laubmann-kg/` in einen Fork von
+      <https://github.com/perma-id/w3id.org> kopieren und Pull Request stellen.
+   Die Registrierung legt nur die Weiterleitungen fest, nicht den Inhalt; Ziele lassen sich später per PR ändern.
+   Der Namensraum steckt bereits in allen IRIs des Graphen und in den `occurrenceID`s des GBIF-Exports.
+2. **Dokumentations-URL**: w3id (siehe 1.); die Seite selbst ist aktuell (`docs/ontology/index.html`, 0.7.1, neu erzeugt 2026-10-26).
 3. **Rechteinhaber/Publisher** klären (steht in `LICENSE` und `dcterms:publisher` als „HistOrniGraph / Laubmann KG Project“).
 4. **Account und Gruppe** im BiodivPortal anlegen (`administeredBy`).
 5. **Publikation** (Feld *publication*) – noch keine vorhanden.
