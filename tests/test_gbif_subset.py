@@ -138,6 +138,21 @@ def test_country_code_only_from_a_geonames_location() -> None:
     assert row["countryCode"] == ""
 
 
+def test_taxon_id_is_the_bare_gbif_key() -> None:
+    row = occurrence_row(occ(1, taxonID="https://www.gbif.org/species/2495455"), None, q(1), OBS, META, {})
+    assert row["taxonID"] == "2495455"
+    assert gbif.taxon_key("") == "" and gbif.taxon_key("urn:other:1") == "urn:other:1"
+
+
+def test_no_country_code_from_hydrographic_features(tmp_path) -> None:
+    import zipfile
+    lines = ["2772288\tLoisach\tLoisach\t\t47.93\t11.45\tH\tSTM\tAT\t",
+             "2867714\tMunich\tMunich\t\t48.14\t11.58\tP\tPPLA\tDE\t"]
+    with zipfile.ZipFile(tmp_path / "XX.zip", "w") as z:
+        z.writestr("XX.txt", "\n".join(lines) + "\n")
+    assert gbif.country_codes(tmp_path, {"2772288", "2867714"}) == {"2867714": "DE"}
+
+
 def test_mof_rows_drop_event_id_and_add_the_estimates() -> None:
     src = [{"eventID": D + "entry_1", "occurrenceID": D + "obs_1", "measurementID": D + "obs_1:recordType:0",
             "measurementType": "recordType", "measurementValue": "field-observation"}]
@@ -172,9 +187,10 @@ def test_eml_names_creators_originator_funding_and_licence() -> None:
     root = ElementTree.fromstring(eml.encode())
     ds = root.find("dataset")
     assert root.tag == "{https://eml.ecoinformatics.org/eml-2.2.0}eml"
-    assert ds.findtext("creator/userId") == "https://orcid.org/0009-0008-7070-8705"
+    assert ds.findtext("creator/userId") == "0009-0008-7070-8705"
+    assert ds.find("creator/userId").get("directory") == "https://orcid.org/"
     assert ds.findtext("associatedParty/role") == "originator"
-    assert ds.findtext("associatedParty/userId") == "https://d-nb.info/gnd/1012394506"
+    assert ds.findtext("associatedParty/userId") == "1012394506"
     assert "NFDI4Biodiversity" in ds.findtext("project/funding/para")
     assert ds.find("intellectualRights/para/ulink").get("url") == "https://creativecommons.org/licenses/by/4.0/"
     assert ds.findtext("methods/qualityControl/description/para") == "quality"
@@ -215,3 +231,18 @@ def test_export_writes_occurrence_core_archives_and_exclusions(tmp_path: Path) -
     excluded = (tmp_path / "gbif" / "exclusions.tsv").read_text(encoding="utf-8").splitlines()
     assert len(excluded) == 4
     assert (src / "occurrence.txt").read_text(encoding="utf-8").count("\n") == 6   # source untouched
+
+
+def test_place_corrections_set_or_remove_the_georeference() -> None:
+    from laubmann_kg.review.identities import Identity
+    src = occ(1, locality="Tafelberg", locationID="https://www.openstreetmap.org/node/1",
+              georeferenceSources="OpenStreetMap/Nominatim name match", coordinateUncertaintyInMeters="1000")
+    moved = gbif.correct_place(src, Identity("places", "Tafelberg", "link", "Tafelberg", (), "", "", 48.2106, 11.7139,
+                                             4000, "", "micro-toponym at the Ismaninger Speichersee", "georef check", "machine"))
+    assert (moved["decimalLatitude"], moved["decimalLongitude"], moved["coordinateUncertaintyInMeters"]) == ("48.2106", "11.7139", "4000")
+    assert moved["locationID"] == "" and moved["geodeticDatum"] == "WGS84"
+    gn = gbif.correct_place(src, Identity("places", "Kalamos", "link", "Kalamos", (("gn", "261565"),), "", "", 38.628, 20.9085,
+                                          2000, "", "", "", "machine"))
+    assert gn["locationID"] == "https://sws.geonames.org/261565/"
+    gone = gbif.correct_place(src, Identity("places", "Tietzing", "nolink", "", (), "", "", None, None, None, "", "", "", "machine"))
+    assert all(gone[c] == "" for c in gbif.GEO_COLUMNS) and gone["locality"] == "Tafelberg"

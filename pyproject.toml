@@ -22,7 +22,7 @@ dev = [
 ]
 docs = [
     "pylode>=3.6",
-    "kurra>=3.0,<3.1",
+    "kurra>=3.0,<3.0.7",   # 3.0.7 dropped kurra.labels.get_missing_labels, which pyLODE 3.6 imports
 ]
 llm = [
     "google-genai>=0.3",

@@ -6,6 +6,9 @@
 source_dwca: output/dwca                       # export kg_exports_2026-10-06_regions
 quality: data/cache/graph_check/quality/record_quality.csv
 geonames_dir: data/cache/linking/geonames      # countryCode from the GeoNames country dumps
+place_corrections:                             # place links decided after the source export (identities.csv contract);
+  - data/review/identities.csv                 #   human decisions first, then the georeference check of 2026-10-26
+  - data/review/machine/georef_machine.csv     #   (tools/validation_ui/machine_review/georef_check.py); absent files = none
 output_dir: output/gbif
 
 filter:
@@ -69,4 +72,4 @@ metadata:
     title: HistOrniGraph
     funding: The HistOrniGraph project was funded by NFDI4Biodiversity (https://www.nfdi4biodiversity.org/).
   keywords: [ornithology, birds, field diaries, historical observations, Bavaria, Alfred Louis Laubmann, NFDI4Biodiversity]
-  homepage: https://github.com/Maelkolb/laubmann-kg_TP
+  homepage: https://github.com/desyLoyz/laubmann-kg

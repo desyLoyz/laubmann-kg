@@ -162,8 +162,8 @@
     dcterms:rights "Creative Commons Attribution 4.0 International (CC BY 4.0)"@en ;
     dcterms:issued "2026-07-22"^^xsd:date ;
     dcterms:modified "2026-10-06"^^xsd:date ;
-    dcterms:source <https://github.com/Maelkolb/laubmann-kg_TP> ;
-    rdfs:seeAlso <https://github.com/Maelkolb/laubmann-kg_TP> , <https://w3id.org/laubmann-kg/vocabularies> , <https://w3id.org/laubmann-kg/shapes> ;
+    dcterms:source <https://github.com/desyLoyz/laubmann-kg> ;
+    rdfs:seeAlso <https://github.com/desyLoyz/laubmann-kg> , <https://w3id.org/laubmann-kg/vocabularies> , <https://w3id.org/laubmann-kg/shapes> ;
     dcterms:subject "ornithology"@en , "field diaries"@en , "biodiversity data"@en , "Darwin Core"@en ,
                     <https://d-nb.info/gnd/1012394506> ;   # Alfred Louis Laubmann (GND)
     dcterms:language "en" , "de" .
@@ -310,6 +310,7 @@ lkg:containsObservation
 lkg:containsTravelEvent
     a owl:ObjectProperty ;
     rdfs:label "contains travel event"@en , "enthält Reiseereignis"@de ;
+    rdfs:comment "Links a diary entry to a journey it describes (the travel event is part of the entry)."@en ;
     rdfs:domain lkg:DiaryEntry ;
     rdfs:range lkg:TravelEvent ;
     rdfs:subPropertyOf dcterms:hasPart .
@@ -325,6 +326,7 @@ lkg:hasWeather
 lkg:hasLeg
     a owl:ObjectProperty ;
     rdfs:label "has leg"@en , "hat Etappe"@de ;
+    rdfs:comment "Links a travel event to one of its legs (one stage between two places)."@en ;
     rdfs:domain lkg:TravelEvent ;
     rdfs:range lkg:TravelLeg ;
     rdfs:subPropertyOf dcterms:hasPart .
@@ -461,6 +463,7 @@ lkg:mentionsOther
 lkg:observedTaxon
     a owl:ObjectProperty ;
     rdfs:label "observed taxon"@en , "beobachtetes Taxon"@de ;
+    rdfs:comment "The shared taxon node the observation refers to (specialises dwciri:toTaxon)."@en ;
     rdfs:domain lkg:Observation ;
     rdfs:range lkg:Taxon ;
     rdfs:subPropertyOf dwciri:toTaxon .
@@ -612,6 +615,7 @@ lkg:departurePlace
 lkg:arrivalPlace
     a owl:ObjectProperty ;
     rdfs:label "arrival place"@en , "Ankunftsort"@de ;
+    rdfs:comment "Where the leg ended, as stated in the entry."@en ;
     rdfs:domain lkg:TravelLeg ;
     rdfs:range lkg:Place .
 
@@ -632,6 +636,7 @@ lkg:departureTime
 lkg:arrivalTime
     a owl:DatatypeProperty ;
     rdfs:label "arrival time"@en , "Ankunftszeit"@de ;
+    rdfs:comment "Entry date combined with the stated clock time of arrival."@en ;
     rdfs:domain lkg:TravelLeg ;
     rdfs:range xsd:dateTime .
 

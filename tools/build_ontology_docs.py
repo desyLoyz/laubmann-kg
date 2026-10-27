@@ -97,7 +97,7 @@ def main() -> None:
 <body><h1>Laubmann Knowledge Graph — data</h1>
 <p>You followed an instance IRI under <code>https://w3id.org/laubmann-kg/data/</code>. The graph is not yet served
 through a public SPARQL endpoint; the full exports (Turtle, JSON-LD, Darwin Core Archive) are published as releases of the
-<a href="https://github.com/Maelkolb/laubmann-kg_TP">laubmann-kg repository</a>. Vocabulary: <a href="index.html">ontology {version}</a> ·
+<a href="https://github.com/desyLoyz/laubmann-kg">laubmann-kg repository</a>. Vocabulary: <a href="index.html">ontology {version}</a> ·
 <a href="vocabularies.html">controlled vocabularies</a> · <a href="shapes.html">SHACL shapes</a>.</p>
 <p id="iri"></p><script>if(location.hash)document.getElementById('iri').innerHTML='Requested IRI: <code>https://w3id.org/laubmann-kg/data/'+location.hash.slice(1)+'</code>';</script>
 </body></html>""", encoding="utf-8")

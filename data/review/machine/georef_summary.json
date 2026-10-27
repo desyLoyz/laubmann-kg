@@ -1,0 +1,23 @@
+{
+  "dossiers": 899,
+  "outcome (places)": {
+    "relocated": 88,
+    "unchanged": 403,
+    "open": 86,
+    "coordinates removed": 111,
+    "confirmed": 211
+  },
+  "outcome (records)": {
+    "relocated": 869,
+    "unchanged": 1887,
+    "open": 706,
+    "coordinates removed": 699,
+    "confirmed": 1443
+  },
+  "rows": 199,
+  "rows applied at confidence >= 0.9": 142,
+  "control": {
+    "sample": 60,
+    "second judge also correct": 56
+  }
+}

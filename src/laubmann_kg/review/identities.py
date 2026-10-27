@@ -135,10 +135,13 @@ class Identities:
         (``machine``, ``machine_review/identities_machine.csv``): a machine row
         counts only where no human decision exists for the same name form (or
         entity link) and it clears both thresholds. So a reviewer's decision
-        always wins, and the machine fills the forms nobody has looked at."""
+        always wins, and the machine fills the forms nobody has looked at.
+        ``machine`` may be a list of files; an earlier file wins over a later one
+        (a targeted later check such as the georeference check comes first)."""
         ids = cls.load(human)
-        if machine:
-            ids.add_fallback(cls.load(machine, min_confidence, min_agreement, origin="machine"))
+        for path in ([machine] if isinstance(machine, (str, Path)) else machine or []):
+            if path:
+                ids.add_fallback(cls.load(path, min_confidence, min_agreement, origin="machine"))
         return ids
 
     def add_fallback(self, other: "Identities") -> int:

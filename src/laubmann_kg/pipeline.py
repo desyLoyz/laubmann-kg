@@ -333,7 +333,10 @@ def run_pipeline(config: dict, input_dir: Optional[Path] = None) -> ExtractionRe
     # machine review (tools/validation_ui/machine_review): fills the forms nobody reviewed;
     # a human row in identities.csv always wins, machine rows need confidence + agreement
     machine_cfg = review_cfg.get("machine") or {}
-    result.identities = Identities.load_layers(review_cfg.get("identities"), machine_cfg.get("identities") if machine_cfg.get("enabled", True) else None,
+    # the georeference check (data/review/machine/georef_machine.csv) is more specific than the
+    # general identity review, so its place links come first
+    machine_ids = [machine_cfg.get("georef"), machine_cfg.get("identities")] if machine_cfg.get("enabled", True) else None
+    result.identities = Identities.load_layers(review_cfg.get("identities"), machine_ids,
                                               float(machine_cfg.get("min_confidence", 0.9)), int(machine_cfg.get("min_agreement", 2)))
 
     # Sequential prep. The gazetteer/regex reading of the header is only the

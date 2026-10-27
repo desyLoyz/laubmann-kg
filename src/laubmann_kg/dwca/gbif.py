@@ -37,6 +37,11 @@ from laubmann_kg.dwca.meta_xml import DWC, FileSpec, ROW_TYPES, build_meta_xml
 GND = "https://d-nb.info/gnd/"
 ORCID = "https://orcid.org/"
 LITERATURE_BASIS = "MaterialCitation"
+GBIF_SPECIES = re.compile(r"^https?://(?:www\.)?gbif\.org/species/(\d+)/?$")
+# GeoNames feature classes that give no countryCode: hydrographic features
+# (rivers, lakes) often cross borders, and their point need not lie in the
+# country GeoNames assigns (Loisach, Tiroler Achen -> AT, coordinates in Bavaria)
+NO_COUNTRY_FEATURE_CLASSES = frozenset({"H"})
 
 # ------------------------------------------------------------------ configuration
 
@@ -93,6 +98,10 @@ class GbifConfig(BaseModel):
     source_dwca: Path
     quality: Path
     geonames_dir: Optional[Path] = None
+    # place links decided after the source export (identities.csv contract, section places):
+    # applied to the records whose locality they name, so the GBIF archives carry the
+    # corrected georeference before the next full rebuild picks it up
+    place_corrections: list[Path] = Field(default_factory=list)
     output_dir: Path
     filter: FilterConfig = Field(default_factory=FilterConfig)
     datasets: dict[str, DatasetConfig]
@@ -190,6 +199,40 @@ def geonames_id(location_id: str) -> Optional[str]:
     return m.group(1) if m else None
 
 
+def taxon_key(taxon_id: str) -> str:
+    """The bare GBIF backbone key of a taxonID ("https://www.gbif.org/species/2495455" -> "2495455").
+
+    The GBIF occurrence interpretation looks taxonID up as an identifier and does not
+    resolve URLs (validator issue "Taxon ID not found"); other values pass unchanged."""
+    m = GBIF_SPECIES.match(taxon_id or "")
+    return m.group(1) if m else (taxon_id or "")
+
+
+GEO_COLUMNS = ("decimalLatitude", "decimalLongitude", "geodeticDatum", "coordinateUncertaintyInMeters",
+               "georeferenceSources", "georeferenceProtocol", "locationID")
+
+
+def correct_place(occ: dict, ident) -> dict:
+    """The record with the georeference of a reviewed place link (``ident``: a
+    ``laubmann_kg.review.identities.Identity`` of section places). ``nolink``
+    removes the coordinates (wrong and no reliable replacement), ``link`` sets
+    them (GeoNames id as locationID when the link names one)."""
+    row = dict(occ)
+    for column in GEO_COLUMNS:
+        row[column] = ""
+    if ident.decision == "nolink" or ident.lat is None or ident.lon is None:
+        return row
+    gn = ident.auth("gn")
+    row.update({
+        "decimalLatitude": f"{ident.lat:.4f}", "decimalLongitude": f"{ident.lon:.4f}", "geodeticDatum": "WGS84",
+        "coordinateUncertaintyInMeters": str(ident.uncertainty_m or ""),
+        "locationID": f"https://sws.geonames.org/{gn}/" if gn else "",
+        "georeferenceSources": "GeoNames" if gn else "diary text (the place lies within the named larger place)",
+        "georeferenceProtocol": ident.reason or "reviewed place link",
+    })
+    return row
+
+
 def occurrence_row(occ: dict, event: Optional[dict], quality: dict, dataset: DatasetConfig,
                    meta: Metadata, countries: dict[str, str]) -> dict:
     """The GBIF occurrence row of one record: its own columns, the entry's columns
@@ -203,6 +246,7 @@ def occurrence_row(occ: dict, event: Optional[dict], quality: dict, dataset: Dat
         "rightsHolder": meta.rights_holder,
         "datasetName": dataset.title,
         "language": meta.data_language,
+        "taxonID": taxon_key(occ.get("taxonID", "")),
         "countryCode": countries.get(geonames_id(occ.get("locationID", "")) or "", ""),
         # dwc:recordedByID lists the identifiers of the recorders it can name; only
         # Laubmann has one in the archive (his companions keep their names only)
@@ -242,9 +286,10 @@ def _person_xml(p: Person, tag: str, role: Optional[str] = None) -> str:
     if p.email:
         parts.append(f"<electronicMailAddress>{escape(p.email)}</electronicMailAddress>")
     if p.orcid:
-        parts.append(f'<userId directory="{ORCID}">{escape(ORCID + p.orcid)}</userId>')
+        # GBIF profile: the directory URL as attribute, the bare identifier as value
+        parts.append(f'<userId directory="{ORCID}">{escape(p.orcid)}</userId>')
     elif p.gnd:
-        parts.append(f'<userId directory="{GND}">{escape(GND + p.gnd)}</userId>')
+        parts.append(f'<userId directory="{GND}">{escape(p.gnd)}</userId>')
     if role:
         parts.append(f"<role>{escape(role)}</role>")
     return f"<{tag}>" + "".join(parts) + f"</{tag}>"
@@ -461,8 +506,12 @@ def sha256(path: Path) -> str:
 
 
 def country_codes(geonames_dir: Optional[Path], wanted: set[str]) -> dict[str, str]:
-    """GeoNames id -> ISO country code from the cached country dumps (<CC>.zip with <CC>.txt)."""
+    """GeoNames id -> ISO country code from the cached country dumps (<CC>.zip with <CC>.txt).
+
+    Features of NO_COUNTRY_FEATURE_CLASSES get no code (GBIF derives the country
+    from the coordinates)."""
     found: dict[str, str] = {}
+    seen: set[str] = set()
     if not geonames_dir or not Path(geonames_dir).is_dir() or not wanted:
         return found
     for path in sorted(Path(geonames_dir).glob("*.zip")):
@@ -474,10 +523,11 @@ def country_codes(geonames_dir: Optional[Path], wanted: set[str]) -> dict[str, s
                         gid, _, rest = raw.partition(b"\t")
                         key = gid.decode()
                         if key in wanted:
+                            seen.add(key)
                             cols = rest.split(b"\t")
-                            if len(cols) > 7:
+                            if len(cols) > 7 and cols[5].decode() not in NO_COUNTRY_FEATURE_CLASSES:
                                 found[key] = cols[7].decode()
-        if len(found) == len(wanted):
+        if len(seen) == len(wanted):
             break
     return found
 
@@ -502,6 +552,15 @@ def export(cfg: GbifConfig, root: Path, today: Optional[_dt.date] = None) -> dic
     resolve = lambda p: p if Path(p).is_absolute() else Path(root) / p   # noqa: E731
     src, quality_path, out = resolve(cfg.source_dwca), resolve(cfg.quality), resolve(cfg.output_dir)
     occurrences = read_tsv(src / "occurrence.txt")
+    corrected = Counter()
+    if cfg.place_corrections:
+        from laubmann_kg.review.identities import Identities
+        places = Identities.load_layers(None, [resolve(p) for p in cfg.place_corrections])
+        for i, occ in enumerate(occurrences):
+            ident = places.link("places", occ.get("locality"))
+            if ident is not None:
+                occurrences[i] = correct_place(occ, ident)
+                corrected[ident.decision] += 1
     events = {e["eventID"]: e for e in read_tsv(src / "event.txt")}
     quality = {q["occurrenceID"]: q for q in read_csv(quality_path)}
     mof_by_occ: dict[str, list[dict]] = {}
@@ -530,7 +589,9 @@ def export(cfg: GbifConfig, root: Path, today: Optional[_dt.date] = None) -> dic
     summary: dict = {"date": today.isoformat(), "source": {
         "dwca": str(cfg.source_dwca), "occurrence.txt sha256": sha256(src / "occurrence.txt"),
         "quality": str(cfg.quality), "quality sha256": sha256(quality_path),
-        "records": len(occurrences)}, "filter": cfg.filter.model_dump(), "datasets": {}}
+        "records": len(occurrences),
+        "place corrections": {"files": [str(p) for p in cfg.place_corrections], "records": dict(corrected)}},
+        "filter": cfg.filter.model_dump(), "datasets": {}}
     for name, ds in cfg.datasets.items():
         rows = [occurrence_row(o, events.get(o["eventID"]), quality[o["occurrenceID"]], ds, cfg.metadata, countries)
                 for o in selected[name]]

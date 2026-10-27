@@ -34,8 +34,8 @@ All thresholds are in `configs/gbif_laubmann.yaml`.
 | records | 40,332 | 81 |
 | diary entries | 6,756 | 56 |
 | absences (`occurrenceStatus` absent) | 704 | 0 |
-| with coordinates | 27,983 | 64 |
-| with `countryCode` | 23,799 | 61 |
+| with coordinates | 27,848 (27,983 before the georeference check) | 64 |
+| with `countryCode` | 21,571 (no code from rivers/lakes, see below) | 54 |
 | expected records with a wrong field (sum of `p_any`) | 7,640 (18.9 %) | 22 (27.6 %) |
 
 Laubmann's records left out: 5,719 with an estimated error of 50 % or more, 84 dated outside 1917–1965 (mostly
@@ -95,9 +95,11 @@ Issues in `occurrence.txt` (all warnings of the GBIF occurrence interpretation, 
 
 ### Checklist
 
-- [ ] **`taxonID`**: decide between leaving it out and the bare GBIF key; re-validate (the warning should
-  disappear for all 40,271 records).
-- [ ] **Country coordinate mismatch** (9 records, all with `countryCode` AT and coordinates in Bavaria). Check
+- [x] **`taxonID`** (2026-10-26): the bare GBIF key (`2495455`) instead of the species URL
+  (`gbif.taxon_key`); re-validate (the warning should disappear for all 40,271 records).
+- [x] **Country coordinate mismatch** (2026-10-26): no `countryCode` from GeoNames hydrographic features
+  (class H: rivers, lakes; `NO_COUNTRY_FEATURE_CLASSES`), GBIF derives the country from the coordinates. Original
+  finding (9 records, all with `countryCode` AT and coordinates in Bavaria); check
   per entry the place and whether the GeoNames river point is acceptable as georeference:
   - Loisach, "Loisach bei der ersten Überfahrt, dem Ausfluß aus dem Kochelsee", 47.9333 / 11.4500
     (GeoNames 2772288): `L02-e0117` (1919-02-16; Zwergtaucher `obs_b87c9271ed4c`, Wasseramsel `obs_2120a2b211ef`,
@@ -123,9 +125,41 @@ Issues in `occurrence.txt` (all warnings of the GBIF occurrence interpretation, 
     non-backbone name is `L32-e0209` 1960-05-19 (`obs_d3c9999fe02e`, *Aves*, remarks mention a Bastard).
 - [ ] **Country / continent derived** (4,184 / 27,972): accept as information, or fill `countryCode` and
   `continent` in the export.
+- [x] **EML identifiers** (2026-10-26): ORCID and GND in `<userId>` as bare identifiers with the directory
+  attribute (GBIF metadata profile), not as full URLs.
+- [x] **Georeferences** (2026-10-26): see "Georeference check" below.
+- [ ] Re-validate both ZIPs after these changes.
 - [ ] Validate `laubmann_specimens_dwca.zip`.
 
 Record IDs are abbreviated; the full `occurrenceID` is `https://w3id.org/laubmann-kg/data/obs_…`.
+
+## Georeference check (2026-10-26)
+
+Reviewing the archive showed places linked to a namesake far away: local names at the Ismaning reservoir
+("Tafelberg", 391 records, placed near Mühldorf; "Oberbecken" and "Keilberg" in the Spessart; "Verbindungskanal"
+at Mannheim), the Ionian island Kalamos in Attica, "Tietzing" in Hungary, "Hinterbrühl" (Munich) near Vienna.
+`tools/validation_ui/machine_review/georef_check.py` selects every place whose coordinates lie far from the rest of
+its entries (median > 60 km; 702 places) or from the records of the surrounding days (> 100 km; 197 more), and two
+Claude judges decide independently from the diary passages, the entries' other places and the GeoNames namesakes
+nearby: correct, another GeoNames feature, inside a larger place of the entry, remove the coordinates, or unsure.
+
+| | places | records (full archive) |
+|---|---|---|
+| checked | 899 | 5,604 |
+| coordinates confirmed (both judges, or first judge with no second look) | 614 | 3,330 |
+| relocated (both judges, same point within 5 km) | 88 | 869 |
+| coordinates removed (both find them wrong, no agreed replacement) | 111 | 699 |
+| open: the judges disagree or are unsure (`data/review/machine/georef_open.csv`) | 86 | 706 |
+
+Control: of 60 places the first judge found correct, the second agreed on 56. The decisions are in
+`data/review/machine/georef_machine.csv` (contract of `review/identities.csv`, confidence 1 − (1 − c1)(1 − c2),
+agreement 2); 142 of 199 rows reach confidence 0.9 and are applied: by the pipeline at the next rebuild
+(`review.machine.georef`, before `identities_machine.csv`; a human row in `identities.csv` still wins) and by this
+export already (`place_corrections` in `configs/gbif_laubmann.yaml`; `summary.json` counts the corrected records).
+In the observations archive 390 records got new coordinates and 135 lost theirs; relocated records carry
+`georeferenceProtocol` "georeference check: was …". A relocation onto a river's GeoNames point is not taken (the
+point can lie 40 km from the stretch meant, e.g. Lech); those coordinates are removed instead. Labels that stand for
+several real places (Obersee, Eching, Hintersee, Bodman) need decisions per mention and are left open.
 
 ## Before publishing
 
