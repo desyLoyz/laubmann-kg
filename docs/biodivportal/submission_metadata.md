@@ -67,15 +67,15 @@ Pflichtfelder laut API von BiodivPortal: `acronym`, `name`, `administeredBy`, `s
 | coverage | Bayern, 1917–1965 |
 | Kategorie (hasDomain) | im Portalformular zu wählen, z. B. Biodiversität / Ökologie (TODO) |
 | Gruppe | TODO: NFDI4Biodiversity-Gruppe, falls im Portal vorhanden |
-| keywords | ornithology; field diaries; biodiversity data; Darwin Core; historical bird observations; Bavaria; knowledge graph; Alfred Louis Laubmann (<https://d-nb.info/gnd/1012394506>) |
+| keywords | ornithology ([Q44703](https://www.wikidata.org/wiki/Q44703)); field notes ([Q1335979](https://www.wikidata.org/wiki/Q1335979)); biodiversity data ([Q28946370](https://www.wikidata.org/wiki/Q28946370)); biodiversity informatics ([Q864269](https://www.wikidata.org/wiki/Q864269)); Darwin Core ([Q5225953](https://www.wikidata.org/wiki/Q5225953)); historical ecology ([Q1053639](https://www.wikidata.org/wiki/Q1053639)); Bavaria ([Q980](https://www.wikidata.org/wiki/Q980)); knowledge graph ([Q33002955](https://www.wikidata.org/wiki/Q33002955)); Alfred Louis Laubmann ([Q11850829](https://www.wikidata.org/wiki/Q11850829), GND [1012394506](https://d-nb.info/gnd/1012394506)) |
 | Wiederverwendete Vokabulare | Darwin Core (dwc, dwciri), DCTERMS, SKOS, PROV-O, GeoSPARQL, schema.org, RiC-O, FOAF, W3C Basic Geo |
 | Verknüpfte Autoritäten | GBIF, EUNIS, GeoNames, Wikidata, GND |
 
 Hinweis zu den Schlüsselwörtern: Die OntoPortal-Dokumentation verlangt Schlüsselwörter möglichst
-aus kontrollierten Vokabularen mit URI. Prüfbare Kandidaten: Ornithologie = Wikidata
-[Q44703](https://www.wikidata.org/wiki/Q44703), Darwin Core = [Q5225953](https://www.wikidata.org/wiki/Q5225953),
-Biodiversitätsinformatik = [Q864269](https://www.wikidata.org/wiki/Q864269), Bayern = [Q980](https://www.wikidata.org/wiki/Q980),
-Alfred Louis Laubmann = GND 1012394506. Das Schlüsselwort „Adolf“ kommt nicht mehr vor.
+aus kontrollierten Vokabularen mit URI. Alle Wikidata-IDs oben am 2026-10-27 geprüft (Label und Beschreibung
+passen). „historical bird observations“ ist durch historical ecology ersetzt (kein eigenes Wikidata-Item);
+in `ontologies/laubmann.ttl` stehen die Schlüsselwörter noch als Literale in `dcterms:subject`, die URIs
+kommen mit 0.8.0 dazu.
 
 ### Abgleich mit dem Repo (Stand dieser Änderung)
 
@@ -127,19 +127,22 @@ In `ontologies/laubmann.ttl` ergänzt oder korrigiert:
 
 1. **w3id-Namespace registrieren.** Stand 2026-10-26: `w3id/laubmann-kg/` zeigt auf `desyLoyz/laubmann-kg`
    (vorher auf den nicht mehr gepflegten Fork), README mit beiden Maintainern und Version 0.7.1. Reihenfolge:
-   1. GitHub Pages für `desyLoyz/laubmann-kg` einschalten (Settings ▸ Pages ▸ Branch `main`, Ordner `/docs`;
+   1. ✅ (2026-10-27) GitHub Pages für `desyLoyz/laubmann-kg` einschalten (Settings ▸ Pages ▸ Branch `main`, Ordner `/docs`;
       nur Repo-Admin): dann liegt die Dokumentation unter <https://desyloyz.github.io/laubmann-kg/ontology/>.
-   2. Git-Tag `v0.7.1` auf den Commit setzen, der die einzureichende Ontologie enthält (die versionIRI
+   2. ✅ (2026-10-27, Merge-Commit 6882410) Git-Tag `v0.7.1` auf den Commit setzen, der die einzureichende Ontologie enthält (die versionIRI
       `…/ontology/0.7.1` löst auf `raw.githubusercontent.com/desyLoyz/laubmann-kg/v0.7.1/ontologies/laubmann.ttl` auf).
    3. Ordner `w3id/laubmann-kg/` (`.htaccess`, `README.md`) als `laubmann-kg/` in einen Fork von
-      <https://github.com/perma-id/w3id.org> kopieren und Pull Request stellen.
+      <https://github.com/perma-id/w3id.org> kopieren und Pull Request stellen (als `ids/laubmann-kg/`, das
+      Repo nutzt inzwischen diese Struktur). Offen; alle Weiterleitungsziele am 2026-10-27 geprüft (HTTP 200,
+      Turtle-Dateien parsen).
    Die Registrierung legt nur die Weiterleitungen fest, nicht den Inhalt; Ziele lassen sich später per PR ändern.
    Der Namensraum steckt bereits in allen IRIs des Graphen und in den `occurrenceID`s des GBIF-Exports.
-2. **Dokumentations-URL**: w3id (siehe 1.); die Seite selbst ist aktuell (`docs/ontology/index.html`, 0.7.1, neu erzeugt 2026-10-26).
+2. **Dokumentations-URL**: w3id (siehe 1.); bis dahin direkt <https://desyloyz.github.io/laubmann-kg/ontology/> (live seit
+   2026-10-27, `docs/ontology/index.html`, 0.7.1, neu erzeugt 2026-10-26).
 3. **Rechteinhaber/Publisher** klären (steht in `LICENSE` und `dcterms:publisher` als „HistOrniGraph / Laubmann KG Project“).
 4. **Account und Gruppe** im BiodivPortal anlegen (`administeredBy`).
 5. **Publikation** (Feld *publication*) – noch keine vorhanden.
-6. Keywords mit URIs (Wikidata/GND, siehe oben) im Portalformular eintragen.
+6. Keywords mit URIs (Wikidata/GND, siehe oben, IDs geprüft 2026-10-27) im Portalformular eintragen.
 
 Erledigt am 2026-10-20: ORCIDs (`schema:identifier` / `schema:sameAs` an den Autoren), `LICENSE`,
 pyLODE-Dokumentation neu erzeugt, Kompetenzfragen gegen 0.7.1 getestet
