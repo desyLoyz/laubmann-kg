@@ -128,8 +128,16 @@ Issues in `occurrence.txt` (all warnings of the GBIF occurrence interpretation, 
 - [x] **EML identifiers** (2026-10-26): ORCID and GND in `<userId>` as bare identifiers with the directory
   attribute (GBIF metadata profile), not as full URLs.
 - [x] **Georeferences** (2026-10-26): see "Georeference check" below.
-- [ ] Re-validate both ZIPs after these changes.
-- [ ] Validate `laubmann_specimens_dwca.zip`.
+- [ ] Re-validate both ZIPs after these changes with the GBIF validator (needs a GBIF login).
+- [ ] Validate `laubmann_specimens_dwca.zip` with the GBIF validator.
+
+Local pre-check of the ZIPs of 2026-10-26 (2026-10-27; not the GBIF validator: archive structure, EML against the
+GBIF profile 1.3 XSD, every `taxonID` against the GBIF species API, names through the backbone matcher
+`/species/match` with the classification, `countryCode` against the GBIF reverse geocoder): both archives
+structurally sound, both EML files valid; all 382 (observations) and 56 (specimens) `taxonID`s resolve; no
+country coordinate mismatch. Remaining: the 9 known higher-rank matches (list above) and one fuzzy match
+(*Anatinae* → Anatidae, `obs_c00702b8bba4`); 6,277 observation and 10 specimen records without `countryCode`
+(information; more than before because rivers and lakes no longer give one).
 
 Record IDs are abbreviated; the full `occurrenceID` is `https://w3id.org/laubmann-kg/data/obs_…`.
 
